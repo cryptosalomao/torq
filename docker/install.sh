@@ -63,8 +63,8 @@ chmod +x $TORQDIR/$DELETE_COMMAND
 # https://stackoverflow.com/questions/16745988/sed-command-with-i-option-in-place-editing-works-fine-on-ubuntu-but-not-mac
 sed -i.bak "s/<YourDBPassword>/$DBPASSWORD/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
 sed -i.bak "s/<YourUIPassword>/$UIPASSWORD/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
-sed -i.bak "s/<YourPort>/$UI_PORT/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
-sed -i.bak "s/<YourPort>/$UI_PORT/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
+sed -i.bak "s/<YourPort>/$UI_PORT/g" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
+sed -i.bak "s/<YourPort>/$UI_PORT/g" $TORQDIR/start-torq && rm $TORQDIR/start-torq.bak
 
 echo 'Docker compose file (docker-compose.yml) created in '$TORQDIR
 
