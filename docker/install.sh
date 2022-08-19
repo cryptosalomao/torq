@@ -64,6 +64,7 @@ chmod +x $TORQDIR/$DELETE_COMMAND
 sed -i.bak "s/<YourDBPassword>/$DBPASSWORD/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
 sed -i.bak "s/<YourUIPassword>/$UIPASSWORD/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
 sed -i.bak "s/<YourPort>/$UI_PORT/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
+sed -i.bak "s/<YourPort>/$UI_PORT/" $TORQDIR/docker-compose.yml && rm $TORQDIR/docker-compose.yml.bak
 
 echo 'Docker compose file (docker-compose.yml) created in '$TORQDIR
 
