@@ -67,6 +67,7 @@ func getInvoicesHandler(c *gin.Context, db *sqlx.DB) {
 				"is_amp",
 				"updated_on",
 				"expiry",
+				"cltv_expiry",
 				"private",
 			})
 		if err != nil {

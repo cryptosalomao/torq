@@ -49,11 +49,11 @@ STOP_COMMAND='stop-torq'
 UPDATE_COMMAND='update-torq'
 DELETE_COMMAND='delete-torq'
 
-curl --location --silent --output "${TORQDIR}/docker-compose.yml" https://raw.githubusercontent.com/lncapital/torq/main/docker/example-docker-compose.yml
-curl --location --silent --output "${TORQDIR}/${START_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/main/docker/start.sh
-curl --location --silent --output "${TORQDIR}/${STOP_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/main/docker/stop.sh
-curl --location --silent --output "${TORQDIR}/${UPDATE_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/main/docker/update.sh
-curl --location --silent --output "${TORQDIR}/${DELETE_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/main/docker/delete.sh
+curl --location --silent --output "${TORQDIR}/docker-compose.yml" https://raw.githubusercontent.com/lncapital/torq/install-with-port/docker/example-docker-compose.yml
+curl --location --silent --output "${TORQDIR}/${START_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/install-with-port/docker/start.sh
+curl --location --silent --output "${TORQDIR}/${STOP_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/install-with-port/docker/stop.sh
+curl --location --silent --output "${TORQDIR}/${UPDATE_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/install-with-port/docker/update.sh
+curl --location --silent --output "${TORQDIR}/${DELETE_COMMAND}" https://raw.githubusercontent.com/lncapital/torq/install-with-port/docker/delete.sh
 
 chmod +x $TORQDIR/$START_COMMAND
 chmod +x $TORQDIR/$STOP_COMMAND
