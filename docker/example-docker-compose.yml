@@ -13,7 +13,7 @@ services:
       - --torq.password
       - <YourUIPassword> # Set password here to connect to login to the web ui
       - --torq.port
-      - <YourPort>
+      - "<YourPort>"
       - start
     ports:
       - "<YourPort>:<YourPort>"

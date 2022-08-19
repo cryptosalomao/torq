@@ -31,8 +31,9 @@ printf "\n"
 printf "\n"
 
 printf "\n"
-echo Please choose a port for the web UI
-stty -echo
+echo Please choose a port for the web UI.
+echo NB! Umbrel users needs to use a different port than 8080. Try 8081.
+stty echo
 printf "Port (default: 8080):"
 read UI_PORT
 stty echo
