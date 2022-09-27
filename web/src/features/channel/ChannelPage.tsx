@@ -35,7 +35,6 @@ import Popover from '../popover/Popover';
 import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
 import { selectTimeInterval } from '../timeIntervalSelect/timeIntervalSlice';
 
-
 const ft = d3.format(',.0f');
 
 const eventNames = new Map([

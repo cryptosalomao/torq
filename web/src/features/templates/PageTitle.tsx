@@ -6,7 +6,6 @@ import Breadcrumbs from 'features/breadcrumbs/Breadcrumbs';
 
 import styles from './templates.module.scss';
 
-
 type PageTitleProps = {
   title: string;
   breadcrumbs?: Array<any>;

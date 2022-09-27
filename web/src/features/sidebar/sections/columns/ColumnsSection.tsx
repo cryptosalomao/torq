@@ -17,7 +17,6 @@ import { ColumnMetaData } from 'features/table/Table';
 import Select, { SelectOptionType } from './ColumnDropDown';
 import styles from './columns-section.module.scss';
 
-
 interface columnRow {
   column: ColumnMetaData;
   index: number;

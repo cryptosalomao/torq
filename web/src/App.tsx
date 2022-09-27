@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useLogoutMutation } from 'apiSlice';
 import { Cookies } from 'react-cookie';
-import { Route, Routes, useLocation, useNavigate , BrowserRouter } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, BrowserRouter } from 'react-router-dom';
 
 import Toasts, { addToastHandle } from 'features/toast/Toasts';
 import ToastContext from 'features/toast/context';
 import InvoicesPage from 'features/transact/Invoices/InvoicesPage';
 import OnChainPage from 'features/transact/OnChain/OnChainPage';
 import PaymentsPage from 'features/transact/Payments/PaymentsPage';
-
 
 import styles from './app.module.scss';
 import LoginPage from './features/auth/LoginPage';
@@ -21,7 +20,6 @@ import SettingsPage from './features/settings/SettingsPage';
 import AllTxPage from './features/transact/AllTxPage';
 import DefaultLayout from './layout/DefaultLayout';
 import LoginLayout from './layout/LoginLayout';
-
 
 function Logout() {
   const [logout] = useLogoutMutation();

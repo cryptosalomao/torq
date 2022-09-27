@@ -5,7 +5,6 @@ import { ViewInterface, viewOrderInterface } from 'features/forwards/forwardsSli
 
 import { localNode, settings, timeZone } from './apiTypes';
 
-
 const buildBaseUrl = () => {
   // checks to see if the app is running under /torq and if so prepends that to API paths
   const splitLocation = window.location.pathname.split('/');

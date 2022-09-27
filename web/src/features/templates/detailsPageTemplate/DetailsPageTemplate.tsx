@@ -6,7 +6,6 @@ import PageTitle from 'features/templates/PageTitle';
 
 import styles from './details-page-template.module.scss';
 
-
 type DetailsPageProps = {
   title: string;
   titleContent?: React.ReactNode;

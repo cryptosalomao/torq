@@ -16,7 +16,6 @@ import { ColumnMetaData } from 'features/table/Table';
 import DropDown from './SortDropDown';
 import styles from './sort.module.scss';
 
-
 export interface SortByOptionType {
   value: string;
   label: string;

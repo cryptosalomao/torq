@@ -25,7 +25,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { SectionContainer } from '../../section/SectionContainer';
 import ColumnsSection from '../../sidebar/sections/columns/ColumnsSection';
 import FilterSection from '../../sidebar/sections/filter/FilterSection';
-import { Clause, FilterInterface, deserialiseQuery , FilterCategoryType } from '../../sidebar/sections/filter/filter';
+import { Clause, FilterInterface, deserialiseQuery, FilterCategoryType } from '../../sidebar/sections/filter/filter';
 import {
   selectActiveColumns,
   selectAllColumns,
@@ -34,7 +34,6 @@ import {
   updateInvoicesFilters,
 } from '../Invoices/invoicesSlice';
 import TransactTabs from '../TransactTabs';
-
 
 type sections = {
   filter: boolean;

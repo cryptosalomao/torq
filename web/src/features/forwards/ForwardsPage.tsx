@@ -41,7 +41,6 @@ import TablePageTemplate, {
 } from '../templates/tablePageTemplate/TablePageTemplate';
 import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
 
-
 type sections = {
   filter: boolean;
   sort: boolean;

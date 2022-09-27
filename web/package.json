@@ -39,8 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts,.tsx,.jsx .",
+    "lint": "eslint --ignore-path .eslintignore --fix --ext .js,.ts,.tsx,.jsx .",
     "prettier": "prettier --write '**/*.{ts,tsx}'",
+    "format": "npm run prettier && npm run lint",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

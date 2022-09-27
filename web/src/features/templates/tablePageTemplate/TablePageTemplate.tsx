@@ -9,7 +9,6 @@ import styles from './table-page-template.module.scss';
 
 import Button, { buttonColor } from '../../buttons/Button';
 
-
 type TablePageTemplateProps = {
   title: string;
   titleContent?: React.ReactNode;

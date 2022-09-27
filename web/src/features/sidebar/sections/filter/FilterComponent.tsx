@@ -7,7 +7,6 @@ import FilterRow from './FilterRow';
 import { AndClause, Clause, FilterClause, FilterInterface, OrClause } from './filter';
 import styles from './filter-section.module.scss';
 
-
 interface filterProps {
   columnsMeta: Array<ColumnMetaData>;
   filters: Clause;

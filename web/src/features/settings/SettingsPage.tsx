@@ -17,7 +17,6 @@ import { defaultStaticRangesFn } from '../timeIntervalSelect/customRanges';
 import { toastCategory } from '../toast/Toasts';
 import ToastContext from '../toast/context';
 
-
 function Settings() {
   const { data: settingsData } = useGetSettingsQuery();
   const { data: localNodes } = useGetLocalNodesQuery();

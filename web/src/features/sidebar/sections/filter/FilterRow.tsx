@@ -6,7 +6,7 @@ import { format } from 'd3';
 import NumberFormat from 'react-number-format';
 
 import Select from './FilterDropDown';
-import { FilterClause, FilterParameterType , FilterFunctions , FilterCategoryType } from './filter';
+import { FilterClause, FilterParameterType, FilterFunctions, FilterCategoryType } from './filter';
 import styles from './filter-section.module.scss';
 
 const formatter = format(',.0f');
