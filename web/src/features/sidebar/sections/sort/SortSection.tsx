@@ -1,17 +1,21 @@
 import { memo, useMemo } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+
 import {
   AddSquare20Regular as AddIcon,
-  ArrowSortDownLines16Regular as SortDescIcon,
   Delete16Regular as DismissIcon,
   ReOrder16Regular as ReOrderIcon,
+  ArrowSortDownLines16Regular as SortDescIcon,
 } from '@fluentui/react-icons';
-import DropDown from './SortDropDown';
-import { ColumnMetaData } from 'features/table/Table';
-import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
-import styles from './sort.module.scss';
 import classNames from 'classnames';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { ActionMeta } from 'react-select';
+
+import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
+import { ColumnMetaData } from 'features/table/Table';
+
+import DropDown from './SortDropDown';
+import styles from './sort.module.scss';
+
 
 export type OrderBy = {
   key: string;

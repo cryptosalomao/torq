@@ -1,6 +1,7 @@
 import { VirtualNetwork20Regular as ChannelsIcon, Iot20Regular as PeersIcon } from '@fluentui/react-icons';
-import styles from './group-section.module.scss';
 import classNames from 'classnames';
+
+import styles from './group-section.module.scss';
 
 type GroupPopoverProps = {
   groupBy: string;

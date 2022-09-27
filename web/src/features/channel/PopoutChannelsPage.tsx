@@ -1,7 +1,9 @@
-import { MoneyHand24Regular as TransactionIconModal } from '@fluentui/react-icons';
 import { useState } from 'react';
-import PopoutPageTemplate from 'features/templates/popoutPageTemplate/PopoutPageTemplate';
+
+import { MoneyHand24Regular as TransactionIconModal } from '@fluentui/react-icons';
+
 import ChannelPage from 'features/channel/ChannelPage';
+import PopoutPageTemplate from 'features/templates/popoutPageTemplate/PopoutPageTemplate';
 
 type PopoutChannelsPageProps = {
   show: boolean;

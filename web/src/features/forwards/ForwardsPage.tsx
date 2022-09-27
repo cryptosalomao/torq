@@ -1,43 +1,46 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
 import {
-  Filter20Regular as FilterIcon,
-  ArrowSortDownLines20Regular as SortIcon,
   ColumnTriple20Regular as ColumnsIcon,
+  Filter20Regular as FilterIcon,
   ArrowJoin20Regular as GroupIcon,
   Options20Regular as OptionsIcon,
+  ArrowSortDownLines20Regular as SortIcon,
 } from '@fluentui/react-icons';
-import Sidebar from '../sidebar/Sidebar';
 import { useGetTableViewsQuery } from 'apiSlice';
+import { Link } from 'react-router-dom';
 
 import { Clause, FilterCategoryType, FilterInterface } from 'features/sidebar/sections/filter/filter';
 
+import ForwardsDataWrapper from './ForwardsDataWrapper';
+import {
+  selectActiveColumns,
+  selectAllColumns,
+  selectFilters,
+  selectGroupBy,
+  selectSortBy,
+  updateColumns,
+  updateFilters,
+  updateGroupBy,
+  updateSortBy,
+} from './forwardsSlice';
+import ViewsPopover from './views/ViewsPopover';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { SectionContainer } from '../section/SectionContainer';
+import Sidebar from '../sidebar/Sidebar';
+import ColumnsSection from '../sidebar/sections/columns/ColumnsSection';
+import FilterSection from '../sidebar/sections/filter/FilterSection';
+import GroupBySection from '../sidebar/sections/group/GroupBySection';
+import SortSection, { SortByOptionType } from '../sidebar/sections/sort/SortSectionOld';
 import TablePageTemplate, {
   TableControlSection,
   TableControlsButton,
   TableControlsButtonGroup,
   TableControlsTabsGroup,
 } from '../templates/tablePageTemplate/TablePageTemplate';
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import {
-  updateColumns,
-  selectActiveColumns,
-  selectAllColumns,
-  selectFilters,
-  updateFilters,
-  selectSortBy,
-  updateSortBy,
-  selectGroupBy,
-  updateGroupBy,
-} from './forwardsSlice';
-import ViewsPopover from './views/ViewsPopover';
-import ColumnsSection from '../sidebar/sections/columns/ColumnsSection';
-import FilterSection from '../sidebar/sections/filter/FilterSection';
-import SortSection, { SortByOptionType } from '../sidebar/sections/sort/SortSectionOld';
-import GroupBySection from '../sidebar/sections/group/GroupBySection';
-import ForwardsDataWrapper from './ForwardsDataWrapper';
 import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
-import { SectionContainer } from '../section/SectionContainer';
+
 
 type sections = {
   filter: boolean;

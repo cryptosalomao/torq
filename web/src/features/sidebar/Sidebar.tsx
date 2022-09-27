@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { DismissCircle24Regular as CloseIcon, Options24Regular as SideBarIcon } from '@fluentui/react-icons';
 
 import styles from './sidebar.module.scss';

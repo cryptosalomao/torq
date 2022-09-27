@@ -1,10 +1,12 @@
-import FilterRow from './FilterRow';
-import classNames from 'classnames';
 import { AddSquare20Regular as AddFilterIcon, AddSquareMultiple20Regular as AddGroupIcon } from '@fluentui/react-icons';
+import classNames from 'classnames';
 
-import styles from './filter-section.module.scss';
-import { AndClause, OrClause, Clause, FilterClause, FilterInterface } from './filter';
 import { ColumnMetaData } from 'features/table/Table';
+
+import FilterRow from './FilterRow';
+import { AndClause, Clause, FilterClause, FilterInterface, OrClause } from './filter';
+import styles from './filter-section.module.scss';
+
 
 interface filterProps {
   columnsMeta: Array<ColumnMetaData>;

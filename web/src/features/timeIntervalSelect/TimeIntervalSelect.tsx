@@ -1,17 +1,18 @@
-import './interval_select.scss';
 import React, { useState } from 'react';
-import { format, startOfDay, addDays, subDays, differenceInDays } from 'date-fns';
-import { DateRangePicker } from 'react-date-range';
+
 import { ChevronLeft24Regular as LeftIcon, ChevronRight24Regular as RightIcon } from '@fluentui/react-icons';
+import { useGetSettingsQuery } from 'apiSlice';
+import classNames from 'classnames';
+import { addDays, differenceInDays, format, startOfDay, subDays } from 'date-fns';
+import { DateRangePicker } from 'react-date-range';
 
 import { defaultStaticRangesFn } from './customRanges';
-
-import Popover from '../popover/Popover';
-import classNames from 'classnames';
-import Button, { buttonColor } from '../buttons/Button';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { selectTimeInterval, updateInterval } from './timeIntervalSlice';
-import { useGetSettingsQuery } from 'apiSlice';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import Button, { buttonColor } from '../buttons/Button';
+import Popover from '../popover/Popover';
+import './interval_select.scss';
 
 interface selection {
   startDate: Date;

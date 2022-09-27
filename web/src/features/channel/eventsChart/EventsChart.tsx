@@ -1,12 +1,14 @@
 // https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-import { useD3 } from '../../charts/useD3';
 import { useEffect } from 'react';
+
 import { Selection } from 'd3';
-import { ChartCanvas, EventsPlot, LinePlot, BarPlot } from '../../charts/charts';
-import '../../charts/chart.scss';
-import { useAppSelector } from '../../../store/hooks';
-import { selectEventChartKey } from '../channelSlice';
+
 import { useGetSettingsQuery } from '../../../apiSlice';
+import { useAppSelector } from '../../../store/hooks';
+import '../../charts/chart.scss';
+import { BarPlot, ChartCanvas, EventsPlot, LinePlot } from '../../charts/charts';
+import { useD3 } from '../../charts/useD3';
+import { selectEventChartKey } from '../channelSlice';
 
 type EventsChart = {
   data: any[];

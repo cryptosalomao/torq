@@ -1,17 +1,22 @@
-import { AddSquare20Regular as AddIcon, Save20Regular as SaveIcon } from '@fluentui/react-icons';
-import Page from 'layout/Page';
-import Box from './Box';
-import Button, { buttonColor, buttonPosition } from 'features/buttons/Button';
-import style from './settings.module.css';
-import Select, { SelectOption } from '../forms/Select';
 import React from 'react';
-import { defaultStaticRangesFn } from '../timeIntervalSelect/customRanges';
+
+import { AddSquare20Regular as AddIcon, Save20Regular as SaveIcon } from '@fluentui/react-icons';
 import { useGetLocalNodesQuery, useGetSettingsQuery, useGetTimeZonesQuery, useUpdateSettingsMutation } from 'apiSlice';
 import { localNode, settings } from 'apiTypes';
+import Page from 'layout/Page';
+
+import Button, { buttonColor, buttonPosition } from 'features/buttons/Button';
+import Modal from 'features/modal/Modal';
+
+import Box from './Box';
+import NodeSettings from './NodeSettings';
+import style from './settings.module.css';
+
+import Select, { SelectOption } from '../forms/Select';
+import { defaultStaticRangesFn } from '../timeIntervalSelect/customRanges';
 import { toastCategory } from '../toast/Toasts';
 import ToastContext from '../toast/context';
-import NodeSettings from './NodeSettings';
-import Modal from 'features/modal/Modal';
+
 
 function Settings() {
   const { data: settingsData } = useGetSettingsQuery();

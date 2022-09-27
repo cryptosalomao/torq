@@ -1,18 +1,22 @@
-import styles from './channel-page.module.scss';
-import * as d3 from 'd3';
+import { useGetChannelHistoryQuery, useGetFlowQuery } from 'apiSlice';
 import classNames from 'classnames';
-import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
-import ProfitsChart from './revenueChart/ProfitsChart';
-import Select from '../inputs/Select';
-import FlowChart from './flowChart/FlowChart';
-import { useGetFlowQuery, useGetChannelHistoryQuery } from 'apiSlice';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { selectTimeInterval } from '../timeIntervalSelect/timeIntervalSlice';
+import * as d3 from 'd3';
 import { addDays, format } from 'date-fns';
 import { useParams } from 'react-router';
-import DetailsPageTemplate from 'features/templates/detailsPageTemplate/DetailsPageTemplate';
-import { selectFlowKeys, selectProfitChartKey, updateFlowKey, updateProfitChartKey } from './channelSlice';
 import { Link } from 'react-router-dom';
+
+import DetailsPageTemplate from 'features/templates/detailsPageTemplate/DetailsPageTemplate';
+
+import styles from './channel-page.module.scss';
+import { selectFlowKeys, selectProfitChartKey, updateFlowKey, updateProfitChartKey } from './channelSlice';
+import FlowChart from './flowChart/FlowChart';
+import ProfitsChart from './revenueChart/ProfitsChart';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import Select from '../inputs/Select';
+import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
+import { selectTimeInterval } from '../timeIntervalSelect/timeIntervalSlice';
+
 
 const ft = d3.format(',.0f');
 

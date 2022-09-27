@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './nav.module.scss';
+
+import { LineHorizontal120Regular as CollapseIcon, ChevronDown20Regular as ExpandIcon } from '@fluentui/react-icons';
 import classNames from 'classnames';
-import { ChevronDown20Regular as ExpandIcon, LineHorizontal120Regular as CollapseIcon } from '@fluentui/react-icons';
+
+import styles from './nav.module.scss';
 
 function NavCategory(props: { text: string; collapsed?: boolean; children: React.ReactNode }) {
   const icon = props.collapsed ? <ExpandIcon /> : <CollapseIcon />;

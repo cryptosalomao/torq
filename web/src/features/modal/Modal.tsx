@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './Modal.module.scss';
+
 import { DismissCircle24Regular as DismissIcon } from '@fluentui/react-icons';
 import classNames from 'classnames';
+
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   children: React.ReactNode;

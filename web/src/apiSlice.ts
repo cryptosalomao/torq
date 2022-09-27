@@ -1,7 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ViewInterface, viewOrderInterface } from 'features/forwards/forwardsSlice';
-import { settings, timeZone, localNode } from './apiTypes';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import { ViewInterface, viewOrderInterface } from 'features/forwards/forwardsSlice';
+
+import { localNode, settings, timeZone } from './apiTypes';
+
 
 const buildBaseUrl = () => {
   // checks to see if the app is running under /torq and if so prepends that to API paths

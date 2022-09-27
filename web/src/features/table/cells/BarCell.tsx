@@ -1,7 +1,9 @@
-import styles from './cell.module.scss';
-import { format } from 'd3';
 import React from 'react';
+
 import classNames from 'classnames';
+import { format } from 'd3';
+
+import styles from './cell.module.scss';
 
 interface barCell {
   current: number;

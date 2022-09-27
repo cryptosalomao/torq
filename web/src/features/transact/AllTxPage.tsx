@@ -1,19 +1,22 @@
-import { useGetTableViewsQuery } from 'apiSlice';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
 import {
+  ColumnTriple20Regular as ColumnsIcon,
   Filter20Regular as FilterIcon,
   ArrowSortDownLines20Regular as SortIcon,
-  ColumnTriple20Regular as ColumnsIcon,
 } from '@fluentui/react-icons';
+import { useGetTableViewsQuery } from 'apiSlice';
+import { Link } from 'react-router-dom';
+
+import TransactTabs from './TransactTabs';
+
+import { SectionContainer } from '../section/SectionContainer';
 import Sidebar from '../sidebar/Sidebar';
 import TablePageTemplate, {
   TableControlSection,
   TableControlsButton,
   TableControlsButtonGroup,
 } from '../templates/tablePageTemplate/TablePageTemplate';
-import { useState } from 'react';
-import TransactTabs from './TransactTabs';
-import { SectionContainer } from '../section/SectionContainer';
 
 type sections = {
   filter: boolean;

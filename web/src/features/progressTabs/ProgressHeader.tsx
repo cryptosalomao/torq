@@ -1,13 +1,15 @@
-import styles from './progressHeader.module.scss';
 import React, { MouseEventHandler, ReactEventHandler } from 'react';
-import classNames from 'classnames';
+
 import {
-  Checkmark16Regular as CompletedIcon,
   Edit16Regular as ActiveIcon,
+  Checkmark16Regular as CompletedIcon,
+  Dismiss16Regular as ErrorIcon,
   Subtract16Regular as InactiveIcon,
   ArrowSync16Filled as ProcessingIcon,
-  Dismiss16Regular as ErrorIcon,
 } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
+import styles from './progressHeader.module.scss';
 
 const progressStepClass = {
   0: styles.active,

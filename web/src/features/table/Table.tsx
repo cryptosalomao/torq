@@ -1,15 +1,16 @@
-import styles from './table.module.scss';
-import cellStyles from './cells/cell.module.scss';
-import HeaderCell from './cells/HeaderCell';
-import AliasCell from './cells/AliasCell';
-import NumericCell from './cells/NumericCell';
-import BarCell from './cells/BarCell';
-import TextCell from './cells/TextCell';
-import DurationCell from './cells/DurationCell';
-import BooleanCell from './cells/BooleanCell';
 import classNames from 'classnames';
+
+import AliasCell from './cells/AliasCell';
+import BarCell from './cells/BarCell';
+import BooleanCell from './cells/BooleanCell';
 import DateCell from './cells/DateCell';
+import DurationCell from './cells/DurationCell';
 import EnumCell from './cells/EnumCell';
+import HeaderCell from './cells/HeaderCell';
+import NumericCell from './cells/NumericCell';
+import TextCell from './cells/TextCell';
+import cellStyles from './cells/cell.module.scss';
+import styles from './table.module.scss';
 
 export interface ColumnMetaData {
   heading: string;

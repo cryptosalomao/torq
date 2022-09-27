@@ -1,18 +1,20 @@
-import { useAppDispatch } from '../../store/hooks';
-import { toggleNav } from './navSlice';
-import classNames from 'classnames';
-import MenuItem from './MenuItem';
-import NavCategory from './NavCategory';
-import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
 import {
   Navigation20Regular as CollapseIcon,
   AppsListDetail20Regular as ForwardsIcon,
-  Autosum20Regular as SummaryIcon,
-  MoneyHand20Regular as TransactionIcon,
   LockClosed20Regular as LogoutIcon,
   Settings20Regular as SettingsIcon,
+  Autosum20Regular as SummaryIcon,
+  MoneyHand20Regular as TransactionIcon,
 } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
+import MenuItem from './MenuItem';
+import NavCategory from './NavCategory';
 import styles from './nav.module.scss';
+import { toggleNav } from './navSlice';
+
+import { useAppDispatch } from '../../store/hooks';
+import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
 
 function Navigation() {
   const dispatch = useAppDispatch();

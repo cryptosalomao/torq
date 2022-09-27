@@ -1,5 +1,6 @@
-import styles from './textInput.module.scss';
 import React from 'react';
+
+import styles from './textInput.module.scss';
 
 interface textInputProps {
   label?: string;

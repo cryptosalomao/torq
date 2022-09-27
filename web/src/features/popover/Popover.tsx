@@ -1,6 +1,8 @@
-import './popover.scss';
-import React, { ReactChild, SetStateAction, useEffect, Dispatch, useRef, useState } from 'react';
+import React, { Dispatch, ReactChild, SetStateAction, useEffect, useRef, useState } from 'react';
+
 import classNames from 'classnames';
+
+import './popover.scss';
 
 function useOutsideClose(ref: any, setIsPopoverOpen: Dispatch<SetStateAction<boolean>>) {
   useEffect(() => {

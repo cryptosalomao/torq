@@ -1,10 +1,14 @@
 import React from 'react';
+
+import { FluentIconsProps } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
+import PageTitle from 'features/templates/PageTitle';
+
 import styles from './table-page-template.module.scss';
 
-import classNames from 'classnames';
-import { FluentIconsProps } from '@fluentui/react-icons';
-import PageTitle from 'features/templates/PageTitle';
 import Button, { buttonColor } from '../../buttons/Button';
+
 
 type TablePageTemplateProps = {
   title: string;

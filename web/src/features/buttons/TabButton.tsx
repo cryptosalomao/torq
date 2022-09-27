@@ -1,7 +1,8 @@
-import classNames from 'classnames';
-import styles from './button.module.scss';
-import { NavLink } from 'react-router-dom';
 import { ChevronDown20Regular as ExpandIcon } from '@fluentui/react-icons';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+
+import styles from './button.module.scss';
 
 type TabButtonProps = {
   title: string;

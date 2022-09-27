@@ -6,8 +6,10 @@
 //   key: K,
 //   parameter: FilterParameterType
 // ) => boolean;
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import clone from 'clone';
+
 import { SelectOption } from 'features/forms/Select';
 
 export type FilterCategoryType = 'number' | 'string' | 'date' | 'boolean' | 'array' | 'duration';

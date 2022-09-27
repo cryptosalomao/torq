@@ -1,8 +1,10 @@
 import React from 'react';
-import styles from './cell.module.scss';
+
+import { CalendarLtr20Regular as DateIcon, Clock20Regular as TimeIcon } from '@fluentui/react-icons';
 import classNames from 'classnames';
 import { format } from 'date-fns';
-import { Clock20Regular as TimeIcon, CalendarLtr20Regular as DateIcon } from '@fluentui/react-icons';
+
+import styles from './cell.module.scss';
 
 interface DateCellProps {
   value: string | Date;

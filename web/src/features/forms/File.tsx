@@ -1,9 +1,10 @@
 // Drag and drop!!
 // https://www.youtube.com/watch?v=vJG9lnO7jOM
+import React from 'react';
+
+import classNames from 'classnames';
 
 import styles from './file.module.scss';
-import React from 'react';
-import classNames from 'classnames';
 
 interface fileProps {
   label?: string;

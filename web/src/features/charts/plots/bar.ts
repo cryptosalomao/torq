@@ -1,8 +1,10 @@
-import ChartCanvas from '../chartCanvas';
-import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
-import { addHours } from 'date-fns';
 import * as d3 from 'd3';
 import { Selection } from 'd3';
+import { addHours } from 'date-fns';
+
+import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
+
+import ChartCanvas from '../chartCanvas';
 
 type barsConfig = basePlotConfig & {
   key: string; // The key used to fetch data

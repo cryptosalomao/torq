@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './note.module.scss';
+
 import { Note24Regular as DefaultNoteIcon } from '@fluentui/react-icons';
 import classNames from 'classnames';
+
+import styles from './note.module.scss';
 
 type NoteProps = {
   title: string;

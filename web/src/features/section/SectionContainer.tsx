@@ -1,11 +1,13 @@
-import styles from './sectionContainer.module.scss';
+import React from 'react';
+
 import {
   ChevronDown20Regular as CollapsedIcon,
-  FluentIconsProps,
   LineHorizontal120Regular as ExpandedIcon,
+  FluentIconsProps,
 } from '@fluentui/react-icons';
 import classNames from 'classnames';
-import React from 'react';
+
+import styles from './sectionContainer.module.scss';
 
 type SectionContainerProps = {
   title: string;

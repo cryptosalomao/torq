@@ -1,6 +1,8 @@
-import styles from './switch.module.scss';
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
+
+import styles from './switch.module.scss';
 
 type SwitchProps = {
   label: string;

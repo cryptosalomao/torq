@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import Select, { Props, components } from 'react-select';
 import { ChevronDown16Regular as ChevronDownIcon } from '@fluentui/react-icons';
+import Select, { Props, components } from 'react-select';
 
 export type SelectOptionType = { value: string; label: string };
 

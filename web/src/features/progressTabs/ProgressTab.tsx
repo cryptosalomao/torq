@@ -1,5 +1,6 @@
-import styles from './progressTabs.module.scss';
 import React from 'react';
+
+import styles from './progressTabs.module.scss';
 
 type ProgressTabContainerProps = {
   // modalCloseHandler: Function;

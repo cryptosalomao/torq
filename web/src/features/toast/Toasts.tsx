@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
-import styles from './toast.module.css';
+
 import {
-  ThumbLike20Regular as SuccessIcon,
   Dismiss20Regular as CloseIcon,
   ErrorCircle20Regular as ErrorIcon,
+  ThumbLike20Regular as SuccessIcon,
   Warning20Regular as WarnIcon,
 } from '@fluentui/react-icons';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { v4 as uuidv4 } from 'uuid';
+
+import styles from './toast.module.css';
 
 export enum toastCategory {
   success,

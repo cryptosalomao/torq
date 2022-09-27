@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import './login_layout.scss';
-
 import classNames from 'classnames';
+import { Outlet } from 'react-router-dom';
+
+import './login_layout.scss';
 
 function LoginLayout() {
   return (

@@ -1,7 +1,9 @@
-import ChartCanvas from '../chartCanvas';
-import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
 import * as d3 from 'd3';
 import { Selection } from 'd3';
+
+import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
+
+import ChartCanvas from '../chartCanvas';
 
 type linePlotConfig = basePlotConfig & {
   lineColor: string;

@@ -1,24 +1,27 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import DefaultLayout from './layout/DefaultLayout';
-import LoginLayout from './layout/LoginLayout';
-import ForwardsPage from './features/forwards/ForwardsPage';
 
-import LoginPage from './features/auth/LoginPage';
-import SettingsPage from './features/settings/SettingsPage';
-import styles from './app.module.scss';
-import { Cookies } from 'react-cookie';
 import { useLogoutMutation } from 'apiSlice';
+import { Cookies } from 'react-cookie';
+import { Route, Routes, useLocation, useNavigate , BrowserRouter } from 'react-router-dom';
+
 import Toasts, { addToastHandle } from 'features/toast/Toasts';
 import ToastContext from 'features/toast/context';
-import { BrowserRouter } from 'react-router-dom';
-import ChannelPage from './features/channel/ChannelPage';
-import DashboardPage from './features/channel/DashboardPage';
-import PaymentsPage from 'features/transact/Payments/PaymentsPage';
 import InvoicesPage from 'features/transact/Invoices/InvoicesPage';
 import OnChainPage from 'features/transact/OnChain/OnChainPage';
-import AllTxPage from './features/transact/AllTxPage';
+import PaymentsPage from 'features/transact/Payments/PaymentsPage';
+
+
+import styles from './app.module.scss';
+import LoginPage from './features/auth/LoginPage';
+import ChannelPage from './features/channel/ChannelPage';
+import DashboardPage from './features/channel/DashboardPage';
+import ForwardsPage from './features/forwards/ForwardsPage';
 import NoMatch from './features/no_match/NoMatch';
+import SettingsPage from './features/settings/SettingsPage';
+import AllTxPage from './features/transact/AllTxPage';
+import DefaultLayout from './layout/DefaultLayout';
+import LoginLayout from './layout/LoginLayout';
+
 
 function Logout() {
   const [logout] = useLogoutMutation();

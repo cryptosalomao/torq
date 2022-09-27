@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './popoutPageTemplate.module.scss';
+
 import { DismissCircle24Regular as DismissIcon } from '@fluentui/react-icons';
 import classNames from 'classnames';
+
+import styles from './popoutPageTemplate.module.scss';
 
 type PopoutPageTemplateProps = {
   children: React.ReactNode;

@@ -1,8 +1,10 @@
 import React from 'react';
-import * as d3 from 'd3';
-import styles from '../channel/channel-page.module.scss';
+
 import classNames from 'classnames';
+import * as d3 from 'd3';
 import { format } from 'date-fns';
+
+import styles from '../channel/channel-page.module.scss';
 import eventIcons from '../charts/plots/eventIcons';
 
 function fm(value: number): string | number {

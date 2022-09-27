@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './cell.module.scss';
-import classNames from 'classnames';
+
 import { CheckmarkCircle24Regular as CheckedIcon, Circle24Regular as UncheckedIcon } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
+import styles from './cell.module.scss';
 
 interface BooleanCellProps {
   value: boolean;

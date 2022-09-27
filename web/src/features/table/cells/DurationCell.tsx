@@ -1,8 +1,10 @@
-import styles from './cell.module.scss';
 import React from 'react';
+
+import classNames from 'classnames';
 import { format } from 'd3';
 import { formatDuration, intervalToDuration } from 'date-fns';
-import classNames from 'classnames';
+
+import styles from './cell.module.scss';
 
 interface DurationCellProps {
   seconds: number;

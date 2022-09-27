@@ -1,37 +1,41 @@
-import Box from './Box';
-import styles from './NodeSettings.module.scss';
-import Select, { SelectOption } from '../forms/Select';
 import React, { useState } from 'react';
+
 import {
-  Save20Regular as SaveIcon,
-  Play16Regular as ConnectedIcon,
-  Pause16Regular as DisconnectedIcon,
   ChevronDown20Regular as CollapsedIcon,
+  Play16Regular as ConnectedIcon,
+  Delete20Regular as DeleteIcon,
+  Delete24Regular as DeleteIconHeader,
+  Pause16Regular as DisconnectedIcon,
   LineHorizontal120Regular as ExpandedIcon,
   MoreCircle20Regular as MoreIcon,
-  Delete24Regular as DeleteIconHeader,
-  Delete20Regular as DeleteIcon,
   Pause20Regular as PauseIcon,
   Play20Regular as PlayIcon,
+  Save20Regular as SaveIcon,
 } from '@fluentui/react-icons';
-import Spinny from 'features/spinny/Spinny';
-import { toastCategory } from '../toast/Toasts';
-import ToastContext from '../toast/context';
-import File from '../forms/File';
-import TextInput from 'features/forms/TextInput';
 import {
+  useAddLocalNodeMutation,
   useGetLocalNodeQuery,
   useUpdateLocalNodeMutation,
-  useAddLocalNodeMutation,
-  useUpdateLocalNodeSetDisabledMutation,
   useUpdateLocalNodeSetDeletedMutation,
+  useUpdateLocalNodeSetDisabledMutation,
 } from 'apiSlice';
 import { localNode } from 'apiTypes';
 import classNames from 'classnames';
-import Collapse from 'features/collapse/Collapse';
-import Popover from 'features/popover/Popover';
+
 import Button, { buttonColor, buttonPosition } from 'features/buttons/Button';
+import Collapse from 'features/collapse/Collapse';
+import TextInput from 'features/forms/TextInput';
 import Modal from 'features/modal/Modal';
+import Popover from 'features/popover/Popover';
+import Spinny from 'features/spinny/Spinny';
+
+import styles from './NodeSettings.module.scss';
+import Box from './Box';
+
+import ToastContext from '../toast/context';
+import { toastCategory } from '../toast/Toasts';
+import Select, { SelectOption } from '../forms/Select';
+import File from '../forms/File';
 
 interface nodeProps {
   localNodeId: number;

@@ -1,5 +1,6 @@
-import RawSelect, { SelectOptionType } from '../inputs/Select';
 import { Props } from 'react-select';
+
+import RawSelect, { SelectOptionType } from '../inputs/Select';
 
 type selectProps = {
   label: string;

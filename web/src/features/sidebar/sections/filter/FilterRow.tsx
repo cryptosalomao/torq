@@ -1,14 +1,13 @@
-import classNames from 'classnames';
-import { Delete16Regular as RemoveIcon } from '@fluentui/react-icons';
-import Select from './FilterDropDown';
-
-import { FilterClause, FilterParameterType } from './filter';
-import styles from './filter-section.module.scss';
-import { FilterFunctions } from './filter';
-import NumberFormat from 'react-number-format';
 import { useState } from 'react';
+
+import { Delete16Regular as RemoveIcon } from '@fluentui/react-icons';
+import classNames from 'classnames';
 import { format } from 'd3';
-import { FilterCategoryType } from './filter';
+import NumberFormat from 'react-number-format';
+
+import Select from './FilterDropDown';
+import { FilterClause, FilterParameterType , FilterFunctions , FilterCategoryType } from './filter';
+import styles from './filter-section.module.scss';
 
 const formatter = format(',.0f');
 

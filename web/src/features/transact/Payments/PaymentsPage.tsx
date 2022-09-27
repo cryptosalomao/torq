@@ -1,27 +1,32 @@
-import Table, { ColumnMetaData } from 'features/table/Table';
-import { useGetPaymentsQuery } from 'apiSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import {
   ArrowSortDownLines20Regular as SortIcon,
   ColumnTriple20Regular as ColumnsIcon,
   Filter20Regular as FilterIcon,
-  Options20Regular as OptionsIcon,
   MoneyHand20Regular as TransactionIcon,
+  Options20Regular as OptionsIcon,
 } from '@fluentui/react-icons';
+import { useGetPaymentsQuery } from 'apiSlice';
+import clone from 'clone';
+import { useLocation } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
+
+import Button, { buttonColor } from 'features/buttons/Button';
+import useLocalStorage from 'features/helpers/useLocalStorage';
+import ColumnsSection from 'features/sidebar/sections/columns/ColumnsSection';
+import { FilterCategoryType } from 'features/sidebar/sections/filter/filter';
+import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
 import Sidebar from 'features/sidebar/Sidebar';
+import Pagination from 'features/table/pagination/Pagination';
+import Table, { ColumnMetaData } from 'features/table/Table';
 import TablePageTemplate, {
   TableControlsButton,
   TableControlsButtonGroup,
   TableControlSection,
 } from 'features/templates/tablePageTemplate/TablePageTemplate';
-import { useState } from 'react';
-import TransactTabs from '../TransactTabs';
-import Pagination from 'features/table/pagination/Pagination';
-import useLocalStorage from 'features/helpers/useLocalStorage';
-import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
-import FilterSection from '../../sidebar/sections/filter/FilterSection';
-import { Clause, deserialiseQuery, FilterInterface } from '../../sidebar/sections/filter/filter';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+
+import NewPaymentModal from './newPayment/NewPaymentModal';
 import {
   selectActiveColumns,
   selectAllColumns,
@@ -29,13 +34,12 @@ import {
   updateColumns,
   updatePaymentsFilters,
 } from './paymentsSlice';
-import { FilterCategoryType } from 'features/sidebar/sections/filter/filter';
-import ColumnsSection from 'features/sidebar/sections/columns/ColumnsSection';
-import clone from 'clone';
-import Button, { buttonColor } from 'features/buttons/Button';
+
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { SectionContainer } from '../../section/SectionContainer';
-import NewPaymentModal from './newPayment/NewPaymentModal';
-import { useLocation } from 'react-router';
+import { Clause, deserialiseQuery, FilterInterface } from '../../sidebar/sections/filter/filter';
+import FilterSection from '../../sidebar/sections/filter/FilterSection';
+import TransactTabs from '../TransactTabs';
 
 type sections = {
   filter: boolean;

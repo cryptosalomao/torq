@@ -1,34 +1,37 @@
-import styles from './views.module.scss';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import {
-  Dismiss20Regular as RemoveIcon,
-  Edit16Regular as EditIcon,
-  Save20Regular as SaveIcon,
-  AddSquare20Regular as AddIcon,
-  Reorder20Regular as DragHandle,
-} from '@fluentui/react-icons';
 import { useState } from 'react';
-import classNames from 'classnames';
-import TabButton from 'features/buttons/TabButton';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import {
-  selectViews,
-  updateViews,
-  updateSelectedView,
-  selectedViewIndex,
-  ViewInterface,
-  viewOrderInterface,
-  DefaultView,
-  updateViewsOrder,
-} from 'features/forwards/forwardsSlice';
-import Popover from 'features/popover/Popover';
-import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
+
 import {
   useCreateTableViewMutation,
-  useUpdateTableViewMutation,
   useDeleteTableViewMutation,
+  useUpdateTableViewMutation,
   useUpdateTableViewsOrderMutation,
 } from 'apiSlice';
+import classNames from 'classnames';
+import {
+  AddSquare20Regular as AddIcon,
+  Reorder20Regular as DragHandle,
+  Edit16Regular as EditIcon,
+  Dismiss20Regular as RemoveIcon,
+  Save20Regular as SaveIcon,
+} from '@fluentui/react-icons';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+
+import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
+import TabButton from 'features/buttons/TabButton';
+import {
+  DefaultView,
+  ViewInterface,
+  selectViews,
+  selectedViewIndex,
+  updateSelectedView,
+  updateViews,
+  updateViewsOrder,
+  viewOrderInterface,
+} from 'features/forwards/forwardsSlice';
+import Popover from 'features/popover/Popover';
+
+import styles from './views.module.scss';
 
 type viewRow = {
   title: string;

@@ -1,26 +1,31 @@
-import Table, { ColumnMetaData } from 'features/table/Table';
+import { useState } from 'react';
+
+import {
+  ColumnTriple20Regular as ColumnsIcon,
+  Filter20Regular as FilterIcon,
+  Options20Regular as OptionsIcon,
+  ArrowSortDownLines20Regular as SortIcon,
+} from '@fluentui/react-icons';
 import { useGetInvoicesQuery } from 'apiSlice';
 import { Link } from 'react-router-dom';
-import {
-  Filter20Regular as FilterIcon,
-  ArrowSortDownLines20Regular as SortIcon,
-  ColumnTriple20Regular as ColumnsIcon,
-  Options20Regular as OptionsIcon,
-} from '@fluentui/react-icons';
+
+import useLocalStorage from 'features/helpers/useLocalStorage';
 import Sidebar from 'features/sidebar/Sidebar';
+import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
+import Table, { ColumnMetaData } from 'features/table/Table';
+import Pagination from 'features/table/pagination/Pagination';
 import TablePageTemplate, {
   TableControlSection,
   TableControlsButton,
   TableControlsButtonGroup,
 } from 'features/templates/tablePageTemplate/TablePageTemplate';
-import { useState } from 'react';
-import TransactTabs from '../TransactTabs';
-import Pagination from 'features/table/pagination/Pagination';
-import useLocalStorage from 'features/helpers/useLocalStorage';
-import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
-import FilterSection from '../../sidebar/sections/filter/FilterSection';
-import { Clause, deserialiseQuery, FilterInterface } from '../../sidebar/sections/filter/filter';
+
+import clone from '../../../clone';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { SectionContainer } from '../../section/SectionContainer';
+import ColumnsSection from '../../sidebar/sections/columns/ColumnsSection';
+import FilterSection from '../../sidebar/sections/filter/FilterSection';
+import { Clause, FilterInterface, deserialiseQuery , FilterCategoryType } from '../../sidebar/sections/filter/filter';
 import {
   selectActiveColumns,
   selectAllColumns,
@@ -28,10 +33,8 @@ import {
   updateColumns,
   updateInvoicesFilters,
 } from '../Invoices/invoicesSlice';
-import { FilterCategoryType } from '../../sidebar/sections/filter/filter';
-import ColumnsSection from '../../sidebar/sections/columns/ColumnsSection';
-import clone from '../../../clone';
-import { SectionContainer } from '../../section/SectionContainer';
+import TransactTabs from '../TransactTabs';
+
 
 type sections = {
   filter: boolean;

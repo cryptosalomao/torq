@@ -1,7 +1,9 @@
-import ChartCanvas from '../chartCanvas';
-import { AbstractPlot, basePlotConfig } from './abstract';
 import * as d3 from 'd3';
+
+import { AbstractPlot, basePlotConfig } from './abstract';
 import eventIcons from './eventIcons';
+
+import ChartCanvas from '../chartCanvas';
 
 type eventsPlotConfig = basePlotConfig & {
   events: any[];

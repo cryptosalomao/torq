@@ -1,5 +1,5 @@
-import Select, { Props, components } from 'react-select';
 import { ChevronDown20Regular as ChevronDownIcon } from '@fluentui/react-icons';
+import Select, { components, Props } from 'react-select';
 
 const customStyles = {
   indicatorSeparator: () => {

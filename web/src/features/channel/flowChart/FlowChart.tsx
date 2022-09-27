@@ -1,9 +1,11 @@
 // https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-import { useD3 } from '../../charts/useD3';
 import { useEffect } from 'react';
+
 import { Selection } from 'd3';
-import FlowChartCanvas, { FlowData } from '../../charts/flowChartCanvas';
+
 import { useAppSelector } from '../../../store/hooks';
+import FlowChartCanvas, { FlowData } from '../../charts/flowChartCanvas';
+import { useD3 } from '../../charts/useD3';
 import { selectFlowKeys } from '../channelSlice';
 
 type FlowChart = {

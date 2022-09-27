@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './cell.module.scss';
-import classNames from 'classnames';
+
 import { FluentIconsProps } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
+import styles from './cell.module.scss';
 
 interface EnumCellProps {
   value: string;

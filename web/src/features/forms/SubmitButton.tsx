@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+
 import style from './submitButton.module.scss';
 
 interface SubmitButtonProps {

@@ -1,18 +1,22 @@
-import classNames from 'classnames';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useState } from 'react';
+
 import {
-  Delete16Regular as RemoveIcon,
-  Options16Regular as OptionsIcon,
-  LineHorizontal1Regular as OptionsExpandedIcon,
-  LockClosed16Regular as LockClosedIcon,
-  LockOpen16Regular as LockOpenIcon,
   AddCircle16Regular as AddIcon,
   ReOrder16Regular as DragHandle,
+  LockClosed16Regular as LockClosedIcon,
+  LockOpen16Regular as LockOpenIcon,
+  LineHorizontal1Regular as OptionsExpandedIcon,
+  Options16Regular as OptionsIcon,
+  Delete16Regular as RemoveIcon,
 } from '@fluentui/react-icons';
-import styles from './columns-section.module.scss';
-import Select, { SelectOptionType } from './ColumnDropDown';
+import classNames from 'classnames';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+
 import { ColumnMetaData } from 'features/table/Table';
-import { useState } from 'react';
+
+import Select, { SelectOptionType } from './ColumnDropDown';
+import styles from './columns-section.module.scss';
+
 
 interface columnRow {
   column: ColumnMetaData;

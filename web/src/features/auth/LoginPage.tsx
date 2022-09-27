@@ -1,9 +1,11 @@
 import React from 'react';
-import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
+
 import { LockOpen20Regular as UnlockIcon } from '@fluentui/react-icons';
-import './login_page.scss';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from 'apiSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
+import './login_page.scss';
 
 function LoginPage() {
   const [login] = useLoginMutation();

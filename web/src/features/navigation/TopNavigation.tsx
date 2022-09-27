@@ -1,9 +1,11 @@
-import { useAppDispatch } from '../../store/hooks';
-import { toggleNav } from './navSlice';
-import classNames from 'classnames';
-import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
 import { Navigation20Regular as CollapseIcon } from '@fluentui/react-icons';
+import classNames from 'classnames';
+
 import styles from './nav.module.scss';
+import { toggleNav } from './navSlice';
+
+import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
+import { useAppDispatch } from '../../store/hooks';
 
 function TopNavigation() {
   const dispatch = useAppDispatch();

@@ -1,6 +1,7 @@
-import { createContext } from 'react';
+import React, { createContext } from 'react';
+
 import { addToastHandle } from '../toast/Toasts';
-import React from 'react';
+
 const ToastContext = createContext<React.MutableRefObject<addToastHandle | undefined> | null>(null);
 
 // const ToastContext = createContext<addToastHandle>({

@@ -1,4 +1,4 @@
-import { AndClause, OrClause, FilterClause, processQuery, deserialiseQueryFromString } from './filter';
+import { AndClause, FilterClause, OrClause, deserialiseQueryFromString, processQuery } from './filter';
 
 const data = { capacity: 99 };
 

@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../store/store';
-import { defineds, getCompareRanges, defaultStaticRangesFn } from './customRanges';
 import { torqApi } from 'apiSlice';
 import { Draft } from 'immer';
+
+import { defaultStaticRangesFn, defineds, getCompareRanges } from './customRanges';
+
+import { RootState } from '../../store/store';
 
 export interface TimeIntervalState {
   from: string;
