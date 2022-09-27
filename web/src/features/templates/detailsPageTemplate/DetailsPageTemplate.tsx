@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./details-page-template.module.scss";
-import PageTitle from "features/templates/PageTitle";
-import classNames from "classnames";
+import React from 'react';
+import styles from './details-page-template.module.scss';
+import PageTitle from 'features/templates/PageTitle';
+import classNames from 'classnames';
 
 type DetailsPageProps = {
   title: string;

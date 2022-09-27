@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./cell.module.scss";
-import classNames from "classnames";
-import { FluentIconsProps } from "@fluentui/react-icons";
+import React from 'react';
+import styles from './cell.module.scss';
+import classNames from 'classnames';
+import { FluentIconsProps } from '@fluentui/react-icons';
 
 interface EnumCellProps {
   value: string;
@@ -14,7 +14,7 @@ function EnumCell(props: EnumCellProps) {
     <div className={classNames(styles.cell, styles.alignLeft, styles.EnumCell, props.className)}>
       <div className={styles.current}>
         <>
-          {props.icon ? props.icon : ""}
+          {props.icon ? props.icon : ''}
           {props.value}
         </>
       </div>

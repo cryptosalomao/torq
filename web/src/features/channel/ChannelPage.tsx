@@ -1,22 +1,22 @@
-import React from "react";
-import styles from "./channel-page.module.scss";
-import * as d3 from "d3";
-import classNames from "classnames";
-import Popover from "../popover/Popover";
-import TimeIntervalSelect from "../timeIntervalSelect/TimeIntervalSelect";
-import ProfitsChart from "./revenueChart/ProfitsChart";
-import EventsChart from "./eventsChart/EventsChart";
-import EventsCard from "../eventsCard/EventsCard";
-import Switch from "../inputs/Slider/Switch";
-import Button, { buttonColor, buttonSize } from "../buttons/Button";
-import Select from "../inputs/Select";
-import { Flag16Regular as EventFlagIcon } from "@fluentui/react-icons";
-import FlowChart from "./flowChart/FlowChart";
-import { useGetFlowQuery, useGetChannelHistoryQuery } from "apiSlice";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { selectTimeInterval } from "../timeIntervalSelect/timeIntervalSlice";
-import { addDays, format } from "date-fns";
-import { useParams } from "react-router";
+import React from 'react';
+import styles from './channel-page.module.scss';
+import * as d3 from 'd3';
+import classNames from 'classnames';
+import Popover from '../popover/Popover';
+import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
+import ProfitsChart from './revenueChart/ProfitsChart';
+import EventsChart from './eventsChart/EventsChart';
+import EventsCard from '../eventsCard/EventsCard';
+import Switch from '../inputs/Slider/Switch';
+import Button, { buttonColor, buttonSize } from '../buttons/Button';
+import Select from '../inputs/Select';
+import { Flag16Regular as EventFlagIcon } from '@fluentui/react-icons';
+import FlowChart from './flowChart/FlowChart';
+import { useGetFlowQuery, useGetChannelHistoryQuery } from 'apiSlice';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { selectTimeInterval } from '../timeIntervalSelect/timeIntervalSlice';
+import { addDays, format } from 'date-fns';
+import { useParams } from 'react-router';
 import {
   selectEventChartKey,
   selectFlowKeys,
@@ -26,20 +26,20 @@ import {
   updateProfitChartKey,
   updateBalanceChanID,
   selectBalanceChanID,
-} from "./channelSlice";
-import BalanceChart from "./balanceChart/BalanceChart";
-import DetailsPageTemplate from "features/templates/detailsPageTemplate/DetailsPageTemplate";
-import { Link } from "react-router-dom";
+} from './channelSlice';
+import BalanceChart from './balanceChart/BalanceChart';
+import DetailsPageTemplate from 'features/templates/detailsPageTemplate/DetailsPageTemplate';
+import { Link } from 'react-router-dom';
 
-const ft = d3.format(",.0f");
+const ft = d3.format(',.0f');
 
 const eventNames = new Map([
-  ["fee_rate", "Fee rate"],
-  ["base_fee", "Base fee"],
-  ["min_htlc", "Min htlc"],
-  ["max_htlc", "Max htlc"],
-  ["enabled", "Enabled"],
-  ["disabled", "Disabled"],
+  ['fee_rate', 'Fee rate'],
+  ['base_fee', 'Base fee'],
+  ['min_htlc', 'Min htlc'],
+  ['max_htlc', 'Max htlc'],
+  ['enabled', 'Enabled'],
+  ['disabled', 'Disabled'],
 ]);
 
 type ChannelPageProps = {
@@ -49,17 +49,17 @@ type ChannelPageProps = {
 function ChannelPage(props: ChannelPageProps) {
   const currentPeriod = useAppSelector(selectTimeInterval);
   const dispatch = useAppDispatch();
-  const from = format(new Date(currentPeriod.from), "yyyy-MM-dd");
-  const to = format(new Date(currentPeriod.to), "yyyy-MM-dd");
+  const from = format(new Date(currentPeriod.from), 'yyyy-MM-dd');
+  const to = format(new Date(currentPeriod.to), 'yyyy-MM-dd');
   const [allToggle, setAllToggle] = React.useState(true);
   const [selectedEvents, setSelectedEvents] = React.useState(
     new Map<string, boolean>([
-      ["fee_rate", true],
-      ["base_fee", true],
-      ["min_htlc", true],
-      ["max_htlc", true],
-      ["enabled", true],
-      ["disabled", true],
+      ['fee_rate', true],
+      ['base_fee', true],
+      ['min_htlc', true],
+      ['max_htlc', true],
+      ['enabled', true],
+      ['disabled', true],
     ])
   );
   const handleSelectEventUpdate = (type: string) => {
@@ -71,21 +71,21 @@ function ChannelPage(props: ChannelPageProps) {
   const { chanId } = useParams();
   const { data, isLoading } = useGetFlowQuery({
     from: from,
-    to: format(addDays(new Date(currentPeriod.to), 1), "yyyy-MM-dd"),
-    chanId: chanId || "1",
+    to: format(addDays(new Date(currentPeriod.to), 1), 'yyyy-MM-dd'),
+    chanId: chanId || '1',
   });
   const historyQuery = useGetChannelHistoryQuery({
     from: from,
-    to: format(addDays(new Date(currentPeriod.to), 1), "yyyy-MM-dd"),
-    chanIds: chanId || "1",
+    to: format(addDays(new Date(currentPeriod.to), 1), 'yyyy-MM-dd'),
+    chanIds: chanId || '1',
   });
 
   const flowKey = useAppSelector(selectFlowKeys);
   const profitKey = useAppSelector(selectProfitChartKey);
   const eventKey = useAppSelector(selectEventChartKey);
   let balanceChanId = useAppSelector(selectBalanceChanID);
-  if (balanceChanId.label === "") {
-    balanceChanId = { value: 0, label: historyQuery?.data?.channel_balance[0]?.LNDShortChannelId || "" };
+  if (balanceChanId.label === '') {
+    balanceChanId = { value: 0, label: historyQuery?.data?.channel_balance[0]?.LNDShortChannelId || '' };
   }
 
   let total_capacity = 0;
@@ -112,8 +112,8 @@ function ChannelPage(props: ChannelPageProps) {
       .filter((value: any, index: number, self: any[]) => {
         return self.indexOf(value) === index;
       })
-      .join(", ");
-  let channelBalanceOptions = [{ value: 0, label: "" }];
+      .join(', ');
+  let channelBalanceOptions = [{ value: 0, label: '' }];
   if (historyQuery?.data?.channel_balance) {
     channelBalanceOptions = historyQuery.data.channel_balance.map((d: any, i: number) => {
       return { value: i, label: d.ChanId };
@@ -172,13 +172,13 @@ function ChannelPage(props: ChannelPageProps) {
               <div className={styles.cardRow}>
                 <div className={styles.rowLabel}>Gross Profit Margin</div>
                 <div className={classNames(styles.rowValue)}>
-                  {d3.format(".2%")((historyQuery?.data?.revenue_out - totalCost) / historyQuery?.data?.revenue_out)}
+                  {d3.format('.2%')((historyQuery?.data?.revenue_out - totalCost) / historyQuery?.data?.revenue_out)}
                 </div>
               </div>
               <div className={styles.cardRow}>
                 <div className={styles.rowLabel}>Turnover</div>
                 <div className={classNames(styles.rowValue)}>
-                  {d3.format(",.2")(historyQuery?.data?.amount_total / total_capacity)}
+                  {d3.format(',.2')(historyQuery?.data?.amount_total / total_capacity)}
                 </div>
               </div>
             </div>
@@ -186,19 +186,19 @@ function ChannelPage(props: ChannelPageProps) {
               <div className={styles.heading}>Automation</div>
               <div className={styles.sliderRow}>
                 <div className={styles.rowLabel}>
-                  <Switch label={"Fees"} />
+                  <Switch label={'Fees'} />
                 </div>
                 <div className={classNames(styles.rowValue, styles.comingSoon)}>(Coming soon)</div>
               </div>
               <div className={styles.sliderRow}>
                 <div className={styles.rowLabel}>
-                  <Switch label={"Rebalancing"} />
+                  <Switch label={'Rebalancing'} />
                 </div>
                 <div className={classNames(styles.rowValue, styles.comingSoon)}>(Coming soon)</div>
               </div>
               <div className={styles.sliderRow}>
                 <div className={styles.rowLabel}>
-                  <Switch label={"HTLC amount"} />
+                  <Switch label={'HTLC amount'} />
                 </div>
                 <div className={classNames(styles.rowValue, styles.comingSoon)}>(Coming soon)</div>
               </div>
@@ -209,24 +209,24 @@ function ChannelPage(props: ChannelPageProps) {
             <div className={styles.profitChartControls}>
               <div className={styles.profitChartLeftControls}>
                 <Select
-                  className={"small"}
+                  className={'small'}
                   value={profitKey}
                   onChange={(newValue) => {
                     if (newValue) {
                       dispatch(
                         updateProfitChartKey({
                           key: (newValue as { value: string; label: string }) || {
-                            value: "amount",
-                            label: "Amount",
+                            value: 'amount',
+                            label: 'Amount',
                           },
                         })
                       );
                     }
                   }}
                   options={[
-                    { value: "amount", label: "Amount" },
-                    { value: "revenue", label: "Revenue" },
-                    { value: "count", label: "Count" },
+                    { value: 'amount', label: 'Amount' },
+                    { value: 'revenue', label: 'Revenue' },
+                    { value: 'count', label: 'Count' },
                   ]}
                 />
               </div>
@@ -263,13 +263,13 @@ function ChannelPage(props: ChannelPageProps) {
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Turnover</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(",.2")(historyQuery?.data?.amount_total / total_capacity)}
+                {d3.format(',.2')(historyQuery?.data?.amount_total / total_capacity)}
               </div>
             </div>
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Balance score</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(".1%")(
+                {d3.format('.1%')(
                   Math.min(historyQuery?.data?.amount_in, historyQuery?.data?.amount_out) /
                     Math.max(historyQuery?.data?.amount_in, historyQuery?.data?.amount_out)
                 )}
@@ -294,19 +294,19 @@ function ChannelPage(props: ChannelPageProps) {
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Average fee out</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(",.1f")((historyQuery?.data?.revenue_out / historyQuery?.data?.amount_out) * 1000 * 1000)}
+                {d3.format(',.1f')((historyQuery?.data?.revenue_out / historyQuery?.data?.amount_out) * 1000 * 1000)}
               </div>
             </div>
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Average fee in</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(",.1f")((historyQuery?.data?.revenue_in / historyQuery?.data?.amount_in) * 1000 * 1000)}
+                {d3.format(',.1f')((historyQuery?.data?.revenue_in / historyQuery?.data?.amount_in) * 1000 * 1000)}
               </div>
             </div>
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Average fee</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(",.1f")(
+                {d3.format(',.1f')(
                   (historyQuery?.data?.revenue_total / historyQuery?.data?.amount_total) * 1000 * 1000
                 )}
               </div>
@@ -330,7 +330,7 @@ function ChannelPage(props: ChannelPageProps) {
             <div className={styles.cardRow}>
               <div className={styles.rowLabel}>Balance score (Nb. Tx)</div>
               <div className={classNames(styles.rowValue)}>
-                {d3.format(".1%")(
+                {d3.format('.1%')(
                   Math.min(historyQuery?.data?.count_in, historyQuery?.data?.count_out) /
                     Math.max(historyQuery?.data?.count_in, historyQuery?.data?.count_out)
                 )}
@@ -343,7 +343,7 @@ function ChannelPage(props: ChannelPageProps) {
           <div className={styles.shortColumn}>
             <EventsCard events={historyQuery} selectedEvents={selectedEvents} />
           </div>
-          <div className={classNames(styles.card, styles.channelSummaryChart)} style={{ height: "600px" }}>
+          <div className={classNames(styles.card, styles.channelSummaryChart)} style={{ height: '600px' }}>
             <div className={styles.profitChartControls}>
               <div className={styles.profitChartLeftControls}>
                 <Select
@@ -353,17 +353,17 @@ function ChannelPage(props: ChannelPageProps) {
                       dispatch(
                         updateEventChartKey({
                           key: (newValue as { value: string; label: string }) || {
-                            value: "amount",
-                            label: "Amount",
+                            value: 'amount',
+                            label: 'Amount',
                           },
                         })
                       );
                     }
                   }}
                   options={[
-                    { value: "amount", label: "Amount" },
-                    { value: "revenue", label: "Revenue" },
-                    { value: "count", label: "Count" },
+                    { value: 'amount', label: 'Amount' },
+                    { value: 'revenue', label: 'Revenue' },
+                    { value: 'count', label: 'Count' },
                   ]}
                 />
               </div>
@@ -376,10 +376,10 @@ function ChannelPage(props: ChannelPageProps) {
                       isOpen={selectedEventsCount > 0}
                       text={`${selectedEventsCount}`}
                       icon={<EventFlagIcon />}
-                      className={"collapse-tablet"}
+                      className={'collapse-tablet'}
                     />
                   }
-                  className={"right"}
+                  className={'right'}
                 >
                   <div className={styles.channelChartSettingsPopover}>
                     <div className={styles.cardRow}>
@@ -391,12 +391,12 @@ function ChannelPage(props: ChannelPageProps) {
                             setAllToggle(checked);
                             setSelectedEvents(
                               new Map([
-                                ["fee_rate", checked],
-                                ["base_fee", checked],
-                                ["min_htlc", checked],
-                                ["max_htlc", checked],
-                                ["enabled", checked],
-                                ["disabled", checked],
+                                ['fee_rate', checked],
+                                ['base_fee', checked],
+                                ['min_htlc', checked],
+                                ['max_htlc', checked],
+                                ['enabled', checked],
+                                ['disabled', checked],
                               ])
                             );
                           }}
@@ -409,7 +409,7 @@ function ChannelPage(props: ChannelPageProps) {
                         <div className={styles.cardRow} key={item[0]}>
                           <div className={styles.rowLabel}>
                             <Switch
-                              label={eventNames.get(item[0]) || ""}
+                              label={eventNames.get(item[0]) || ''}
                               checked={selectedEvents.get(item[0])}
                               onChange={handleSelectEventUpdate(item[0])}
                             />
@@ -483,17 +483,17 @@ function ChannelPage(props: ChannelPageProps) {
                       dispatch(
                         updateFlowKey({
                           flowKey: (newValue as { value: string; label: string }) || {
-                            value: "amount",
-                            label: "Amount",
+                            value: 'amount',
+                            label: 'Amount',
                           },
                         })
                       );
                     }
                   }}
                   options={[
-                    { value: "amount", label: "Amount" },
-                    { value: "revenue", label: "Revenue" },
-                    { value: "count", label: "Count" },
+                    { value: 'amount', label: 'Amount' },
+                    { value: 'revenue', label: 'Revenue' },
+                    { value: 'count', label: 'Count' },
                   ]}
                 />
               </div>

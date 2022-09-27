@@ -1,41 +1,41 @@
-import Table, { ColumnMetaData } from "features/table/Table";
-import { useGetPaymentsQuery } from "apiSlice";
-import { Link, useNavigate } from "react-router-dom";
+import Table, { ColumnMetaData } from 'features/table/Table';
+import { useGetPaymentsQuery } from 'apiSlice';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowSortDownLines20Regular as SortIcon,
   ColumnTriple20Regular as ColumnsIcon,
   Filter20Regular as FilterIcon,
   Options20Regular as OptionsIcon,
   MoneyHand20Regular as TransactionIcon,
-} from "@fluentui/react-icons";
-import Sidebar from "features/sidebar/Sidebar";
+} from '@fluentui/react-icons';
+import Sidebar from 'features/sidebar/Sidebar';
 import TablePageTemplate, {
   TableControlsButton,
   TableControlsButtonGroup,
   TableControlSection,
-} from "features/templates/tablePageTemplate/TablePageTemplate";
-import { useState } from "react";
-import TransactTabs from "../TransactTabs";
-import Pagination from "features/table/pagination/Pagination";
-import useLocalStorage from "features/helpers/useLocalStorage";
-import SortSection, { OrderBy } from "features/sidebar/sections/sort/SortSection";
-import FilterSection from "../../sidebar/sections/filter/FilterSection";
-import { Clause, deserialiseQuery, FilterInterface } from "../../sidebar/sections/filter/filter";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+} from 'features/templates/tablePageTemplate/TablePageTemplate';
+import { useState } from 'react';
+import TransactTabs from '../TransactTabs';
+import Pagination from 'features/table/pagination/Pagination';
+import useLocalStorage from 'features/helpers/useLocalStorage';
+import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
+import FilterSection from '../../sidebar/sections/filter/FilterSection';
+import { Clause, deserialiseQuery, FilterInterface } from '../../sidebar/sections/filter/filter';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import {
   selectActiveColumns,
   selectAllColumns,
   selectPaymentsFilters,
   updateColumns,
   updatePaymentsFilters,
-} from "./paymentsSlice";
-import { FilterCategoryType } from "features/sidebar/sections/filter/filter";
-import ColumnsSection from "features/sidebar/sections/columns/ColumnsSection";
-import clone from "clone";
-import Button, { buttonColor } from "features/buttons/Button";
-import { SectionContainer } from "../../section/SectionContainer";
-import NewPaymentModal from "./newPayment/NewPaymentModal";
-import { useLocation } from "react-router";
+} from './paymentsSlice';
+import { FilterCategoryType } from 'features/sidebar/sections/filter/filter';
+import ColumnsSection from 'features/sidebar/sections/columns/ColumnsSection';
+import clone from 'clone';
+import Button, { buttonColor } from 'features/buttons/Button';
+import { SectionContainer } from '../../section/SectionContainer';
+import NewPaymentModal from './newPayment/NewPaymentModal';
+import { useLocation } from 'react-router';
 
 type sections = {
   filter: boolean;
@@ -44,30 +44,30 @@ type sections = {
 };
 
 const statusTypes: any = {
-  SUCCEEDED: "Succeeded",
-  FAILED: "Failed",
-  IN_FLIGHT: "In Flight",
+  SUCCEEDED: 'Succeeded',
+  FAILED: 'Failed',
+  IN_FLIGHT: 'In Flight',
 };
 
 const failureReasons: any = {
-  FAILURE_REASON_NONE: "",
-  FAILURE_REASON_TIMEOUT: "Timeout",
-  FAILURE_REASON_NO_ROUTE: "No Route",
-  FAILURE_REASON_ERROR: "Error",
-  FAILURE_REASON_INCORRECT_PAYMENT_DETAILS: "Incorrect Payment Details",
-  FAILURE_REASON_INCORRECT_PAYMENT_AMOUNT: "Incorrect Payment Amount",
-  FAILURE_REASON_PAYMENT_HASH_MISMATCH: "Payment Hash Mismatch",
-  FAILURE_REASON_INCORRECT_PAYMENT_REQUEST: "Incorrect Payment Request",
-  FAILURE_REASON_UNKNOWN: "Unknown",
+  FAILURE_REASON_NONE: '',
+  FAILURE_REASON_TIMEOUT: 'Timeout',
+  FAILURE_REASON_NO_ROUTE: 'No Route',
+  FAILURE_REASON_ERROR: 'Error',
+  FAILURE_REASON_INCORRECT_PAYMENT_DETAILS: 'Incorrect Payment Details',
+  FAILURE_REASON_INCORRECT_PAYMENT_AMOUNT: 'Incorrect Payment Amount',
+  FAILURE_REASON_PAYMENT_HASH_MISMATCH: 'Payment Hash Mismatch',
+  FAILURE_REASON_INCORRECT_PAYMENT_REQUEST: 'Incorrect Payment Request',
+  FAILURE_REASON_UNKNOWN: 'Unknown',
 };
 
 function PaymentsPage(props: { newPayment: boolean }) {
-  const [limit, setLimit] = useLocalStorage("paymentsLimit", 100);
+  const [limit, setLimit] = useLocalStorage('paymentsLimit', 100);
   const [offset, setOffset] = useState(0);
-  const [orderBy, setOrderBy] = useLocalStorage("paymentsOrderBy", [
+  const [orderBy, setOrderBy] = useLocalStorage('paymentsOrderBy', [
     {
-      key: "date",
-      direction: "desc",
+      key: 'date',
+      direction: 'desc',
     },
   ] as Array<OrderBy>);
 
@@ -103,7 +103,7 @@ function PaymentsPage(props: { newPayment: boolean }) {
   }
 
   const columns = activeColumns.map((column: ColumnMetaData, _: number) => {
-    if (column.type === "number") {
+    if (column.type === 'number') {
       return {
         ...column,
         max: Math.max(column.max ?? 0, data[column.key].max ?? 0),
@@ -144,10 +144,10 @@ function PaymentsPage(props: { newPayment: boolean }) {
       <TableControlsButtonGroup>
         <Button
           buttonColor={buttonColor.green}
-          text={"New"}
+          text={'New'}
           icon={<TransactionIcon />}
           onClick={() => {
-            navigate("/transactions/payments/new");
+            navigate('/transactions/payments/new');
           }}
         />
         <TableControlsButton onClickHandler={() => setSidebarExpanded(!sidebarExpanded)} icon={OptionsIcon} />
@@ -156,17 +156,17 @@ function PaymentsPage(props: { newPayment: boolean }) {
   );
 
   const defaultFilter: FilterInterface = {
-    funcName: "gte",
-    category: "number" as FilterCategoryType,
+    funcName: 'gte',
+    category: 'number' as FilterCategoryType,
     parameter: 0,
-    key: "value",
+    key: 'value',
   };
 
   const filterColumns = clone(allColumns).map((c: any) => {
     switch (c.key) {
-      case "failure_reason":
+      case 'failure_reason':
         c.selectOptions = Object.keys(failureReasons)
-          .filter((key) => key !== "FAILURE_REASON_NONE")
+          .filter((key) => key !== 'FAILURE_REASON_NONE')
           .map((key: any) => {
             return {
               value: key,
@@ -174,7 +174,7 @@ function PaymentsPage(props: { newPayment: boolean }) {
             };
           });
         break;
-      case "status":
+      case 'status':
         c.selectOptions = Object.keys(statusTypes).map((key: any) => {
           return {
             value: key,
@@ -191,17 +191,17 @@ function PaymentsPage(props: { newPayment: boolean }) {
 
   const sortableColumns = allColumns.filter((column: ColumnMetaData) =>
     [
-      "date",
-      "value",
-      "fee",
-      "ppm",
-      "status",
-      "is_rebalance",
-      "seconds_in_flight",
-      "failure_reason",
-      "is_mpp",
-      "count_failed_attempts",
-      "count_successful_attempts",
+      'date',
+      'value',
+      'fee',
+      'ppm',
+      'status',
+      'is_rebalance',
+      'seconds_in_flight',
+      'failure_reason',
+      'is_mpp',
+      'count_failed_attempts',
+      'count_successful_attempts',
     ].includes(column.key)
   );
 
@@ -215,24 +215,24 @@ function PaymentsPage(props: { newPayment: boolean }) {
   };
 
   const handleModalClose = () => {
-    navigate("/transactions/payments");
+    navigate('/transactions/payments');
   };
 
   const sidebar = (
-    <Sidebar title={"Options"} closeSidebarHandler={closeSidebarHandler()}>
+    <Sidebar title={'Options'} closeSidebarHandler={closeSidebarHandler()}>
       <SectionContainer
-        title={"Columns"}
+        title={'Columns'}
         icon={ColumnsIcon}
         expanded={activeSidebarSections.columns}
-        handleToggle={sidebarSectionHandler("columns")}
+        handleToggle={sidebarSectionHandler('columns')}
       >
         <ColumnsSection columns={allColumns} activeColumns={activeColumns} handleUpdateColumn={updateColumnsHandler} />
       </SectionContainer>
       <SectionContainer
-        title={"Filter"}
+        title={'Filter'}
         icon={FilterIcon}
         expanded={activeSidebarSections.filter}
-        handleToggle={sidebarSectionHandler("filter")}
+        handleToggle={sidebarSectionHandler('filter')}
       >
         <FilterSection
           columnsMeta={filterColumns}
@@ -242,10 +242,10 @@ function PaymentsPage(props: { newPayment: boolean }) {
         />
       </SectionContainer>
       <SectionContainer
-        title={"Sort"}
+        title={'Sort'}
         icon={SortIcon}
         expanded={activeSidebarSections.sort}
-        handleToggle={sidebarSectionHandler("sort")}
+        handleToggle={sidebarSectionHandler('sort')}
       >
         <SortSection columns={sortableColumns} orderBy={orderBy} updateHandler={handleSortUpdate} />
       </SectionContainer>
@@ -254,7 +254,7 @@ function PaymentsPage(props: { newPayment: boolean }) {
 
   const breadcrumbs = [
     <span key="b1">Transactions</span>,
-    <Link key="b2" to={"/transactions/payments"}>
+    <Link key="b2" to={'/transactions/payments'}>
       Payments
     </Link>,
   ];
@@ -270,7 +270,7 @@ function PaymentsPage(props: { newPayment: boolean }) {
   );
   return (
     <TablePageTemplate
-      title={"Payments"}
+      title={'Payments'}
       breadcrumbs={breadcrumbs}
       sidebarExpanded={sidebarExpanded}
       sidebar={sidebar}

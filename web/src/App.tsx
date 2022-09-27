@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import DefaultLayout from "./layout/DefaultLayout";
-import LoginLayout from "./layout/LoginLayout";
-import ForwardsPage from "./features/forwards/ForwardsPage";
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import DefaultLayout from './layout/DefaultLayout';
+import LoginLayout from './layout/LoginLayout';
+import ForwardsPage from './features/forwards/ForwardsPage';
 
-import LoginPage from "./features/auth/LoginPage";
-import SettingsPage from "./features/settings/SettingsPage";
-import styles from "./app.module.scss";
-import { Cookies } from "react-cookie";
-import { useLogoutMutation } from "apiSlice";
-import Toasts, { addToastHandle } from "features/toast/Toasts";
-import ToastContext from "features/toast/context";
-import { BrowserRouter } from "react-router-dom";
-import ChannelPage from "./features/channel/ChannelPage";
-import DashboardPage from "./features/channel/DashboardPage";
-import PaymentsPage from "features/transact/Payments/PaymentsPage";
-import InvoicesPage from "features/transact/Invoices/InvoicesPage";
-import OnChainPage from "features/transact/OnChain/OnChainPage";
-import AllTxPage from "./features/transact/AllTxPage";
-import NoMatch from "./features/no_match/NoMatch";
+import LoginPage from './features/auth/LoginPage';
+import SettingsPage from './features/settings/SettingsPage';
+import styles from './app.module.scss';
+import { Cookies } from 'react-cookie';
+import { useLogoutMutation } from 'apiSlice';
+import Toasts, { addToastHandle } from 'features/toast/Toasts';
+import ToastContext from 'features/toast/context';
+import { BrowserRouter } from 'react-router-dom';
+import ChannelPage from './features/channel/ChannelPage';
+import DashboardPage from './features/channel/DashboardPage';
+import PaymentsPage from 'features/transact/Payments/PaymentsPage';
+import InvoicesPage from 'features/transact/Invoices/InvoicesPage';
+import OnChainPage from 'features/transact/OnChain/OnChainPage';
+import AllTxPage from './features/transact/AllTxPage';
+import NoMatch from './features/no_match/NoMatch';
 
 function Logout() {
   const [logout] = useLogoutMutation();
@@ -26,22 +26,22 @@ function Logout() {
 
   useEffect(() => {
     const c = new Cookies();
-    c.remove("torq_session");
+    c.remove('torq_session');
     logout();
-    navigate("/login", { replace: true });
+    navigate('/login', { replace: true });
   });
 
   return <div />;
 }
 
 function App() {
-  const [locationState, setLocationState] = React.useState("");
+  const [locationState, setLocationState] = React.useState('');
 
   useEffect(() => {
-    const splitLocation = window.location.pathname.split("/");
+    const splitLocation = window.location.pathname.split('/');
     if (splitLocation.length > 1) {
       const path = splitLocation[1];
-      if (path === "torq") {
+      if (path === 'torq') {
         setLocationState(path);
       }
     }
@@ -158,9 +158,9 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 
   useEffect(() => {
     const c = new Cookies();
-    const cookies = c.get("torq_session");
+    const cookies = c.get('torq_session');
     if (cookies === undefined) {
-      navigate("/login", { replace: true, state: location });
+      navigate('/login', { replace: true, state: location });
     }
   });
 

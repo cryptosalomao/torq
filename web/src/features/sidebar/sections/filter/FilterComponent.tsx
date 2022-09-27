@@ -1,10 +1,10 @@
-import FilterRow from "./FilterRow";
-import classNames from "classnames";
-import { AddSquare20Regular as AddFilterIcon, AddSquareMultiple20Regular as AddGroupIcon } from "@fluentui/react-icons";
+import FilterRow from './FilterRow';
+import classNames from 'classnames';
+import { AddSquare20Regular as AddFilterIcon, AddSquareMultiple20Regular as AddGroupIcon } from '@fluentui/react-icons';
 
-import styles from "./filter-section.module.scss";
-import { AndClause, OrClause, Clause, FilterClause, FilterInterface } from "./filter";
-import { ColumnMetaData } from "features/table/Table";
+import styles from './filter-section.module.scss';
+import { AndClause, OrClause, Clause, FilterClause, FilterInterface } from './filter';
+import { ColumnMetaData } from 'features/table/Table';
 
 interface filterProps {
   columnsMeta: Array<ColumnMetaData>;
@@ -16,8 +16,8 @@ interface filterProps {
 }
 
 const combinerOptions = new Map<string, string>([
-  ["$and", "And"],
-  ["$or", "Or"],
+  ['$and', 'And'],
+  ['$or', 'Or'],
 ]);
 
 const FilterComponent = (props: filterProps) => {
@@ -29,7 +29,7 @@ const FilterComponent = (props: filterProps) => {
     const filters = props.filters as AndClause | OrClause;
     filters.childClauses.splice(index, 1);
     if (filters.childClauses.length === 1) {
-      filters.prefix = "$and";
+      filters.prefix = '$and';
     }
     if (filters.childClauses.length === 0) {
       if (props.onNoChildrenLeft) {
@@ -62,8 +62,8 @@ const FilterComponent = (props: filterProps) => {
     filters.addChildClause(
       new AndClause([
         new FilterClause({
-          funcName: "gte",
-          category: "number",
+          funcName: 'gte',
+          category: 'number',
           parameter: 0,
         }),
       ])
@@ -73,7 +73,7 @@ const FilterComponent = (props: filterProps) => {
 
   const handleCombinerChange = () => {
     // this effectively changes the type of the object from AndClause to OrClause or vice versa
-    props.filters.prefix = props.filters.prefix === "$and" ? "$or" : "$and";
+    props.filters.prefix = props.filters.prefix === '$and' ? '$or' : '$and';
     props.onFilterUpdate();
   };
 
@@ -81,13 +81,13 @@ const FilterComponent = (props: filterProps) => {
     const columnOption: any = {
       value: column.key,
       label: column.heading,
-      valueType: column.valueType as "string" | "number" | "boolean" | "date" | "array",
+      valueType: column.valueType as 'string' | 'number' | 'boolean' | 'date' | 'array',
       selectOptions: column.selectOptions,
     };
-    if (column.valueType === "array") {
+    if (column.valueType === 'array') {
       columnOption.arrayOptions = [
-        { value: true, label: "True" },
-        { value: false, label: "False" },
+        { value: true, label: 'True' },
+        { value: false, label: 'False' },
       ];
     }
     return columnOption;
@@ -109,15 +109,15 @@ const FilterComponent = (props: filterProps) => {
         {!props.filters.length && <div className={styles.noFilters}>No filters</div>}
 
         {(props.filters as AndClause | OrClause).childClauses.map((filter, index) => {
-          if (filter.prefix === "$filter") {
+          if (filter.prefix === '$filter') {
             return (
               <div
-                key={"filter-row-wrapper-" + index}
+                key={'filter-row-wrapper-' + index}
                 className={classNames(styles.filterRow, { [styles.first]: !index })}
               >
                 <FilterRow
                   child={props.child}
-                  key={"filter-row-" + index}
+                  key={'filter-row-' + index}
                   filterClause={filter as FilterClause}
                   index={index}
                   filterOptions={filterOptions}
@@ -131,7 +131,7 @@ const FilterComponent = (props: filterProps) => {
           } else {
             return (
               <div
-                key={"filter-sub-group-" + index}
+                key={'filter-sub-group-' + index}
                 className={classNames(styles.filterRow, { first: !index, [styles.childWrapper]: true })}
               >
                 <div className={styles.filterKeyLabel} onClick={() => handleCombinerChange()}>
@@ -154,12 +154,12 @@ const FilterComponent = (props: filterProps) => {
       <div className={styles.buttonsRow}>
         <div className={styles.addFilterButton} onClick={addFilter}>
           <AddFilterIcon />
-          <span className={styles.buttonText}>{"Add filter"}</span>
+          <span className={styles.buttonText}>{'Add filter'}</span>
         </div>
         {!props.child && (
           <div className={styles.addFilterButton} onClick={addGroup}>
             <AddGroupIcon />
-            <span className={styles.buttonText}>{"Add group"}</span>
+            <span className={styles.buttonText}>{'Add group'}</span>
           </div>
         )}
       </div>

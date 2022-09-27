@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import classNames from 'classnames';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
   Delete16Regular as RemoveIcon,
   Options16Regular as OptionsIcon,
@@ -8,11 +8,11 @@ import {
   LockOpen16Regular as LockOpenIcon,
   AddCircle16Regular as AddIcon,
   ReOrder16Regular as DragHandle,
-} from "@fluentui/react-icons";
-import styles from "./columns-section.module.scss";
-import Select, { SelectOptionType } from "./ColumnDropDown";
-import { ColumnMetaData } from "features/table/Table";
-import { useState } from "react";
+} from '@fluentui/react-icons';
+import styles from './columns-section.module.scss';
+import Select, { SelectOptionType } from './ColumnDropDown';
+import { ColumnMetaData } from 'features/table/Table';
+import { useState } from 'react';
 
 interface columnRow {
   column: ColumnMetaData;
@@ -22,18 +22,18 @@ interface columnRow {
 }
 
 const CellOptions: SelectOptionType[] = [
-  { label: "Number", value: "NumericCell" },
-  { label: "Boolean", value: "BooleanCell" },
-  { label: "Array", value: "EnumCell" },
-  { label: "Bar", value: "BarCell" },
-  { label: "Text", value: "TextCell" },
-  { label: "Duration", value: "TextCell" },
+  { label: 'Number', value: 'NumericCell' },
+  { label: 'Boolean', value: 'BooleanCell' },
+  { label: 'Array', value: 'EnumCell' },
+  { label: 'Bar', value: 'BarCell' },
+  { label: 'Text', value: 'TextCell' },
+  { label: 'Duration', value: 'TextCell' },
 ];
 
 const NumericCellOptions: SelectOptionType[] = [
-  { label: "Number", value: "NumericCell" },
-  { label: "Bar", value: "BarCell" },
-  { label: "Text", value: "TextCell" },
+  { label: 'Number', value: 'NumericCell' },
+  { label: 'Bar', value: 'BarCell' },
+  { label: 'Text', value: 'TextCell' },
 ];
 
 function NameColumnRow({ column, index }: { column: ColumnMetaData; index: number }) {
@@ -95,7 +95,7 @@ function ColumnRow({ column, index, handleRemoveColumn, handleUpdateColumn }: co
           </div>
           <div className={styles.rowOptionsContainer}>
             <Select
-              isDisabled={["date", "array", "string", "boolean", "enum"].includes(column.valueType)}
+              isDisabled={['date', 'array', 'string', 'boolean', 'enum'].includes(column.valueType)}
               options={NumericCellOptions}
               value={selectedOption}
               onChange={(newValue) => {
@@ -169,7 +169,7 @@ function ColumnsSection(props: ColumnsSectionProps) {
     props.handleUpdateColumn(updatedColumns);
   };
 
-  const droppableContainerId = "column-list-droppable";
+  const droppableContainerId = 'column-list-droppable';
   const draggableColumns = props.activeColumns.slice(1, props.activeColumns.length);
 
   const onDragEnd = (result: any) => {
@@ -196,7 +196,7 @@ function ColumnsSection(props: ColumnsSectionProps) {
       <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.columnsSectionContent}>
           <div className={styles.columnRows}>
-            <NameColumnRow column={props.activeColumns.slice(0, 1)[0]} key={"selected-0-name"} index={0} />
+            <NameColumnRow column={props.activeColumns.slice(0, 1)[0]} key={'selected-0-name'} index={0} />
 
             <Droppable droppableId={droppableContainerId}>
               {(provided) => (
@@ -209,7 +209,7 @@ function ColumnsSection(props: ColumnsSectionProps) {
                     return (
                       <ColumnRow
                         column={column}
-                        key={"selected-" + column.key + "-" + index}
+                        key={'selected-' + column.key + '-' + index}
                         index={index}
                         handleRemoveColumn={removeColumn}
                         handleUpdateColumn={updateColumn}
@@ -229,7 +229,7 @@ function ColumnsSection(props: ColumnsSectionProps) {
                   return (
                     <UnselectedColumn
                       name={column.heading}
-                      key={"unselected-" + index}
+                      key={'unselected-' + index}
                       index={index}
                       handleAddColumn={addColumn}
                     />

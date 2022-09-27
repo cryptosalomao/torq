@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import styles from "./page.module.scss";
+import { ReactElement } from 'react';
+import styles from './page.module.scss';
 
 interface pageProps {
   children: ReactElement;

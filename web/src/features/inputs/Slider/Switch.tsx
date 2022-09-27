@@ -1,12 +1,12 @@
-import styles from "./switch.module.scss";
-import classNames from "classnames";
-import React from "react";
+import styles from './switch.module.scss';
+import classNames from 'classnames';
+import React from 'react';
 
 type SwitchProps = {
   label: string;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
-  labelPosition?: "left" | "right";
+  labelPosition?: 'left' | 'right';
 };
 
 export default function Switch(props: SwitchProps) {
@@ -23,7 +23,7 @@ export default function Switch(props: SwitchProps) {
       </span>
       <div
         className={classNames({
-          [styles.left]: props.labelPosition && props.labelPosition === "left",
+          [styles.left]: props.labelPosition && props.labelPosition === 'left',
         })}
       >
         {props.label}

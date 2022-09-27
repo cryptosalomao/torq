@@ -1,10 +1,10 @@
 // import Reactfrom "react";
-import styles from "./pagination.module.scss";
+import styles from './pagination.module.scss';
 // import classNames from "classnames";
-import classNames from "classnames";
-import React, { useMemo } from "react";
-import { ChevronLeft20Filled as LeftIcon, ChevronRight20Filled as RightIcon } from "@fluentui/react-icons";
-import PaginationSelect from "./PaginationSelect";
+import classNames from 'classnames';
+import React, { useMemo } from 'react';
+import { ChevronLeft20Filled as LeftIcon, ChevronRight20Filled as RightIcon } from '@fluentui/react-icons';
+import PaginationSelect from './PaginationSelect';
 
 type PaginationProps = {
   limit: number;
@@ -47,7 +47,7 @@ function renderPages(
       </button>
       <PaginationSelect
         options={pageSelectOptions}
-        menuPlacement={"top"}
+        menuPlacement={'top'}
         className={styles.offsetSelector}
         value={{ value: offset / limit, label: `Page ${offset / limit + 1} of ${pages}` }}
         onChange={(item: any) => {
@@ -87,7 +87,7 @@ function Pagination(props: PaginationProps) {
         <span className={styles.perPageText}>Per page: </span>
         <PaginationSelect
           options={limitOptions}
-          menuPlacement={"top"}
+          menuPlacement={'top'}
           className={styles.limitSelector}
           value={limitOptions.find(({ value }) => value === props.limit)}
           onChange={(item: any) => {

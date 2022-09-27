@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import styles from "./toast.module.css";
+import React, { useEffect } from 'react';
+import styles from './toast.module.css';
 import {
   ThumbLike20Regular as SuccessIcon,
   Dismiss20Regular as CloseIcon,
   ErrorCircle20Regular as ErrorIcon,
   Warning20Regular as WarnIcon,
-} from "@fluentui/react-icons";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { v4 as uuidv4 } from "uuid";
-import classNames from "classnames";
+} from '@fluentui/react-icons';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { v4 as uuidv4 } from 'uuid';
+import classNames from 'classnames';
 
 export enum toastCategory {
   success,
@@ -77,7 +77,7 @@ const Toasts = React.forwardRef(function Toasts(_, ref) {
                 exitActive: styles.toastExitActive,
               }}
             >
-              <div ref={ref} key={toast.uuid + "toast"} className={styles.toast}>
+              <div ref={ref} key={toast.uuid + 'toast'} className={styles.toast}>
                 <div className={styles.icon}>
                   <div
                     className={classNames(

@@ -1,9 +1,9 @@
-import ChartCanvas from "../chartCanvas";
-import { AbstractPlot, basePlotConfig, drawConfig } from "./abstract";
-import { addHours, subHours } from "date-fns";
-import * as d3 from "d3";
-import { Selection } from "d3";
-import clone from "../../../clone";
+import ChartCanvas from '../chartCanvas';
+import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
+import { addHours, subHours } from 'date-fns';
+import * as d3 from 'd3';
+import { Selection } from 'd3';
+import clone from '../../../clone';
 
 type areaPlotConfig = basePlotConfig & {
   areaColor: string;
@@ -26,31 +26,31 @@ export class AreaPlot extends AbstractPlot {
     super(chart, config);
 
     this.config = {
-      areaColor: "#85C4FF",
+      areaColor: '#85C4FF',
       addBuffer: false,
       ...config,
     };
 
     this.legend = this.chart.legendContainer
-      .append("div")
-      .attr("class", "legendContent")
-      .attr("id", `${this.config.id}`);
+      .append('div')
+      .attr('class', 'legendContent')
+      .attr('id', `${this.config.id}`);
 
     const legendColor = this.config.areaGradient
       ? `linear-gradient(0deg, ${this.config.areaGradient[0]} 0%, ${this.config.areaGradient[1]} 100%)`
       : this.config.areaColor;
 
     this.legendColorBox = this.legend
-      .append("div")
-      .attr("class", "legendColorBox")
-      .attr("style", `width: 12px; height: 12px; background: ${legendColor};`);
+      .append('div')
+      .attr('class', 'legendColorBox')
+      .attr('style', `width: 12px; height: 12px; background: ${legendColor};`);
 
     this.legend
-      .append("div")
-      .attr("class", "legendLabelBox")
-      .text((this.config.legendLabel || "") + ": ");
+      .append('div')
+      .attr('class', 'legendLabelBox')
+      .text((this.config.legendLabel || '') + ': ');
 
-    this.legendTextBox = this.legend.append("div").attr("class", "legendTextBox");
+    this.legendTextBox = this.legend.append('div').attr('class', 'legendTextBox');
   }
 
   draw(drawConfig?: drawConfig) {
@@ -102,12 +102,12 @@ export class AreaPlot extends AbstractPlot {
 
     this.chart.data.forEach((d, _) => {
       if (this.config.labels) {
-        this.chart.context.font = "12px Inter";
-        this.chart.context.textAlign = "center";
-        this.chart.context.textBaseline = "middle";
-        this.chart.context.fillStyle = "#3A463C";
+        this.chart.context.font = '12px Inter';
+        this.chart.context.textAlign = 'center';
+        this.chart.context.textBaseline = 'middle';
+        this.chart.context.fillStyle = '#3A463C';
         this.chart.context.fillText(
-          d3.format(",")(d[this.config.key]),
+          d3.format(',')(d[this.config.key]),
           this.xPoint(d.date),
           this.yPoint(d[this.config.key]) - 15
         );
@@ -127,7 +127,7 @@ export class AreaPlot extends AbstractPlot {
     }
     if (this.chart?.data?.length > 0) {
       const legendText = this.chart.data[hoverIndex][this.config.key];
-      this.legendTextBox.text(d3.format(",")(legendText));
+      this.legendTextBox.text(d3.format(',')(legendText));
     }
   }
 }

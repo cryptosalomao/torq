@@ -1,6 +1,6 @@
-import styles from "./cell.module.scss";
-import React from "react";
-import classNames from "classnames";
+import styles from './cell.module.scss';
+import React from 'react';
+import classNames from 'classnames';
 
 interface textCell {
   current: string | Array<string>;
@@ -10,7 +10,7 @@ interface textCell {
 function TextCell({ current, className }: textCell) {
   let displayCurrent = current;
   if (Array.isArray(current)) {
-    displayCurrent = current.join(", ");
+    displayCurrent = current.join(', ');
   }
   return (
     <div className={classNames(styles.cell, styles.alignLeft, styles.TextCell, className)}>

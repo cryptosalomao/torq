@@ -1,38 +1,38 @@
-import styles from "./channel-page.module.scss";
-import * as d3 from "d3";
-import classNames from "classnames";
-import TimeIntervalSelect from "../timeIntervalSelect/TimeIntervalSelect";
-import ProfitsChart from "./revenueChart/ProfitsChart";
-import Select from "../inputs/Select";
-import FlowChart from "./flowChart/FlowChart";
-import { useGetFlowQuery, useGetChannelHistoryQuery } from "apiSlice";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { selectTimeInterval } from "../timeIntervalSelect/timeIntervalSlice";
-import { addDays, format } from "date-fns";
-import { useParams } from "react-router";
-import DetailsPageTemplate from "features/templates/detailsPageTemplate/DetailsPageTemplate";
-import { selectFlowKeys, selectProfitChartKey, updateFlowKey, updateProfitChartKey } from "./channelSlice";
-import { Link } from "react-router-dom";
+import styles from './channel-page.module.scss';
+import * as d3 from 'd3';
+import classNames from 'classnames';
+import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
+import ProfitsChart from './revenueChart/ProfitsChart';
+import Select from '../inputs/Select';
+import FlowChart from './flowChart/FlowChart';
+import { useGetFlowQuery, useGetChannelHistoryQuery } from 'apiSlice';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { selectTimeInterval } from '../timeIntervalSelect/timeIntervalSlice';
+import { addDays, format } from 'date-fns';
+import { useParams } from 'react-router';
+import DetailsPageTemplate from 'features/templates/detailsPageTemplate/DetailsPageTemplate';
+import { selectFlowKeys, selectProfitChartKey, updateFlowKey, updateProfitChartKey } from './channelSlice';
+import { Link } from 'react-router-dom';
 
-const ft = d3.format(",.0f");
+const ft = d3.format(',.0f');
 
 function ChannelPage() {
   const currentPeriod = useAppSelector(selectTimeInterval);
 
   const dispatch = useAppDispatch();
-  const from = format(new Date(currentPeriod.from), "yyyy-MM-dd");
-  const to = format(new Date(currentPeriod.to), "yyyy-MM-dd");
+  const from = format(new Date(currentPeriod.from), 'yyyy-MM-dd');
+  const to = format(new Date(currentPeriod.to), 'yyyy-MM-dd');
 
   const { chanId } = useParams();
   const { data, isLoading } = useGetFlowQuery({
     from: from,
-    to: format(addDays(new Date(currentPeriod.to), 1), "yyyy-MM-dd"),
-    chanId: chanId || "1",
+    to: format(addDays(new Date(currentPeriod.to), 1), 'yyyy-MM-dd'),
+    chanId: chanId || '1',
   });
   const historyQuery = useGetChannelHistoryQuery({
     from: from,
-    to: format(addDays(new Date(currentPeriod.to), 1), "yyyy-MM-dd"),
-    chanIds: chanId || "1",
+    to: format(addDays(new Date(currentPeriod.to), 1), 'yyyy-MM-dd'),
+    chanIds: chanId || '1',
   });
 
   const flowKey = useAppSelector(selectFlowKeys);
@@ -45,12 +45,12 @@ function ChannelPage() {
 
   const breadcrumbs = [
     <span key="b1">&quot;Analyse&quot;</span>,
-    <Link key="b2" to={"analyse"}>
+    <Link key="b2" to={'analyse'}>
       Summary
     </Link>,
   ];
   return (
-    <DetailsPageTemplate title={"Forwards Summary"} titleContent={<TimeIntervalSelect />} breadcrumbs={breadcrumbs}>
+    <DetailsPageTemplate title={'Forwards Summary'} titleContent={<TimeIntervalSelect />} breadcrumbs={breadcrumbs}>
       <div className={styles.channelWrapper}>
         <div className={classNames(styles.pageRow, styles.channelSummary)}>
           <div className={styles.shortColumn}>
@@ -93,7 +93,7 @@ function ChannelPage() {
               <div className={styles.cardRow}>
                 <div className={styles.rowLabel}>Gross Profit Margin</div>
                 <div className={classNames(styles.rowValue)}>
-                  {d3.format(".2%")((historyQuery?.data?.revenue_out - totalCost) / historyQuery?.data?.revenue_out)}
+                  {d3.format('.2%')((historyQuery?.data?.revenue_out - totalCost) / historyQuery?.data?.revenue_out)}
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@ function ChannelPage() {
               <div className={styles.cardRow}>
                 <div className={styles.rowLabel}>Average fee</div>
                 <div className={classNames(styles.rowValue)}>
-                  {d3.format(",.1f")((historyQuery?.data?.revenue_out / historyQuery?.data?.amount_out) * 1000 * 1000)}
+                  {d3.format(',.1f')((historyQuery?.data?.revenue_out / historyQuery?.data?.amount_out) * 1000 * 1000)}
                 </div>
               </div>
             </div>
@@ -123,24 +123,24 @@ function ChannelPage() {
             <div className={styles.profitChartControls}>
               <div className={styles.profitChartLeftControls}>
                 <Select
-                  className={"small"}
+                  className={'small'}
                   value={profitKey}
                   onChange={(newValue) => {
                     if (newValue) {
                       dispatch(
                         updateProfitChartKey({
                           key: (newValue as { value: string; label: string }) || {
-                            value: "amount",
-                            label: "Amount",
+                            value: 'amount',
+                            label: 'Amount',
                           },
                         })
                       );
                     }
                   }}
                   options={[
-                    { value: "amount", label: "Amount" },
-                    { value: "revenue", label: "Revenue" },
-                    { value: "count", label: "Count" },
+                    { value: 'amount', label: 'Amount' },
+                    { value: 'revenue', label: 'Revenue' },
+                    { value: 'count', label: 'Count' },
                   ]}
                 />
               </div>
@@ -168,17 +168,17 @@ function ChannelPage() {
                       dispatch(
                         updateFlowKey({
                           flowKey: (newValue as { value: string; label: string }) || {
-                            value: "amount",
-                            label: "Amount",
+                            value: 'amount',
+                            label: 'Amount',
                           },
                         })
                       );
                     }
                   }}
                   options={[
-                    { value: "amount", label: "Amount" },
-                    { value: "revenue", label: "Revenue" },
-                    { value: "count", label: "Count" },
+                    { value: 'amount', label: 'Amount' },
+                    { value: 'revenue', label: 'Revenue' },
+                    { value: 'count', label: 'Count' },
                   ]}
                 />
               </div>

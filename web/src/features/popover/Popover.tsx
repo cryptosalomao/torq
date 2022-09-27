@@ -1,6 +1,6 @@
-import "./popover.scss";
-import React, { ReactChild, SetStateAction, useEffect, Dispatch, useRef, useState } from "react";
-import classNames from "classnames";
+import './popover.scss';
+import React, { ReactChild, SetStateAction, useEffect, Dispatch, useRef, useState } from 'react';
+import classNames from 'classnames';
 
 function useOutsideClose(ref: any, setIsPopoverOpen: Dispatch<SetStateAction<boolean>>) {
   useEffect(() => {
@@ -10,10 +10,10 @@ function useOutsideClose(ref: any, setIsPopoverOpen: Dispatch<SetStateAction<boo
       }
     }
     // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
 }
@@ -40,20 +40,20 @@ const PopoverButton = React.forwardRef(function popoverButton({ className, butto
     <div
       onClick={() => setIsPopoverOpen(!isPopoverOpen)}
       ref={wrapperRef}
-      className={classNames("torq-popover-button-wrapper", className)}
+      className={classNames('torq-popover-button-wrapper', className)}
     >
-      {button ? button : "button"}
+      {button ? button : 'button'}
       <div
-        className={classNames("popover-wrapper right", {
-          "popover-open": isPopoverOpen,
+        className={classNames('popover-wrapper right', {
+          'popover-open': isPopoverOpen,
         })}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <div className={"popover-mobile-dismiss"}>
+        <div className={'popover-mobile-dismiss'}>
           <div className="left-container" onClick={(e) => e.stopPropagation()}>
-            {button ? button : ""}
+            {button ? button : ''}
           </div>
           <div className="right-container dismiss-button" onClick={() => setIsPopoverOpen(false)}>
             Close

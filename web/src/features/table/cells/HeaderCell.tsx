@@ -1,7 +1,7 @@
-import { LockClosed12Regular as LockIcon } from "@fluentui/react-icons";
-import styles from "./cell.module.scss";
-import React from "react";
-import classNames from "classnames";
+import { LockClosed12Regular as LockIcon } from '@fluentui/react-icons';
+import styles from './cell.module.scss';
+import React from 'react';
+import classNames from 'classnames';
 
 interface headerCell {
   heading: string;
@@ -18,7 +18,7 @@ function HeaderCell({ heading, className, locked }: headerCell) {
             <LockIcon />
           </div>
         ) : (
-          ""
+          ''
         )}
         <div className="text">{heading}</div>
       </div>

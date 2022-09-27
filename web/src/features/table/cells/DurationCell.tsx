@@ -1,18 +1,18 @@
-import styles from "./cell.module.scss";
-import React from "react";
-import { format } from "d3";
-import { formatDuration, intervalToDuration } from "date-fns";
-import classNames from "classnames";
+import styles from './cell.module.scss';
+import React from 'react';
+import { format } from 'd3';
+import { formatDuration, intervalToDuration } from 'date-fns';
+import classNames from 'classnames';
 
 interface DurationCellProps {
   seconds: number;
   className?: string;
 }
 
-const subSecFormat = format("0.2f");
+const subSecFormat = format('0.2f');
 
 function DurationCell({ seconds, className }: DurationCellProps) {
-  let pif = "Unknown";
+  let pif = 'Unknown';
   if (seconds >= 1) {
     const d = intervalToDuration({ start: 0, end: seconds * 1000 });
     pif = formatDuration({

@@ -1,6 +1,6 @@
-import * as d3 from "d3";
-import { ScaleLinear, Selection } from "d3";
-import clone from "../../clone";
+import * as d3 from 'd3';
+import { ScaleLinear, Selection } from 'd3';
+import clone from '../../clone';
 
 type chartConfig = {
   margin: {
@@ -9,8 +9,8 @@ type chartConfig = {
     bottom: number;
     left: number;
   };
-  keyOut: keyof Omit<FlowData, "alias" | "chan_id" | "pub_key" | "channel_point">;
-  keyIn: keyof Omit<FlowData, "alias" | "chan_id" | "pub_key" | "channel_point">;
+  keyOut: keyof Omit<FlowData, 'alias' | 'chan_id' | 'pub_key' | 'channel_point'>;
+  keyIn: keyof Omit<FlowData, 'alias' | 'chan_id' | 'pub_key' | 'channel_point'>;
   totalInbound: number;
   totalOutbound: number;
   verticalGap: number;
@@ -47,8 +47,8 @@ class FlowChartCanvas {
       bottom: 0,
       left: 0,
     },
-    keyOut: "amount_out",
-    keyIn: "amount_in",
+    keyOut: 'amount_out',
+    keyIn: 'amount_in',
     totalInbound: 0,
     totalOutbound: 0,
     verticalGap: 5,
@@ -56,10 +56,10 @@ class FlowChartCanvas {
     horizontalGap: 7.5,
     height: 200,
     width: 500,
-    inboundStroke: "#F3F9FF",
-    outboundStroke: "#ECFAF8",
-    inboundFill: "#C2E2FF",
-    outboundFill: "#ABE9E6",
+    inboundStroke: '#F3F9FF',
+    outboundStroke: '#ECFAF8',
+    inboundFill: '#C2E2FF',
+    outboundFill: '#ABE9E6',
     yScale: d3.scaleLinear([0, 200]),
     xScale: d3.scaleLinear([0, 500]),
   };
@@ -93,7 +93,7 @@ class FlowChartCanvas {
 
     this.config = { ...this.config, ...config };
 
-    this.container = container.attr("style", "position: relative; height: 100%;").html(null);
+    this.container = container.attr('style', 'position: relative; height: 100%;').html(null);
 
     // Configure the chart width and height based on the container
     this.config.width = this.getWidth();
@@ -111,10 +111,10 @@ class FlowChartCanvas {
     this.data = clone(this.dataRaw);
 
     const otherChannelsOut: FlowData = {
-      alias: "",
-      chan_id: "",
-      channel_point: "",
-      pub_key: "",
+      alias: '',
+      chan_id: '',
+      channel_point: '',
+      pub_key: '',
       amount_in: 0,
       revenue_in: 0,
       count_in: 0,
@@ -125,12 +125,12 @@ class FlowChartCanvas {
     let otherChanOutCount = 0;
     this.data.forEach((d, _) => {
       if ((d[this.config.keyOut] as number) && (d[this.config.keyOut] as number) < threshold) {
-        otherChannelsOut.amount_out += d["amount_out"];
-        otherChannelsOut.revenue_out += d["revenue_out"];
-        otherChannelsOut.count_out += d["count_out"];
-        d["amount_out"] = 0;
-        d["revenue_out"] = 0;
-        d["count_out"] = 0;
+        otherChannelsOut.amount_out += d['amount_out'];
+        otherChannelsOut.revenue_out += d['revenue_out'];
+        otherChannelsOut.count_out += d['count_out'];
+        d['amount_out'] = 0;
+        d['revenue_out'] = 0;
+        d['count_out'] = 0;
         otherChanOutCount++;
       }
     });
@@ -138,10 +138,10 @@ class FlowChartCanvas {
     this.data.push(otherChannelsOut);
 
     const otherChannelsIn: FlowData = {
-      alias: "",
-      chan_id: "",
-      channel_point: "",
-      pub_key: "",
+      alias: '',
+      chan_id: '',
+      channel_point: '',
+      pub_key: '',
       amount_in: 0,
       revenue_in: 0,
       count_in: 0,
@@ -152,12 +152,12 @@ class FlowChartCanvas {
     let otherChanInCount = 0;
     this.data.forEach((d, _) => {
       if ((d[this.config.keyIn] as number) && (d[this.config.keyIn] as number) < threshold) {
-        otherChannelsIn.amount_in += d["amount_in"];
-        otherChannelsIn.revenue_in += d["revenue_in"];
-        otherChannelsIn.count_in += d["count_in"];
-        d["amount_in"] = 0;
-        d["revenue_in"] = 0;
-        d["count_in"] = 0;
+        otherChannelsIn.amount_in += d['amount_in'];
+        otherChannelsIn.revenue_in += d['revenue_in'];
+        otherChannelsIn.count_in += d['count_in'];
+        d['amount_in'] = 0;
+        d['revenue_in'] = 0;
+        d['count_in'] = 0;
         otherChanInCount++;
       }
     });
@@ -185,38 +185,38 @@ class FlowChartCanvas {
     ]);
 
     this.chartContainer = this.container
-      .append("div")
-      .attr("class", "chartContainer")
-      .attr("width", this.config.width - this.config.margin.left - this.config.margin.right)
-      .attr("height", this.config.height - this.config.margin.top - this.config.margin.bottom)
-      .attr("style", `position: absolute; left: ${this.config.margin.left}px; top: ${this.config.margin.top}px;`);
+      .append('div')
+      .attr('class', 'chartContainer')
+      .attr('width', this.config.width - this.config.margin.left - this.config.margin.right)
+      .attr('height', this.config.height - this.config.margin.top - this.config.margin.bottom)
+      .attr('style', `position: absolute; left: ${this.config.margin.left}px; top: ${this.config.margin.top}px;`);
 
     this.canvas = this.chartContainer
-      .append("canvas")
-      .attr("width", this.config.xScale.range()[1])
-      .attr("height", this.config.yScale.range()[1])
-      .attr("style", `position: absolute; left: 0; top: 0px;`);
+      .append('canvas')
+      .attr('width', this.config.xScale.range()[1])
+      .attr('height', this.config.yScale.range()[1])
+      .attr('style', `position: absolute; left: 0; top: 0px;`);
 
     this.interactionLayer = this.chartContainer
-      .append("canvas")
-      .attr("width", this.config.xScale.range()[1])
-      .attr("height", this.config.yScale.range()[1])
+      .append('canvas')
+      .attr('width', this.config.xScale.range()[1])
+      .attr('height', this.config.yScale.range()[1])
       .attr(
-        "style",
-        "position: absolute; left: 0; top: 0px; display: none;" // display: none;
+        'style',
+        'position: absolute; left: 0; top: 0px; display: none;' // display: none;
       );
 
-    this.context = this.canvas?.node()?.getContext("2d") as CanvasRenderingContext2D;
-    this.interactionContext = this.interactionLayer?.node()?.getContext("2d") as CanvasRenderingContext2D;
+    this.context = this.canvas?.node()?.getContext('2d') as CanvasRenderingContext2D;
+    this.interactionContext = this.interactionLayer?.node()?.getContext('2d') as CanvasRenderingContext2D;
     this.context.imageSmoothingEnabled = false;
     this.interactionContext.imageSmoothingEnabled = false;
 
     this.labelsContainer = this.container
-      .append("div")
-      .attr("class", "labelsContainer")
-      .attr("width", this.config.xScale.range()[1])
-      .attr("height", this.config.yScale.range()[1])
-      .attr("style", `position: absolute; left: 0; top: 0px; pointer-events: none;`);
+      .append('div')
+      .attr('class', 'labelsContainer')
+      .attr('width', this.config.xScale.range()[1])
+      .attr('height', this.config.yScale.range()[1])
+      .attr('style', `position: absolute; left: 0; top: 0px; pointer-events: none;`);
 
     this.addResizeListener();
     this.addHoverListener();
@@ -232,13 +232,13 @@ class FlowChartCanvas {
   }
 
   addResizeListener() {
-    (d3.select(window).node() as EventTarget).addEventListener("resize", (_) => {
+    (d3.select(window).node() as EventTarget).addEventListener('resize', (_) => {
       this.resizeChart();
     });
   }
 
   removeResizeListener() {
-    (d3.select(window).node() as EventTarget).removeEventListener("resize", (_) => {
+    (d3.select(window).node() as EventTarget).removeEventListener('resize', (_) => {
       this.resizeChart();
     });
   }
@@ -279,13 +279,13 @@ class FlowChartCanvas {
     // Add the domain equivalent distance of 10pixels to the domain
 
     this.chartContainer
-      .attr("width", this.config.width - this.config.margin.left - this.config.margin.right)
-      .attr("height", this.config.height - this.config.margin.top - this.config.margin.bottom);
+      .attr('width', this.config.width - this.config.margin.left - this.config.margin.right)
+      .attr('height', this.config.height - this.config.margin.top - this.config.margin.bottom);
 
-    this.canvas.attr("width", this.config.xScale.range()[1]).attr("height", this.config.yScale.range()[1]);
-    this.interactionLayer.attr("width", this.config.xScale.range()[1]).attr("height", this.config.yScale.range()[1]);
+    this.canvas.attr('width', this.config.xScale.range()[1]).attr('height', this.config.yScale.range()[1]);
+    this.interactionLayer.attr('width', this.config.xScale.range()[1]).attr('height', this.config.yScale.range()[1]);
 
-    this.labelsContainer.attr("width", this.config.xScale.range()[1]).attr("height", this.config.yScale.range()[1]);
+    this.labelsContainer.attr('width', this.config.xScale.range()[1]).attr('height', this.config.yScale.range()[1]);
 
     this.clearCanvas();
 
@@ -297,11 +297,11 @@ class FlowChartCanvas {
   getFigure(xLocation: number, yLocation: number): { index: number; outbound: boolean } | undefined {
     const colorData = this.interactionContext.getImageData(xLocation, yLocation, 1, 1).data;
 
-    return this.figures.get("rgb(" + [colorData[0], colorData[1], colorData[2]].join(",") + ")");
+    return this.figures.get('rgb(' + [colorData[0], colorData[1], colorData[2]].join(',') + ')');
   }
 
   addHoverListener() {
-    this.canvas.on("mousemove", (event) => {
+    this.canvas.on('mousemove', (event) => {
       const [xPosition, yPosition] = d3.pointer(event);
       const figure = this.getFigure(xPosition, yPosition);
 
@@ -318,7 +318,7 @@ class FlowChartCanvas {
   }
 
   addMouseOutListener() {
-    this.canvas.on("mouseleave", (_) => {
+    this.canvas.on('mouseleave', (_) => {
       this.mouseOver = undefined;
       this.clearCanvas();
       this.draw();
@@ -464,15 +464,15 @@ class FlowChartCanvas {
     yOffset: number,
     index: number
   ) {
-    let hoverClass = "";
+    let hoverClass = '';
     if (index === this.mouseOver?.index && this.mouseOver.outbound === true) {
-      hoverClass = "hover";
+      hoverClass = 'hover';
     }
     this.labelsContainer
-      .append("div")
-      .attr("class", "flow-outbound-node " + hoverClass)
+      .append('div')
+      .attr('class', 'flow-outbound-node ' + hoverClass)
       .attr(
-        "style",
+        'style',
         `top: ${
           yOffset -
           this.config.yScale(outboundSum) -
@@ -483,10 +483,10 @@ class FlowChartCanvas {
       .text(dataPoint.alias);
 
     this.labelsContainer
-      .append("div")
-      .attr("class", "flow-outbound-value " + hoverClass)
+      .append('div')
+      .attr('class', 'flow-outbound-value ' + hoverClass)
       .attr(
-        "style",
+        'style',
         `top: ${
           yOffset - this.config.yScale(outboundSum) - this.config.yScale(dataPoint[this.config.keyOut] as number) / 2
           // middle between the two endpoints
@@ -494,7 +494,7 @@ class FlowChartCanvas {
           // left: ${20 + outboundSumPosition / 2}px; Middle posistion
         }px; left: ${outboundSumPosition - 10}px;`
       )
-      .text(d3.format(",")(dataPoint[this.config.keyOut] as number));
+      .text(d3.format(',')(dataPoint[this.config.keyOut] as number));
   }
 
   drawInboundValueLabels(
@@ -504,16 +504,16 @@ class FlowChartCanvas {
     yOffset: number,
     index: number
   ) {
-    let hoverClass = "";
+    let hoverClass = '';
     if (index === this.mouseOver?.index && this.mouseOver.outbound === false) {
-      hoverClass = "hover";
+      hoverClass = 'hover';
     }
 
     this.labelsContainer
-      .append("div")
-      .attr("class", "flow-inbound-node " + hoverClass)
+      .append('div')
+      .attr('class', 'flow-inbound-node ' + hoverClass)
       .attr(
-        "style",
+        'style',
         `top: ${
           yOffset -
           this.config.yScale(inboundSum) -
@@ -524,10 +524,10 @@ class FlowChartCanvas {
       .text(dataPoint.alias);
 
     this.labelsContainer
-      .append("div")
-      .attr("class", "flow-inbound-value " + hoverClass)
+      .append('div')
+      .attr('class', 'flow-inbound-value ' + hoverClass)
       .attr(
-        "style",
+        'style',
         `top: ${
           yOffset - this.config.yScale(inboundSum) - this.config.yScale(dataPoint[this.config.keyIn] as number) / 2
           // middle between the two endpoints
@@ -535,7 +535,7 @@ class FlowChartCanvas {
         }px; left: ${inboundSumPosition + this.config.barWidth + 10}px;`
         // center position: ${this.config.xScale.range()[1] - this.config.barWidth - 10 - inboundSumPosition / 2 + 20}px;
       )
-      .text(d3.format(",")(dataPoint[this.config.keyIn] as number));
+      .text(d3.format(',')(dataPoint[this.config.keyIn] as number));
   }
 
   /**
@@ -556,7 +556,7 @@ class FlowChartCanvas {
       // when you increase by 10, the drawn color is different enough to prevent confusion between figures
       this.nextCol += 10;
     }
-    return "rgb(" + ret.join(",") + ")";
+    return 'rgb(' + ret.join(',') + ')';
   }
 
   draw() {
@@ -564,7 +564,7 @@ class FlowChartCanvas {
     this.figures.clear();
 
     // Clear legends
-    this.labelsContainer.selectAll("*").remove();
+    this.labelsContainer.selectAll('*').remove();
 
     let inboundSum = 0;
     let outboundSum = 0;
@@ -572,13 +572,13 @@ class FlowChartCanvas {
     const outboundSumPosition = this.config.xScale.range()[1] / 2 - this.config.horizontalGap;
     const inboundSumPosition = this.config.xScale.range()[1] / 2 + this.config.horizontalGap;
 
-    let hoverInboundClass = "";
+    let hoverInboundClass = '';
     if (this.mouseOver?.outbound === false) {
-      hoverInboundClass = "hover";
+      hoverInboundClass = 'hover';
     }
-    let hoverOutboundClass = "";
+    let hoverOutboundClass = '';
     if (this.mouseOver?.outbound === true) {
-      hoverOutboundClass = "hover";
+      hoverOutboundClass = 'hover';
     }
 
     this.data
@@ -591,8 +591,8 @@ class FlowChartCanvas {
         this.context.strokeStyle = this.config.outboundStroke;
 
         if (this.mouseOver?.index === i && this.mouseOver?.outbound === true) {
-          this.context.fillStyle = "#57D3CD";
-          this.context.strokeStyle = "#DDF6F5";
+          this.context.fillStyle = '#57D3CD';
+          this.context.strokeStyle = '#DDF6F5';
         }
 
         this.drawOutboundBars(
@@ -648,8 +648,8 @@ class FlowChartCanvas {
         this.context.fillStyle = this.config.inboundFill;
         this.context.strokeStyle = this.config.inboundStroke;
         if (this.mouseOver?.index === i && this.mouseOver?.outbound === false) {
-          this.context.fillStyle = "#AAD6FF";
-          this.context.strokeStyle = "#E7F3FF";
+          this.context.fillStyle = '#AAD6FF';
+          this.context.strokeStyle = '#E7F3FF';
         }
         this.drawInboundBars(this.context, d[this.config.keyIn] as number, inboundSum, inboundSumPosition, yOffset, i);
 
@@ -691,17 +691,17 @@ class FlowChartCanvas {
 
     // Draw the total outbound value label
     this.labelsContainer
-      .append("div")
-      .attr("class", `flow-outbound-value-total ${hoverOutboundClass}`)
-      .attr("style", `top: 0px; left: ${outboundSumPosition - 5}px;`)
-      .text(d3.format(",")(outboundSum));
+      .append('div')
+      .attr('class', `flow-outbound-value-total ${hoverOutboundClass}`)
+      .attr('style', `top: 0px; left: ${outboundSumPosition - 5}px;`)
+      .text(d3.format(',')(outboundSum));
 
     // Draw the total inbound value label
     this.labelsContainer
-      .append("div")
-      .attr("class", `flow-inbound-value-total ${hoverInboundClass}`)
-      .attr("style", `top: 0px; left: ${inboundSumPosition + this.config.barWidth + 5}px;`)
-      .text(d3.format(",")(inboundSum));
+      .append('div')
+      .attr('class', `flow-inbound-value-total ${hoverInboundClass}`)
+      .attr('style', `top: 0px; left: ${inboundSumPosition + this.config.barWidth + 5}px;`)
+      .text(d3.format(',')(inboundSum));
 
     return this;
   }

@@ -1,15 +1,15 @@
-import styles from "./table.module.scss";
-import cellStyles from "./cells/cell.module.scss";
-import HeaderCell from "./cells/HeaderCell";
-import AliasCell from "./cells/AliasCell";
-import NumericCell from "./cells/NumericCell";
-import BarCell from "./cells/BarCell";
-import TextCell from "./cells/TextCell";
-import DurationCell from "./cells/DurationCell";
-import BooleanCell from "./cells/BooleanCell";
-import classNames from "classnames";
-import DateCell from "./cells/DateCell";
-import EnumCell from "./cells/EnumCell";
+import styles from './table.module.scss';
+import cellStyles from './cells/cell.module.scss';
+import HeaderCell from './cells/HeaderCell';
+import AliasCell from './cells/AliasCell';
+import NumericCell from './cells/NumericCell';
+import BarCell from './cells/BarCell';
+import TextCell from './cells/TextCell';
+import DurationCell from './cells/DurationCell';
+import BooleanCell from './cells/BooleanCell';
+import classNames from 'classnames';
+import DateCell from './cells/DateCell';
+import EnumCell from './cells/EnumCell';
 
 export interface ColumnMetaData {
   heading: string;
@@ -34,31 +34,31 @@ type TableProps = {
 function defaultRowRenderer(row: any, index: number, column: ColumnMetaData, columnIndex: number) {
   const key = column.key;
   switch (column.type) {
-    case "AliasCell":
+    case 'AliasCell':
       return (
         <AliasCell
           current={row[key] as string}
-          chanId={row["chan_id"]}
-          open={row["open"]}
+          chanId={row['chan_id']}
+          open={row['open']}
           className={classNames(key, index, cellStyles.locked)}
           key={key + index + columnIndex}
         />
       );
-    case "NumericCell":
+    case 'NumericCell':
       return <NumericCell current={row[key] as number} className={key} key={key + index + columnIndex} />;
-    case "DateCell":
+    case 'DateCell':
       return <DateCell value={row[key] as string} className={key} key={key + index + columnIndex} />;
-    case "BooleanCell":
+    case 'BooleanCell':
       return (
         <BooleanCell
-          falseTitle={"Failure"}
-          trueTitle={"Success"}
+          falseTitle={'Failure'}
+          trueTitle={'Success'}
           value={row[key] as boolean}
           className={classNames(key)}
           key={key + index + columnIndex}
         />
       );
-    case "BarCell":
+    case 'BarCell':
       return (
         <BarCell
           current={row[key] as number}
@@ -67,15 +67,15 @@ function defaultRowRenderer(row: any, index: number, column: ColumnMetaData, col
           key={key + index + columnIndex}
         />
       );
-    case "TextCell":
+    case 'TextCell':
       return (
         <TextCell current={row[key] as string} className={classNames(column.key, index)} key={column.key + index} />
       );
-    case "DurationCell":
+    case 'DurationCell':
       return (
         <DurationCell seconds={row[key] as number} className={classNames(column.key, index)} key={column.key + index} />
       );
-    case "EnumCell":
+    case 'EnumCell':
       return <EnumCell value={row[key] as string} className={key} key={key + index + columnIndex} />;
     default:
       return <NumericCell current={row[key] as number} className={key} key={key + index + columnIndex} />;
@@ -84,16 +84,16 @@ function defaultRowRenderer(row: any, index: number, column: ColumnMetaData, col
 
 function defaultTotalsRowRenderer(column: ColumnMetaData, index: number) {
   switch (column.type) {
-    case "AliasCell":
+    case 'AliasCell':
       return (
         <AliasCell
-          current={"Total"}
-          chanId={""}
+          current={'Total'}
+          chanId={''}
           className={classNames(column.key, index, cellStyles.locked, cellStyles.totalCell)}
           key={column.key + index}
         />
       );
-    case "NumericCell":
+    case 'NumericCell':
       return (
         <NumericCell
           current={column.total as number}
@@ -101,7 +101,7 @@ function defaultTotalsRowRenderer(column: ColumnMetaData, index: number) {
           key={`total-${column.key}-${index}`}
         />
       );
-    case "BooleanCell":
+    case 'BooleanCell':
       return (
         <BooleanCell
           value={false}
@@ -109,7 +109,7 @@ function defaultTotalsRowRenderer(column: ColumnMetaData, index: number) {
           key={`total-${column.key}-${index}`}
         />
       );
-    case "BarCell":
+    case 'BarCell':
       return (
         <BarCell
           current={column.total as number}
@@ -118,18 +118,18 @@ function defaultTotalsRowRenderer(column: ColumnMetaData, index: number) {
           key={`total-${column.key}-${index}`}
         />
       );
-    case "TextCell":
+    case 'TextCell':
       return (
         <TextCell
-          current={" "}
+          current={' '}
           className={classNames(column.key, index, styles.textCell, cellStyles.totalCell, cellStyles.firstTotalCell)}
           key={column.key + index}
         />
       );
-    case "DurationCell":
+    case 'DurationCell':
       return (
         <TextCell
-          current={" "}
+          current={' '}
           className={classNames(column.key, index, styles.textCell, cellStyles.totalCell, cellStyles.firstTotalCell)}
           key={column.key + index}
         />
@@ -151,10 +151,10 @@ function Table(props: TableProps) {
   const rowGridStyle = (numRows: number): string => {
     if (numRows > 0) {
       return `grid-template-rows: min-content repeat(${numRows}, min-content) auto ${
-        props.showTotals ? "min-content" : ""
+        props.showTotals ? 'min-content' : ''
       }`;
     } else {
-      return "grid-template-rows: min-content  auto min-content;";
+      return 'grid-template-rows: min-content  auto min-content;';
     }
   };
 
@@ -163,14 +163,14 @@ function Table(props: TableProps) {
 
   const tableClass = classNames(styles.tableContent, { [styles.loading]: props.isLoading });
   const customStyle =
-    "." +
+    '.' +
     styles.tableContent +
-    " {" +
-    "grid-template-columns: min-content repeat(" +
+    ' {' +
+    'grid-template-columns: min-content repeat(' +
     numColumns +
-    ",  min-content) auto;" +
+    ',  min-content) auto;' +
     rowGridStyle(numRows) +
-    "}";
+    '}';
 
   // if (props.isLoading == true) {
   //   return <div className={styles.tableWrapper}>No data</div>;
@@ -184,9 +184,9 @@ function Table(props: TableProps) {
         {/*/!*Empty header at the start*!/*/}
         {
           <HeaderCell
-            heading={""}
+            heading={''}
             className={classNames(cellStyles.firstEmptyHeader, cellStyles.empty, cellStyles.locked)}
-            key={"first-empty-header"}
+            key={'first-empty-header'}
           />
         }
 
@@ -195,7 +195,7 @@ function Table(props: TableProps) {
           return (
             <HeaderCell
               heading={column.heading}
-              className={classNames(column.key, cellStyles[column.type || "NumericCell"])}
+              className={classNames(column.key, cellStyles[column.type || 'NumericCell'])}
               key={column.key + index}
               locked={column.locked}
             />
@@ -205,9 +205,9 @@ function Table(props: TableProps) {
         {/*Empty header at the end*/}
         {
           <HeaderCell
-            heading={""}
+            heading={''}
             className={classNames(cellStyles.lastEmptyHeader, cellStyles.empty)}
-            key={"last-empty-header"}
+            key={'last-empty-header'}
           />
         }
 
@@ -215,18 +215,18 @@ function Table(props: TableProps) {
         {props.data.map((row: any, index: any) => {
           // Adds empty cells at the start and end of each row. This is to give the table a buffer at each end.
           return (
-            <div className={classNames(styles.tableRow, "torq-row-" + index)} key={"torq-row-" + index}>
+            <div className={classNames(styles.tableRow, 'torq-row-' + index)} key={'torq-row-' + index}>
               {[
                 <div
                   className={classNames(cellStyles.cell, cellStyles.empty, cellStyles.locked)}
-                  key={"first-cell-" + index}
+                  key={'first-cell-' + index}
                 />,
                 ...props.activeColumns.map((column, columnIndex) => {
                   return rowRenderer(row, index, column, columnIndex);
                 }),
                 <div
                   className={classNames(cellStyles.cell, cellStyles.empty, cellStyles.lastEmptyCell)}
-                  key={"last-cell-" + index}
+                  key={'last-cell-' + index}
                 />,
               ]}
             </div>

@@ -1,9 +1,9 @@
-import * as d3 from "d3";
-import { NumberValue, ScaleLinear, ScaleTime, Selection } from "d3";
-import { addHours, subHours, differenceInDays, subDays, differenceInSeconds } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
-import { BarPlot } from "./plots/bar";
-import clone from "../../clone";
+import * as d3 from 'd3';
+import { NumberValue, ScaleLinear, ScaleTime, Selection } from 'd3';
+import { addHours, subHours, differenceInDays, subDays, differenceInSeconds } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+import { BarPlot } from './plots/bar';
+import clone from '../../clone';
 
 type chartConfig = {
   yScaleKey: string;
@@ -40,8 +40,8 @@ type chartConfig = {
 
 class ChartCanvas {
   config: chartConfig = {
-    yScaleKey: "",
-    rightYScaleKey: "",
+    yScaleKey: '',
+    rightYScaleKey: '',
     yAxisMaxOverride: 0,
     rightYAxisMaxOverride: 0,
     yAxisPadding: 1.1,
@@ -50,8 +50,8 @@ class ChartCanvas {
     rightYAxisKeys: [],
     showLeftYAxisLabel: false,
     showRightYAxisLabel: false,
-    leftYAxisFormatter: d3.format(",.3s"),
-    rightYAxisFormatter: d3.format(",.3s"),
+    leftYAxisFormatter: d3.format(',.3s'),
+    rightYAxisFormatter: d3.format(',.3s'),
     tickWidth: { days: 1, hours: 0, minutes: 0, seconds: 0 },
     margin: {
       top: 10,
@@ -64,11 +64,11 @@ class ChartCanvas {
     yScale: d3.scaleLinear([0, 200]),
     rightYScale: d3.scaleLinear([0, 200]),
     xScale: d3.scaleUtc([0, 800]),
-    xAxisFormatter: d3.timeFormat("%d %b") as (domainValue: NumberValue | Date, index: number) => string,
-    xAxisLabelFormatter: d3.timeFormat("%d %b %Y") as (domainValue: NumberValue) => string,
+    xAxisFormatter: d3.timeFormat('%d %b') as (domainValue: NumberValue | Date, index: number) => string,
+    xAxisLabelFormatter: d3.timeFormat('%d %b %Y') as (domainValue: NumberValue) => string,
     from: new Date(),
     to: new Date(),
-    timezone: "America/Montserrat",
+    timezone: 'America/Montserrat',
   };
 
   data: Array<any> = [];
@@ -120,14 +120,14 @@ class ChartCanvas {
     }
 
     this.container = container;
-    this.container.attr("style", "position: relative; height: 100%;");
+    this.container.attr('style', 'position: relative; height: 100%;');
     // Configure the chart width and height based on the container
     this.config.width = this.getWidth();
     this.config.height = this.getHeight();
 
     const timeOffset = differenceInSeconds(
       utcToZonedTime(new Date(), this.config.timezone),
-      utcToZonedTime(new Date(), "UTC")
+      utcToZonedTime(new Date(), 'UTC')
     );
 
     const start = utcToZonedTime(
@@ -160,10 +160,10 @@ class ChartCanvas {
     this.container.html(null);
 
     this.xAxisContainer = this.container
-      .append("div")
-      .attr("class", "xAxisContainer")
+      .append('div')
+      .attr('class', 'xAxisContainer')
       .attr(
-        "style",
+        'style',
         `width: 100%;
                height: ${this.config.margin.bottom}px;
                position: absolute;
@@ -171,80 +171,80 @@ class ChartCanvas {
                left: 0;`
       );
 
-    this.xAxisLabelContainer = this.xAxisContainer.append("div").attr("class", "xAxisLabelContainer");
+    this.xAxisLabelContainer = this.xAxisContainer.append('div').attr('class', 'xAxisLabelContainer');
 
     this.leftYAxisContainer = this.container
-      .append("div")
-      .attr("class", "leftYAxisContainer")
+      .append('div')
+      .attr('class', 'leftYAxisContainer')
       // .attr("style", `position: absolute; top: 0; left: 0;  height: 100%; width: ${this.config.margin.left}px;`);
       .attr(
-        "style",
+        'style',
         `width: ${this.config.width}px;
         height: ${this.config.height - this.config.margin.top}px;
         position: absolute; left: 0; top: ${this.config.margin.top}px;`
       );
 
     this.leftYAxisLabelContainer = this.leftYAxisContainer
-      .append("div")
-      .attr("class", "leftYAxisLabelContainer")
-      .attr("style", `display: none;`);
+      .append('div')
+      .attr('class', 'leftYAxisLabelContainer')
+      .attr('style', `display: none;`);
 
     this.rightYAxisContainer = this.container
-      .append("div")
-      .attr("class", "rightYAxisContainer")
+      .append('div')
+      .attr('class', 'rightYAxisContainer')
       .attr(
-        "style",
+        'style',
         `width: 100%;
         height: ${this.config.height - this.config.margin.top}px;
         position: absolute; left: 0; top: ${this.config.margin.top}px;`
       );
 
     this.rightYAxisLabelContainer = this.rightYAxisContainer
-      .append("div")
-      .attr("class", "rightYAxisLabelContainer")
-      .attr("style", `display: none;`);
+      .append('div')
+      .attr('class', 'rightYAxisLabelContainer')
+      .attr('style', `display: none;`);
 
     this.chartContainer = this.container
-      .append("div")
-      .attr("class", "chartContainer")
-      .attr("width", this.config.width - this.config.margin.left - this.config.margin.right)
-      .attr("height", this.config.height - this.config.margin.top - this.config.margin.bottom)
-      .attr("style", `position: absolute; left: ${this.config.margin.left}px; top: ${this.config.margin.top}px;`);
+      .append('div')
+      .attr('class', 'chartContainer')
+      .attr('width', this.config.width - this.config.margin.left - this.config.margin.right)
+      .attr('height', this.config.height - this.config.margin.top - this.config.margin.bottom)
+      .attr('style', `position: absolute; left: ${this.config.margin.left}px; top: ${this.config.margin.top}px;`);
 
     this.legendContainer = this.container
-      .append("div")
-      .attr("class", "legendContainer")
-      .attr("style", `left: ${this.config.margin.left}px;`);
+      .append('div')
+      .attr('class', 'legendContainer')
+      .attr('style', `left: ${this.config.margin.left}px;`);
 
     this.eventsContainer = this.container
-      .append("div")
-      .attr("class", "eventsContainer")
+      .append('div')
+      .attr('class', 'eventsContainer')
       .attr(
-        "style",
+        'style',
         `width: ${this.config.width - this.config.margin.left - this.config.margin.right}px;
         height: ${this.config.height - this.config.margin.top - this.config.margin.bottom}px;
         position: absolute; left: ${this.config.margin.left}px; bottom: ${this.config.margin.bottom}px;`
       );
 
     this.canvas = this.container
-      .select(".chartContainer")
-      .append("canvas")
-      .attr("width", this.config.xScale.range()[1])
-      .attr("height", this.config.yScale.range()[1])
-      .attr("style", `position: absolute; left: 0; top: 0px;`);
+      .select('.chartContainer')
+      .append('canvas')
+      .attr('width', this.config.xScale.range()[1])
+      .attr('height', this.config.yScale.range()[1])
+      .attr('style', `position: absolute; left: 0; top: 0px;`);
 
     this.interactionLayer = this.container
-      .select(".chartContainer")
-      .append("canvas")
-      .attr("width", this.config.xScale.range()[1])
-      .attr("height", this.config.yScale.range()[1])
+      .select('.chartContainer')
+      .append('canvas')
+      .attr('width', this.config.xScale.range()[1])
+      .attr('height', this.config.yScale.range()[1])
       .attr(
-        "style",
-        "position: absolute; left: 0; top: 0px; display: none;" // display: none;
+        'style',
+        'position: absolute; left: 0; top: 0px; display: none;' // display: none;
       );
 
-    this.context = this.canvas?.node()?.getContext("2d") as CanvasRenderingContext2D;
-    this.interactionContext = this.interactionLayer?.node()?.getContext("2d") as CanvasRenderingContext2D;
+    this.context = this.canvas?.node()?.getContext('2d') as CanvasRenderingContext2D;
+    this.interactionContext = this.interactionLayer?.node()?.getContext('2d') as CanvasRenderingContext2D;
     this.context.imageSmoothingEnabled = false;
     this.interactionContext.imageSmoothingEnabled = false;
 
@@ -265,13 +265,13 @@ class ChartCanvas {
   }
 
   removeResizeListener() {
-    (d3.select(window).node() as EventTarget).removeEventListener("resize", (_) => {
+    (d3.select(window).node() as EventTarget).removeEventListener('resize', (_) => {
       this.resizeChart();
     });
   }
 
   addResizeListener() {
-    (d3.select(window).node() as EventTarget).addEventListener("resize", (_) => {
+    (d3.select(window).node() as EventTarget).addEventListener('resize', (_) => {
       this.resizeChart();
     });
     this.drawXAxis();
@@ -288,15 +288,15 @@ class ChartCanvas {
     this.config.rightYScale.range([0, this.config.height - this.config.margin.top - this.config.margin.bottom]);
 
     this.chartContainer
-      .attr("width", this.config.width - this.config.margin.left - this.config.margin.right)
-      .attr("height", this.config.height - this.config.margin.top - this.config.margin.bottom);
+      .attr('width', this.config.width - this.config.margin.left - this.config.margin.right)
+      .attr('height', this.config.height - this.config.margin.top - this.config.margin.bottom);
 
-    this.canvas.attr("width", this.config.xScale.range()[1]).attr("height", this.config.yScale.range()[1]);
+    this.canvas.attr('width', this.config.xScale.range()[1]).attr('height', this.config.yScale.range()[1]);
 
-    this.interactionLayer.attr("width", this.config.xScale.range()[1]).attr("height", this.config.yScale.range()[1]);
+    this.interactionLayer.attr('width', this.config.xScale.range()[1]).attr('height', this.config.yScale.range()[1]);
 
-    this.context = this.canvas?.node()?.getContext("2d") as CanvasRenderingContext2D;
-    this.interactionContext = this.interactionLayer?.node()?.getContext("2d") as CanvasRenderingContext2D;
+    this.context = this.canvas?.node()?.getContext('2d') as CanvasRenderingContext2D;
+    this.interactionContext = this.interactionLayer?.node()?.getContext('2d') as CanvasRenderingContext2D;
     this.context.imageSmoothingEnabled = false;
     this.interactionContext.imageSmoothingEnabled = false;
 
@@ -329,7 +329,7 @@ class ChartCanvas {
       // when you increase by 10, the drawn color is different enough to prevent confusion between figures
       this.nextCol += 1;
     }
-    return "rgb(" + ret.join(",") + ")";
+    return 'rgb(' + ret.join(',') + ')';
   }
 
   figures: Map<string, { plot: BarPlot; drawConfig: any }> = new Map<string, { plot: BarPlot; drawConfig: any }>();
@@ -337,7 +337,7 @@ class ChartCanvas {
   getFigure(xLocation: number, yLocation: number): { plot: BarPlot; drawConfig: any } | undefined {
     const colorData = this.interactionContext.getImageData(xLocation, yLocation, 1, 1).data;
 
-    return this.figures.get("rgb(" + [colorData[0], colorData[1], colorData[2]].join(",") + ")");
+    return this.figures.get('rgb(' + [colorData[0], colorData[1], colorData[2]].join(',') + ')');
   }
 
   clearCanvas() {
@@ -347,7 +347,7 @@ class ChartCanvas {
   }
 
   addMouseOutListener() {
-    this.canvas.on("mouseleave", (_) => {
+    this.canvas.on('mouseleave', (_) => {
       this.clearCanvas();
       this.plots.forEach((plot: any, _: string) => {
         plot.draw({});
@@ -359,7 +359,7 @@ class ChartCanvas {
   }
 
   addHoverListener() {
-    this.canvas.on("mousemove", (event) => {
+    this.canvas.on('mousemove', (event) => {
       const [xPosition, yPosition] = d3.pointer(event);
       this.clearCanvas();
 
@@ -449,40 +449,40 @@ class ChartCanvas {
 
   drawXAxisLabel(position: number, tickLabel: number) {
     if (position === 0) {
-      this.xAxisLabelContainer.attr("style", `left: ${position}px; display: none;`).text("");
+      this.xAxisLabelContainer.attr('style', `left: ${position}px; display: none;`).text('');
       return;
     }
     this.xAxisLabelContainer
-      .attr("style", `left: ${position}px;`)
-      .text(tickLabel ? this.config.xAxisLabelFormatter(tickLabel) : "");
+      .attr('style', `left: ${position}px;`)
+      .text(tickLabel ? this.config.xAxisLabelFormatter(tickLabel) : '');
   }
 
   drawLeftYAxisLabel(position: number, tickLabel: number) {
     if (position === 0) {
-      this.leftYAxisLabelContainer.attr("style", `top: ${position}px; display: none;`);
+      this.leftYAxisLabelContainer.attr('style', `top: ${position}px; display: none;`);
       return;
     }
     this.leftYAxisLabelContainer
-      .attr("style", `top: ${position}px;`)
-      .text(tickLabel ? this.config.leftYAxisFormatter(tickLabel) : "");
+      .attr('style', `top: ${position}px;`)
+      .text(tickLabel ? this.config.leftYAxisFormatter(tickLabel) : '');
   }
 
   drawRightYAxisLabel(position: number, tickLabel: number) {
     if (position === 0) {
-      this.rightYAxisLabelContainer.attr("style", `top: ${position}px; display: none;`);
+      this.rightYAxisLabelContainer.attr('style', `top: ${position}px; display: none;`);
       return;
     }
     this.rightYAxisLabelContainer
       .attr(
-        "style",
+        'style',
         `
         top: ${position}px;`
       )
-      .text(tickLabel ? this.config.rightYAxisFormatter(tickLabel) : "");
+      .text(tickLabel ? this.config.rightYAxisFormatter(tickLabel) : '');
   }
 
   drawLeftYAxis() {
-    this.leftYAxisContainer.select("svg").remove();
+    this.leftYAxisContainer.select('svg').remove();
 
     const max =
       Math.max(
@@ -497,16 +497,16 @@ class ChartCanvas {
     this.config.yScale.domain([max * this.config.yAxisPadding, 0]);
 
     this.leftYAxisContainer
-      .append("svg")
-      .attr("style", `height: 100%; width: 100%;`)
-      .append("g")
-      .style("font-size", "12px")
-      .attr("transform", `translate(${this.config.margin.left},0)`)
-      .call(d3.axisLeft(this.config.yScale).tickFormat(d3.format(",.2s")));
+      .append('svg')
+      .attr('style', `height: 100%; width: 100%;`)
+      .append('g')
+      .style('font-size', '12px')
+      .attr('transform', `translate(${this.config.margin.left},0)`)
+      .call(d3.axisLeft(this.config.yScale).tickFormat(d3.format(',.2s')));
   }
 
   drawRightYAxis() {
-    this.rightYAxisContainer.select("svg").remove();
+    this.rightYAxisContainer.select('svg').remove();
 
     const max =
       Math.max(
@@ -521,16 +521,16 @@ class ChartCanvas {
     this.config.rightYScale.domain([max * this.config.yAxisPadding, 0]);
 
     this.rightYAxisContainer
-      .append("svg")
-      .attr("style", `height: 100%; width: 100%;`)
-      .append("g")
-      .style("font-size", "12px")
-      .attr("transform", `translate(-${this.config.margin.right}, 0)`)
-      .call(d3.axisRight(this.config.rightYScale).tickFormat(d3.format(",.2s")).tickSize(this.config.width));
+      .append('svg')
+      .attr('style', `height: 100%; width: 100%;`)
+      .append('g')
+      .style('font-size', '12px')
+      .attr('transform', `translate(-${this.config.margin.right}, 0)`)
+      .call(d3.axisRight(this.config.rightYScale).tickFormat(d3.format(',.2s')).tickSize(this.config.width));
   }
 
   drawXAxis() {
-    this.xAxisContainer.select("svg").remove();
+    this.xAxisContainer.select('svg').remove();
 
     const width = this.config.width;
     // This determines the frequencies of the date ticks to fit the width.
@@ -541,11 +541,11 @@ class ChartCanvas {
     const mod = Math.max(Math.round(differenceInDays(this.config.to, this.config.from) / frequency), 1);
 
     this.xAxisContainer
-      .append("svg")
-      .attr("style", `height: 100%; width: 100%;`)
-      .append("g")
-      .style("font-size", "12px")
-      .attr("transform", `translate(${this.config.margin.left},0)`)
+      .append('svg')
+      .attr('style', `height: 100%; width: 100%;`)
+      .append('g')
+      .style('font-size', '12px')
+      .attr('transform', `translate(${this.config.margin.left},0)`)
       .call(
         d3
           .axisBottom(this.config.xScale)
@@ -561,7 +561,7 @@ class ChartCanvas {
 
   drawXCrosshair(xPosition: number, yPosition: number) {
     this.context.lineWidth = 1;
-    this.context.strokeStyle = "rgba(3, 48, 72, 0.2)";
+    this.context.strokeStyle = 'rgba(3, 48, 72, 0.2)';
     // this.context.setLineDash([5, 3]);
     this.context.beginPath();
     this.context.moveTo(xPosition, yPosition);
@@ -573,7 +573,7 @@ class ChartCanvas {
 
   drawYCrosshair(xPosition: number, yPosition: number, right?: boolean) {
     this.context.lineWidth = 1;
-    this.context.strokeStyle = "rgba(3, 48, 72, 0.2)";
+    this.context.strokeStyle = 'rgba(3, 48, 72, 0.2)';
     // this.context.setLineDash([5, 3]);
     this.context.beginPath();
     this.context.moveTo(0, yPosition);

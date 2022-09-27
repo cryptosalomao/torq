@@ -1,9 +1,9 @@
-import { useAppDispatch } from "../../store/hooks";
-import { toggleNav } from "./navSlice";
-import classNames from "classnames";
-import MenuItem from "./MenuItem";
-import NavCategory from "./NavCategory";
-import { ReactComponent as TorqLogo } from "../../icons/torq-logo.svg";
+import { useAppDispatch } from '../../store/hooks';
+import { toggleNav } from './navSlice';
+import classNames from 'classnames';
+import MenuItem from './MenuItem';
+import NavCategory from './NavCategory';
+import { ReactComponent as TorqLogo } from '../../icons/torq-logo.svg';
 import {
   Navigation20Regular as CollapseIcon,
   AppsListDetail20Regular as ForwardsIcon,
@@ -11,8 +11,8 @@ import {
   MoneyHand20Regular as TransactionIcon,
   LockClosed20Regular as LogoutIcon,
   Settings20Regular as SettingsIcon,
-} from "@fluentui/react-icons";
-import styles from "./nav.module.scss";
+} from '@fluentui/react-icons';
+import styles from './nav.module.scss';
 
 function Navigation() {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ function Navigation() {
         {/*  <EventsIcon />*/}
         {/*</div>*/}
 
-        <div className={styles.collapseButton} id={"collapse-navigation"} onClick={() => dispatch(toggleNav())}>
+        <div className={styles.collapseButton} id={'collapse-navigation'} onClick={() => dispatch(toggleNav())}>
           <CollapseIcon />
         </div>
       </div>
@@ -36,9 +36,9 @@ function Navigation() {
       <div className={styles.mainNavWrapper}>
         {/*<MenuItem text={"Dashboard"} icon={<DashboardIcon />} routeTo={"/sadfa"} />*/}
 
-        <NavCategory text={"Analyse"} collapsed={false}>
-          <MenuItem text={"Summary"} icon={<SummaryIcon />} routeTo={"/"} />
-          <MenuItem text={"Forwards"} icon={<ForwardsIcon />} routeTo={"/analyse/forwards"} />
+        <NavCategory text={'Analyse'} collapsed={false}>
+          <MenuItem text={'Summary'} icon={<SummaryIcon />} routeTo={'/'} />
+          <MenuItem text={'Forwards'} icon={<ForwardsIcon />} routeTo={'/analyse/forwards'} />
           {/*<MenuItem text={"Inspect"} icon={<InspectIcon />} routeTo={"/inspect"} />*/}
         </NavCategory>
 
@@ -49,14 +49,14 @@ function Navigation() {
         {/*  </>*/}
         {/*</NavCategory>*/}
 
-        <NavCategory text={"Transact"} collapsed={false}>
-          <MenuItem text={"Transactions"} icon={<TransactionIcon />} routeTo={"/transactions/payments"} />
+        <NavCategory text={'Transact'} collapsed={false}>
+          <MenuItem text={'Transactions'} icon={<TransactionIcon />} routeTo={'/transactions/payments'} />
         </NavCategory>
       </div>
 
       <div className={classNames(styles.bottomWrapper)}>
-        <MenuItem text={"Settings"} icon={<SettingsIcon />} routeTo={"/settings"} />
-        <MenuItem text={"Logout"} icon={<LogoutIcon />} routeTo={"/logout"} />
+        <MenuItem text={'Settings'} icon={<SettingsIcon />} routeTo={'/settings'} />
+        <MenuItem text={'Logout'} icon={<LogoutIcon />} routeTo={'/logout'} />
       </div>
     </div>
   );

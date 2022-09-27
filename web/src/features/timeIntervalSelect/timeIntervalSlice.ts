@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store/store";
-import { defineds, getCompareRanges, defaultStaticRangesFn } from "./customRanges";
-import { torqApi } from "apiSlice";
-import { Draft } from "immer";
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../store/store';
+import { defineds, getCompareRanges, defaultStaticRangesFn } from './customRanges';
+import { torqApi } from 'apiSlice';
+import { Draft } from 'immer';
 
 export interface TimeIntervalState {
   from: string;
@@ -24,12 +24,12 @@ const initialState: TimeIntervalState = {
   from: defineds.startOfLast7Days.toString(),
   compareTo: defineds.endOfLast7DaysCompare.toString(),
   compareFrom: defineds.startOfLast7DaysCompare.toString(),
-  defaultDateRange: "",
+  defaultDateRange: '',
   weekStartsOn: 1, // aka Sunday
 };
 
 export const timeIntervalSlice = createSlice({
-  name: "timeInterval",
+  name: 'timeInterval',
   initialState,
 
   // The `reducers` field lets us define reducers and generate associated actions

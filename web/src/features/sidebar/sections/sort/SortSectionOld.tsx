@@ -1,17 +1,17 @@
-import { memo } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { memo } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
   Delete16Regular as DismissIcon,
   ReOrder16Regular as ReOrderIcon,
   AddSquare20Regular as AddIcon,
   ArrowSortDownLines16Regular as SortDescIcon,
-} from "@fluentui/react-icons";
-import DropDown from "./SortDropDown";
-import Button, { buttonColor, buttonSize } from "features/buttons/Button";
-import { ColumnMetaData } from "features/table/Table";
-import styles from "./sort.module.scss";
-import classNames from "classnames";
-import { ActionMeta } from "react-select";
+} from '@fluentui/react-icons';
+import DropDown from './SortDropDown';
+import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
+import { ColumnMetaData } from 'features/table/Table';
+import styles from './sort.module.scss';
+import classNames from 'classnames';
+import { ActionMeta } from 'react-select';
 
 export interface SortByOptionType {
   value: string;
@@ -29,7 +29,7 @@ interface sortRowInterface {
 
 export type OrderType = {
   key: string;
-  direction: "asc" | "desc";
+  direction: 'asc' | 'desc';
 };
 
 export type KeyLabels = Map<string, string>;
@@ -42,7 +42,7 @@ const SortRow = ({ selected, options, index, handleUpdateSort, handleRemoveSort 
     handleUpdateSort(
       {
         ...selected,
-        direction: selected.direction === "asc" ? "desc" : "asc",
+        direction: selected.direction === 'asc' ? 'desc' : 'asc',
       },
       index
     );
@@ -66,14 +66,14 @@ const SortRow = ({ selected, options, index, handleUpdateSort, handleRemoveSort 
             <DropDown
               onChange={handleColumn}
               options={options}
-              getOptionLabel={(option: any): string => option["label"]}
-              getOptionValue={(option: any): string => option["value"]}
+              getOptionLabel={(option: any): string => option['label']}
+              getOptionValue={(option: any): string => option['value']}
               value={selected}
             />
           </div>
 
           <div
-            className={classNames(styles.directionWrapper, { [styles.asc]: selected.direction === "asc" })}
+            className={classNames(styles.directionWrapper, { [styles.asc]: selected.direction === 'asc' })}
             onClick={() => updateDirection(selected)}
           >
             {<SortDescIcon />}
@@ -102,7 +102,7 @@ const SortSectionOld = (props: SortSectionProps) => {
     return {
       value: column.key,
       label: column.heading,
-      direction: "desc",
+      direction: 'desc',
     };
   });
 
@@ -110,7 +110,7 @@ const SortSectionOld = (props: SortSectionProps) => {
     const updated: SortByOptionType[] = [
       ...props.orderBy,
       {
-        direction: "desc",
+        direction: 'desc',
         value: props.columns[0].key,
         label: props.columns[0].heading,
       },
@@ -135,7 +135,7 @@ const SortSectionOld = (props: SortSectionProps) => {
     props.updateSortByHandler(updated);
   };
 
-  const droppableContainerId = "sort-list-droppable";
+  const droppableContainerId = 'sort-list-droppable';
 
   const onDragEnd = (result: any) => {
     const { destination, source } = result;
@@ -193,7 +193,7 @@ const SortSectionOld = (props: SortSectionProps) => {
             buttonColor={buttonColor.ghost}
             buttonSize={buttonSize.small}
             onClick={() => handleAddSort()}
-            text={"Add"}
+            text={'Add'}
             icon={<AddIcon />}
           />
         </div>

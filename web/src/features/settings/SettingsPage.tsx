@@ -1,17 +1,17 @@
-import { AddSquare20Regular as AddIcon, Save20Regular as SaveIcon } from "@fluentui/react-icons";
-import Page from "layout/Page";
-import Box from "./Box";
-import Button, { buttonColor, buttonPosition } from "features/buttons/Button";
-import style from "./settings.module.css";
-import Select, { SelectOption } from "../forms/Select";
-import React from "react";
-import { defaultStaticRangesFn } from "../timeIntervalSelect/customRanges";
-import { useGetLocalNodesQuery, useGetSettingsQuery, useGetTimeZonesQuery, useUpdateSettingsMutation } from "apiSlice";
-import { localNode, settings } from "apiTypes";
-import { toastCategory } from "../toast/Toasts";
-import ToastContext from "../toast/context";
-import NodeSettings from "./NodeSettings";
-import Modal from "features/modal/Modal";
+import { AddSquare20Regular as AddIcon, Save20Regular as SaveIcon } from '@fluentui/react-icons';
+import Page from 'layout/Page';
+import Box from './Box';
+import Button, { buttonColor, buttonPosition } from 'features/buttons/Button';
+import style from './settings.module.css';
+import Select, { SelectOption } from '../forms/Select';
+import React from 'react';
+import { defaultStaticRangesFn } from '../timeIntervalSelect/customRanges';
+import { useGetLocalNodesQuery, useGetSettingsQuery, useGetTimeZonesQuery, useUpdateSettingsMutation } from 'apiSlice';
+import { localNode, settings } from 'apiTypes';
+import { toastCategory } from '../toast/Toasts';
+import ToastContext from '../toast/context';
+import NodeSettings from './NodeSettings';
+import Modal from 'features/modal/Modal';
 
 function Settings() {
   const { data: settingsData } = useGetSettingsQuery();
@@ -53,9 +53,9 @@ function Settings() {
   }));
 
   const weekStartsOnOptions: SelectOption[] = [
-    { label: "Saturday", value: "saturday" },
-    { label: "Sunday", value: "sunday" },
-    { label: "Monday", value: "monday" },
+    { label: 'Saturday', value: 'saturday' },
+    { label: 'Sunday', value: 'sunday' },
+    { label: 'Monday', value: 'monday' },
   ];
 
   const handleDefaultDateRangeChange = (combiner: any) => {
@@ -76,7 +76,7 @@ function Settings() {
   const submitPreferences = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateSettings(settingsState);
-    toastRef?.current?.addToast("Settings saved", toastCategory.success);
+    toastRef?.current?.addToast('Settings saved', toastCategory.success);
   };
 
   const addLocalNode = () => {
@@ -124,8 +124,8 @@ function Settings() {
                     value={weekStartsOnOptions.find((dd) => dd.value === settingsState?.weekStartsOn)}
                   />
                   <Button
-                    type={"submit"}
-                    text={"Save"}
+                    type={'submit'}
+                    text={'Save'}
                     icon={<SaveIcon />}
                     buttonColor={buttonColor.green}
                     buttonPosition={buttonPosition.fullWidth}
@@ -141,7 +141,7 @@ function Settings() {
                 ))}
             </div>
             <Button buttonColor={buttonColor.primary} onClick={addLocalNode} icon={<AddIcon />} text="Add Node" />
-            <Modal title={"Add Node"} show={showAddNodeState} onClose={handleNewNodeModalOnClose}>
+            <Modal title={'Add Node'} show={showAddNodeState} onClose={handleNewNodeModalOnClose}>
               <NodeSettings
                 ref={addNodeRef}
                 addMode={true}

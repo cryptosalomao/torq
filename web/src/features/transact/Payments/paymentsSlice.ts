@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ColumnMetaData } from "features/table/Table";
-import { SortByOptionType } from "features/sidebar/sections/sort/SortSectionOld";
-import { RootState } from "features/../store/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ColumnMetaData } from 'features/table/Table';
+import { SortByOptionType } from 'features/sidebar/sections/sort/SortSectionOld';
+import { RootState } from 'features/../store/store';
 
 export interface ViewInterface {
   title: string;
@@ -18,38 +18,38 @@ export interface initialStateProps {
 }
 
 export const AllPaymentsColumns: Array<ColumnMetaData> = [
-  { key: "date", heading: "Date", type: "DateCell", valueType: "date" },
-  { key: "status", heading: "Status", type: "TextCell", valueType: "array" },
-  { key: "value", heading: "Value", type: "NumericCell", valueType: "number" },
-  { key: "fee", heading: "Fee", type: "NumericCell", valueType: "number" },
-  { key: "ppm", heading: "PPM", type: "NumericCell", valueType: "number" },
-  { key: "is_rebalance", heading: "Rebalance", type: "BooleanCell", valueType: "boolean" },
-  { key: "seconds_in_flight", heading: "Seconds In Flight", type: "DurationCell", valueType: "duration" },
-  { key: "failure_reason", heading: "Failure Reason", type: "TextCell", valueType: "array" },
-  { key: "is_mpp", heading: "MPP", type: "BooleanCell", valueType: "boolean" },
-  { key: "count_failed_attempts", heading: "Failed Attempts", type: "NumericCell", valueType: "number" },
-  { key: "count_successful_attempts", heading: "Successful Attempts", type: "NumericCell", valueType: "number" },
-  { key: "destination_pub_key", heading: "Destination", type: "TextCell", valueType: "string" },
-  { key: "payment_hash", heading: "Payment Hash", type: "TextCell", valueType: "string" },
-  { key: "payment_preimage", heading: "Payment Preimage", type: "TextCell", valueType: "string" },
+  { key: 'date', heading: 'Date', type: 'DateCell', valueType: 'date' },
+  { key: 'status', heading: 'Status', type: 'TextCell', valueType: 'array' },
+  { key: 'value', heading: 'Value', type: 'NumericCell', valueType: 'number' },
+  { key: 'fee', heading: 'Fee', type: 'NumericCell', valueType: 'number' },
+  { key: 'ppm', heading: 'PPM', type: 'NumericCell', valueType: 'number' },
+  { key: 'is_rebalance', heading: 'Rebalance', type: 'BooleanCell', valueType: 'boolean' },
+  { key: 'seconds_in_flight', heading: 'Seconds In Flight', type: 'DurationCell', valueType: 'duration' },
+  { key: 'failure_reason', heading: 'Failure Reason', type: 'TextCell', valueType: 'array' },
+  { key: 'is_mpp', heading: 'MPP', type: 'BooleanCell', valueType: 'boolean' },
+  { key: 'count_failed_attempts', heading: 'Failed Attempts', type: 'NumericCell', valueType: 'number' },
+  { key: 'count_successful_attempts', heading: 'Successful Attempts', type: 'NumericCell', valueType: 'number' },
+  { key: 'destination_pub_key', heading: 'Destination', type: 'TextCell', valueType: 'string' },
+  { key: 'payment_hash', heading: 'Payment Hash', type: 'TextCell', valueType: 'string' },
+  { key: 'payment_preimage', heading: 'Payment Preimage', type: 'TextCell', valueType: 'string' },
 ];
 
 export const ActivePaymentsColumns: Array<ColumnMetaData> = [
-  { key: "date", heading: "Date", type: "DateCell", valueType: "date" },
-  { key: "status", heading: "Status", type: "TextCell", valueType: "array" },
-  { key: "value", heading: "Value", type: "NumericCell", valueType: "number" },
-  { key: "fee", heading: "Fee", type: "NumericCell", valueType: "number" },
-  { key: "ppm", heading: "PPM", type: "NumericCell", valueType: "number" },
-  { key: "is_rebalance", heading: "Rebalance", type: "BooleanCell", valueType: "boolean" },
-  { key: "seconds_in_flight", heading: "Seconds In Flight", type: "DurationCell", valueType: "duration" },
-  { key: "failure_reason", heading: "Failure Reason", type: "TextCell", valueType: "array" },
-  { key: "count_failed_attempts", heading: "Failed Attempts", type: "NumericCell", valueType: "number" },
+  { key: 'date', heading: 'Date', type: 'DateCell', valueType: 'date' },
+  { key: 'status', heading: 'Status', type: 'TextCell', valueType: 'array' },
+  { key: 'value', heading: 'Value', type: 'NumericCell', valueType: 'number' },
+  { key: 'fee', heading: 'Fee', type: 'NumericCell', valueType: 'number' },
+  { key: 'ppm', heading: 'PPM', type: 'NumericCell', valueType: 'number' },
+  { key: 'is_rebalance', heading: 'Rebalance', type: 'BooleanCell', valueType: 'boolean' },
+  { key: 'seconds_in_flight', heading: 'Seconds In Flight', type: 'DurationCell', valueType: 'duration' },
+  { key: 'failure_reason', heading: 'Failure Reason', type: 'TextCell', valueType: 'array' },
+  { key: 'count_failed_attempts', heading: 'Failed Attempts', type: 'NumericCell', valueType: 'number' },
 ];
 
 const initialState: initialStateProps = {
   paymentViews: [
     {
-      title: "Default View",
+      title: 'Default View',
       saved: true,
       columns: ActivePaymentsColumns,
     },
@@ -58,7 +58,7 @@ const initialState: initialStateProps = {
 };
 
 export const paymentsSlice = createSlice({
-  name: "payments",
+  name: 'payments',
   initialState,
   reducers: {
     updatePaymentsFilters: (state, actions: PayloadAction<{ filters: any }>) => {

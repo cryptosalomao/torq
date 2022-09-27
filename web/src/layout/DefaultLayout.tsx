@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
-import { useAppSelector } from "../store/hooks";
-import { selectHidden } from "../features/navigation/navSlice";
-import styles from "./default-layout.module.scss";
-import navStyles from "../features/navigation/nav.module.scss";
+import { Outlet } from 'react-router-dom';
+import { useAppSelector } from '../store/hooks';
+import { selectHidden } from '../features/navigation/navSlice';
+import styles from './default-layout.module.scss';
+import navStyles from '../features/navigation/nav.module.scss';
 
-import Navigation from "../features/navigation/Navigation";
-import TopNavigation from "../features/navigation/TopNavigation";
-import classNames from "classnames";
+import Navigation from '../features/navigation/Navigation';
+import TopNavigation from '../features/navigation/TopNavigation';
+import classNames from 'classnames';
 
 function DefaultLayout() {
   const hidden = useAppSelector(selectHidden);

@@ -1,27 +1,27 @@
-import styles from "./newPayments.module.scss";
+import styles from './newPayments.module.scss';
 import {
   ArrowSyncFilled as ProcessingIcon,
   CheckmarkRegular as SuccessIcon,
   DismissRegular as FailedIcon,
   MoneyHand24Regular as TransactionIconModal,
   Options20Regular as OptionsIcon,
-} from "@fluentui/react-icons";
-import Button, { buttonColor, ButtonWrapper } from "features/buttons/Button";
-import TextInput from "features/forms/TextInput";
-import { SectionContainer } from "features/section/SectionContainer";
-import { ChangeEvent, useState } from "react";
-import PopoutPageTemplate from "features/templates/popoutPageTemplate/PopoutPageTemplate";
-import ProgressHeader, { ProgressStepState, Step } from "features/progressTabs/ProgressHeader";
-import ProgressTabs, { ProgressTabContainer } from "features/progressTabs/ProgressTab";
-import { useGetDecodedInvoiceQuery, WS_URL } from "apiSlice";
-import { format } from "d3";
-import classNames from "classnames";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
-import useWebSocket from "react-use-websocket";
-import { NewPaymentError, NewPaymentResponse } from "../paymentTypes";
-import { PaymentProcessingErrors } from "./paymentErrorMessages";
+} from '@fluentui/react-icons';
+import Button, { buttonColor, ButtonWrapper } from 'features/buttons/Button';
+import TextInput from 'features/forms/TextInput';
+import { SectionContainer } from 'features/section/SectionContainer';
+import { ChangeEvent, useState } from 'react';
+import PopoutPageTemplate from 'features/templates/popoutPageTemplate/PopoutPageTemplate';
+import ProgressHeader, { ProgressStepState, Step } from 'features/progressTabs/ProgressHeader';
+import ProgressTabs, { ProgressTabContainer } from 'features/progressTabs/ProgressTab';
+import { useGetDecodedInvoiceQuery, WS_URL } from 'apiSlice';
+import { format } from 'd3';
+import classNames from 'classnames';
+import NumberFormat, { NumberFormatValues } from 'react-number-format';
+import useWebSocket from 'react-use-websocket';
+import { NewPaymentError, NewPaymentResponse } from '../paymentTypes';
+import { PaymentProcessingErrors } from './paymentErrorMessages';
 
-const fd = format(",.0f");
+const fd = format(',.0f');
 
 export type NewPaymentRequest = {
   invoice: string;
@@ -51,16 +51,16 @@ enum PaymentType {
 }
 
 const PaymentTypeLabel = {
-  [PaymentType.Unknown]: "Unknown ",
-  [PaymentType.P2PKH]: "Legacy Bitcoin ", // Legacy address
-  [PaymentType.P2SH]: "Pay-to-Script-Hash ", // P2SH address
-  [PaymentType.P2WKH]: "Segwit ", // Segwit address
-  [PaymentType.P2TR]: "Taproot Address", // Taproot address
-  [PaymentType.LightningMainnet]: "Mainnet Invoice",
-  [PaymentType.LightningTestnet]: "Testnet Invoice",
-  [PaymentType.LightningSimnet]: "Simnet Invoice",
-  [PaymentType.LightningRegtest]: "Regtest Invoice",
-  [PaymentType.Keysend]: "Keysend",
+  [PaymentType.Unknown]: 'Unknown ',
+  [PaymentType.P2PKH]: 'Legacy Bitcoin ', // Legacy address
+  [PaymentType.P2SH]: 'Pay-to-Script-Hash ', // P2SH address
+  [PaymentType.P2WKH]: 'Segwit ', // Segwit address
+  [PaymentType.P2TR]: 'Taproot Address', // Taproot address
+  [PaymentType.LightningMainnet]: 'Mainnet Invoice',
+  [PaymentType.LightningTestnet]: 'Testnet Invoice',
+  [PaymentType.LightningSimnet]: 'Simnet Invoice',
+  [PaymentType.LightningRegtest]: 'Regtest Invoice',
+  [PaymentType.Keysend]: 'Keysend',
 };
 
 const paymentStatusClass = {
@@ -94,20 +94,20 @@ const LightningNodePubkeyRegEx = /^[0-9a-fA-F]{66}$/gm; // Keysend / Lightning N
 function NewPaymentModal(props: NewPaymentModalProps) {
   const [responses, setResponses] = useState<Array<NewPaymentResponse>>([]);
 
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState('');
   const [destinationType, setDestinationType] = useState<PaymentType>(0);
-  const [paymentProcessingError, setPaymentProcessingError] = useState("");
+  const [paymentProcessingError, setPaymentProcessingError] = useState('');
 
   const [destState, setDestState] = useState(ProgressStepState.active);
   const [confirmState, setConfirmState] = useState(ProgressStepState.disabled);
   const [processState, setProcessState] = useState(ProgressStepState.disabled);
   const [stepIndex, setStepIndex] = useState(0);
 
-  const [paymentDescription, setPaymentDescription] = useState("");
+  const [paymentDescription, setPaymentDescription] = useState('');
 
   function onNewPaymentMessage(event: MessageEvent<string>) {
     const response = JSON.parse(event.data);
-    if (response?.type == "Error") {
+    if (response?.type == 'Error') {
       setPaymentProcessingError(response.error);
       onNewPaymentError(response as NewPaymentError);
       return;
@@ -117,9 +117,9 @@ function NewPaymentModal(props: NewPaymentModalProps) {
 
   function onNewPaymentResponse(message: NewPaymentResponse) {
     setResponses((prev) => [...prev, message]);
-    if (message.status == "SUCCEEDED") {
+    if (message.status == 'SUCCEEDED') {
       setProcessState(ProgressStepState.completed);
-    } else if (message.status == "FAILED") {
+    } else if (message.status == 'FAILED') {
       setPaymentProcessingError(message.failureReason);
       setProcessState(ProgressStepState.error);
     }
@@ -128,7 +128,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
   function onNewPaymentError(message: NewPaymentError) {
     console.log(PaymentProcessingErrors.get(message.error), message.error);
     setProcessState(ProgressStepState.error);
-    console.log("error", message);
+    console.log('error', message);
   }
 
   // This can also be an async getter function. See notes below on Async Urls.
@@ -187,11 +187,11 @@ function NewPaymentModal(props: NewPaymentModalProps) {
     if (e.target.value !== destination) {
       setDestinationType(0);
       decodedInvRes.data = undefined;
-      setPaymentDescription("");
+      setPaymentDescription('');
     }
 
     setDestination(e.target.value);
-    if (e.target.value === "") {
+    if (e.target.value === '') {
       setDestinationType(0);
       setDestState(ProgressStepState.active);
       return;
@@ -249,16 +249,16 @@ function NewPaymentModal(props: NewPaymentModalProps) {
 
   function lnAmountField(amount: number) {
     if (amount > 0) {
-      return fd(decodedInvRes.data ? decodedInvRes.data.valueMsat / 1000 : 0) + " sat";
+      return fd(decodedInvRes.data ? decodedInvRes.data.valueMsat / 1000 : 0) + ' sat';
     }
     return (
       <NumberFormat
         className={styles.amountInput}
         value={amtSat}
-        placeholder={"0 sat"}
+        placeholder={'0 sat'}
         onValueChange={(values) => setAmtSat(parseInt(values.value))}
         thousandSeparator=","
-        suffix={" sat"}
+        suffix={' sat'}
       />
     );
   }
@@ -268,7 +268,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
       <div className={styles.amountWrapper}>
         {/*<div className={styles.label}>You are paying</div>*/}
         {destinationType && (
-          <span className={styles.destinationType}>{PaymentTypeLabel[destinationType] + " Detected"}</span>
+          <span className={styles.destinationType}>{PaymentTypeLabel[destinationType] + ' Detected'}</span>
         )}
         <div className={styles.amount}>{lnAmountField(decodedInvRes.data?.valueMsat)}</div>
         <div className={styles.label}>To</div>
@@ -293,7 +293,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
       {/*  />*/}
       {/*</div>*/}
       <SectionContainer
-        title={"Advanced Options"}
+        title={'Advanced Options'}
         icon={OptionsIcon}
         expanded={expandAdvancedOptions}
         handleToggle={handleAdvancedToggle}
@@ -308,21 +308,21 @@ function NewPaymentModal(props: NewPaymentModalProps) {
         {/*  }}*/}
         {/*/>*/}
         <TextInput
-          label={"Fee limit"}
-          inputType={"number"}
+          label={'Fee limit'}
+          inputType={'number'}
           value={feeLimit}
           onChange={(e) => {
             setFeeLimit(e as number);
           }}
         />
-        <TextInput label={"Timeout"} value={timeOutSecs} onChange={(e) => setTimeOutSecs(e as number)} />
+        <TextInput label={'Timeout'} value={timeOutSecs} onChange={(e) => setTimeOutSecs(e as number)} />
       </SectionContainer>
 
       <ButtonWrapper
         className={styles.customButtonWrapperStyles}
         leftChildren={
           <Button
-            text={"Back"}
+            text={'Back'}
             onClick={() => {
               setStepIndex(0);
               setDestState(ProgressStepState.completed);
@@ -333,14 +333,14 @@ function NewPaymentModal(props: NewPaymentModalProps) {
         }
         rightChildren={
           <Button
-            text={"Confirm"}
+            text={'Confirm'}
             onClick={() => {
               setStepIndex(2);
               setConfirmState(ProgressStepState.completed);
               setProcessState(ProgressStepState.processing);
               sendJsonMessage({
-                reqId: "randId",
-                type: "newPayment",
+                reqId: 'randId',
+                type: 'newPayment',
                 NewPaymentRequest: {
                   // If the destination is not a pubkey, use it as an invoice
                   invoice: destination.match(LightningNodePubkeyRegEx) ? undefined : destination,
@@ -365,15 +365,15 @@ function NewPaymentModal(props: NewPaymentModalProps) {
     <ProgressTabContainer>
       <div className={styles.amountWrapper}>
         {destinationType && (
-          <span className={styles.destinationType}>{PaymentTypeLabel[destinationType] + " Detected"}</span>
+          <span className={styles.destinationType}>{PaymentTypeLabel[destinationType] + ' Detected'}</span>
         )}
         <div className={styles.amount}>
           <NumberFormat
             className={styles.amountInput}
-            suffix={" sat"}
+            suffix={' sat'}
             thousandSeparator=","
             value={onChainPaymentAmount}
-            placeholder={"0 sat"}
+            placeholder={'0 sat'}
             onValueChange={(values: NumberFormatValues) => {
               setOnChainPaymentAmount(values.floatValue || 0);
             }}
@@ -384,13 +384,13 @@ function NewPaymentModal(props: NewPaymentModalProps) {
       </div>
       <div className={styles.destinationWrapper}>
         <div className={styles.labelWrapper}>
-          <label htmlFor={"destination"} className={styles.destinationLabel}>
+          <label htmlFor={'destination'} className={styles.destinationLabel}>
             Description (only seen by you)
           </label>
         </div>
         <textarea
-          id={"lnDescription"}
-          name={"lnDescription"}
+          id={'lnDescription'}
+          name={'lnDescription'}
           className={styles.destinationTextArea}
           autoComplete="off"
           value={paymentDescription}
@@ -401,13 +401,13 @@ function NewPaymentModal(props: NewPaymentModalProps) {
         />
       </div>
       <SectionContainer
-        title={"Advanced Options"}
+        title={'Advanced Options'}
         icon={OptionsIcon}
         expanded={expandAdvancedOptions}
         handleToggle={handleAdvancedToggle}
       >
         <TextInput
-          label={"Sat per vByte"}
+          label={'Sat per vByte'}
           value={satPerVbyte}
           onChange={(value) => {
             setSatPerVbyte(value as number);
@@ -419,7 +419,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
         className={styles.customButtonWrapperStyles}
         leftChildren={
           <Button
-            text={"Back"}
+            text={'Back'}
             onClick={() => {
               setStepIndex(0);
               setDestState(ProgressStepState.completed);
@@ -430,7 +430,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
         }
         rightChildren={
           <Button
-            text={"Confirm"}
+            text={'Confirm'}
             onClick={() => {
               setStepIndex(2);
               setConfirmState(ProgressStepState.completed);
@@ -445,17 +445,17 @@ function NewPaymentModal(props: NewPaymentModalProps) {
 
   function destiationLabel() {
     if (decodedInvRes?.isError == false) {
-      return PaymentTypeLabel[destinationType] + " Detected";
+      return PaymentTypeLabel[destinationType] + ' Detected';
     }
     return "Can't decode invoice";
   }
 
   return (
-    <PopoutPageTemplate title={"New Payment"} show={props.show} onClose={closeAndReset} icon={<TransactionIconModal />}>
+    <PopoutPageTemplate title={'New Payment'} show={props.show} onClose={closeAndReset} icon={<TransactionIconModal />}>
       <ProgressHeader modalCloseHandler={closeAndReset}>
-        <Step label={"Destination"} state={dynamicDestinationState()} last={false} />
-        <Step label={"Details"} state={dynamicConfirmedState()} last={false} />
-        <Step label={"Process"} state={processState} last={true} />
+        <Step label={'Destination'} state={dynamicDestinationState()} last={false} />
+        <Step label={'Details'} state={dynamicConfirmedState()} last={false} />
+        <Step label={'Process'} state={processState} last={true} />
       </ProgressHeader>
 
       <ProgressTabs showTabIndex={stepIndex}>
@@ -463,7 +463,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
           <div className={styles.destination}>
             <div className={styles.destinationWrapper}>
               <div className={styles.labelWrapper}>
-                <label htmlFor={"destination"} className={styles.destinationLabel}>
+                <label htmlFor={'destination'} className={styles.destinationLabel}>
                   Destination
                 </label>
                 {destination && (
@@ -478,9 +478,9 @@ function NewPaymentModal(props: NewPaymentModalProps) {
                 )}
               </div>
               <textarea
-                id={"destination"}
-                name={"destination"}
-                placeholder={"E.g. Lightning Invoice"} // , PubKey or On-chain Address
+                id={'destination'}
+                name={'destination'}
+                placeholder={'E.g. Lightning Invoice'} // , PubKey or On-chain Address
                 className={styles.destinationTextArea}
                 value={destination}
                 onChange={setDestinationHandler}
@@ -498,7 +498,7 @@ function NewPaymentModal(props: NewPaymentModalProps) {
             className={styles.customButtonWrapperStyles}
             rightChildren={
               <Button
-                text={"Next"}
+                text={'Next'}
                 disabled={!destinationType || decodedInvRes.isError}
                 onClick={() => {
                   if (destination) {
@@ -519,12 +519,12 @@ function NewPaymentModal(props: NewPaymentModalProps) {
             className={classNames(
               styles.paymentResultIconWrapper,
               { [styles.failed]: responses.length === 0 },
-              paymentStatusClass[responses[responses.length - 1]?.status as "SUCCEEDED" | "FAILED" | "IN_FLIGHT"]
+              paymentStatusClass[responses[responses.length - 1]?.status as 'SUCCEEDED' | 'FAILED' | 'IN_FLIGHT']
             )}
           >
-            {" "}
-            {responses.length === 0 && paymentStatusIcon["FAILED"]}
-            {paymentStatusIcon[responses[responses.length - 1]?.status as "SUCCEEDED" | "FAILED" | "IN_FLIGHT"]}
+            {' '}
+            {responses.length === 0 && paymentStatusIcon['FAILED']}
+            {paymentStatusIcon[responses[responses.length - 1]?.status as 'SUCCEEDED' | 'FAILED' | 'IN_FLIGHT']}
           </div>
           <div className={classNames(styles.paymentStatusMessage)}>
             {PaymentProcessingErrors.get(paymentProcessingError) || paymentProcessingError}
@@ -533,10 +533,10 @@ function NewPaymentModal(props: NewPaymentModalProps) {
             className={styles.customButtonWrapperStyles}
             rightChildren={
               <Button
-                text={"New Payment"}
+                text={'New Payment'}
                 onClick={() => {
                   setDestinationType(0);
-                  setDestination("");
+                  setDestination('');
                   setDestState(ProgressStepState.active);
                   setConfirmState(ProgressStepState.disabled);
                   setProcessState(ProgressStepState.disabled);

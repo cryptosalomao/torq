@@ -1,7 +1,7 @@
-import ChartCanvas from "../chartCanvas";
-import { AbstractPlot, basePlotConfig, drawConfig } from "./abstract";
-import * as d3 from "d3";
-import { Selection } from "d3";
+import ChartCanvas from '../chartCanvas';
+import { AbstractPlot, basePlotConfig, drawConfig } from './abstract';
+import * as d3 from 'd3';
+import { Selection } from 'd3';
 
 type linePlotConfig = basePlotConfig & {
   lineColor: string;
@@ -24,29 +24,29 @@ export class LinePlot extends AbstractPlot {
     super(chart, config);
 
     this.config = {
-      lineColor: "#85C4FF",
+      lineColor: '#85C4FF',
       lineWidth: 1.7,
       rightAxis: false,
       ...config,
     };
 
     this.legend = this.chart.legendContainer
-      .append("div")
-      .attr("class", "legendContent")
-      .attr("id", `${this.config.id}`);
+      .append('div')
+      .attr('class', 'legendContent')
+      .attr('id', `${this.config.id}`);
 
-    this.legendColorBox = this.legend.append("div");
+    this.legendColorBox = this.legend.append('div');
 
     if (this.config.legendLabel) {
       this.legendColorBox
-        .attr("class", "legendColorBox")
-        .attr("style", `width: 12px; height: 12px; background: ${this.config.lineColor};`);
+        .attr('class', 'legendColorBox')
+        .attr('style', `width: 12px; height: 12px; background: ${this.config.lineColor};`);
       this.legend
-        .append("div")
-        .attr("class", "legendLabelBox")
-        .text((this.config.legendLabel || "") + ": ");
+        .append('div')
+        .attr('class', 'legendLabelBox')
+        .text((this.config.legendLabel || '') + ': ');
     }
-    this.legendTextBox = this.legend.append("div").attr("class", "legendTextBox");
+    this.legendTextBox = this.legend.append('div').attr('class', 'legendTextBox');
   }
 
   height(dataPoint: number): number {
@@ -80,12 +80,12 @@ export class LinePlot extends AbstractPlot {
 
     if (this.config.labels) {
       this.chart.data.forEach((d, _) => {
-        this.chart.context.font = "12px Inter";
-        this.chart.context.textAlign = "center";
-        this.chart.context.textBaseline = "middle";
-        this.chart.context.fillStyle = "#3A463C";
+        this.chart.context.font = '12px Inter';
+        this.chart.context.textAlign = 'center';
+        this.chart.context.textBaseline = 'middle';
+        this.chart.context.fillStyle = '#3A463C';
         this.chart.context.fillText(
-          d3.format(",")(d[this.config.key]),
+          d3.format(',')(d[this.config.key]),
           this.xPoint(d.date),
           this.yPoint(d[this.config.key]) - 15
         );
@@ -105,7 +105,7 @@ export class LinePlot extends AbstractPlot {
     }
     if (this.config.legendLabel) {
       const legendText = this.chart.data[hoverIndex][this.config.key];
-      this.legendTextBox.text(d3.format(",")(legendText));
+      this.legendTextBox.text(d3.format(',')(legendText));
     }
   }
 }

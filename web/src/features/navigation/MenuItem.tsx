@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./nav.module.scss";
-import classNames from "classnames";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import styles from './nav.module.scss';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 function MenuItem(props: { text: string; icon?: any; routeTo: string }) {
   const linkClasses = (p: { isActive: boolean }): string => {

@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store/store";
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../store/store';
 
-type keyOption = { value: "revenue" | "amount" | "count"; label: string };
+type keyOption = { value: 'revenue' | 'amount' | 'count'; label: string };
 
 export interface NavState {
   flowKey: keyOption;
@@ -11,14 +11,14 @@ export interface NavState {
 }
 
 const initialState: NavState = {
-  profitChartKey: { value: "revenue", label: "Revenue" },
-  eventChartKey: { value: "amount", label: "Amount" },
-  flowKey: { value: "amount", label: "Amount" },
-  balanceChanID: { value: 0, label: "" },
+  profitChartKey: { value: 'revenue', label: 'Revenue' },
+  eventChartKey: { value: 'amount', label: 'Amount' },
+  flowKey: { value: 'amount', label: 'Amount' },
+  balanceChanID: { value: 0, label: '' },
 };
 
 export const channelSlice = createSlice({
-  name: "channel",
+  name: 'channel',
   initialState,
 
   // The `reducers` field lets us define reducers and generate associated actions

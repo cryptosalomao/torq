@@ -1,24 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   Filter20Regular as FilterIcon,
   ArrowSortDownLines20Regular as SortIcon,
   ColumnTriple20Regular as ColumnsIcon,
   ArrowJoin20Regular as GroupIcon,
   Options20Regular as OptionsIcon,
-} from "@fluentui/react-icons";
-import Sidebar from "../sidebar/Sidebar";
-import { useGetTableViewsQuery } from "apiSlice";
+} from '@fluentui/react-icons';
+import Sidebar from '../sidebar/Sidebar';
+import { useGetTableViewsQuery } from 'apiSlice';
 
-import { Clause, FilterCategoryType, FilterInterface } from "features/sidebar/sections/filter/filter";
+import { Clause, FilterCategoryType, FilterInterface } from 'features/sidebar/sections/filter/filter';
 
 import TablePageTemplate, {
   TableControlSection,
   TableControlsButton,
   TableControlsButtonGroup,
   TableControlsTabsGroup,
-} from "../templates/tablePageTemplate/TablePageTemplate";
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+} from '../templates/tablePageTemplate/TablePageTemplate';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   updateColumns,
   selectActiveColumns,
@@ -29,15 +29,15 @@ import {
   updateSortBy,
   selectGroupBy,
   updateGroupBy,
-} from "./forwardsSlice";
-import ViewsPopover from "./views/ViewsPopover";
-import ColumnsSection from "../sidebar/sections/columns/ColumnsSection";
-import FilterSection from "../sidebar/sections/filter/FilterSection";
-import SortSection, { SortByOptionType } from "../sidebar/sections/sort/SortSectionOld";
-import GroupBySection from "../sidebar/sections/group/GroupBySection";
-import ForwardsDataWrapper from "./ForwardsDataWrapper";
-import TimeIntervalSelect from "../timeIntervalSelect/TimeIntervalSelect";
-import { SectionContainer } from "../section/SectionContainer";
+} from './forwardsSlice';
+import ViewsPopover from './views/ViewsPopover';
+import ColumnsSection from '../sidebar/sections/columns/ColumnsSection';
+import FilterSection from '../sidebar/sections/filter/FilterSection';
+import SortSection, { SortByOptionType } from '../sidebar/sections/sort/SortSectionOld';
+import GroupBySection from '../sidebar/sections/group/GroupBySection';
+import ForwardsDataWrapper from './ForwardsDataWrapper';
+import TimeIntervalSelect from '../timeIntervalSelect/TimeIntervalSelect';
+import { SectionContainer } from '../section/SectionContainer';
 
 type sections = {
   filter: boolean;
@@ -53,7 +53,7 @@ function ForwardsPage() {
   const activeColumns = useAppSelector(selectActiveColumns) || [];
   const columns = useAppSelector(selectAllColumns);
   const sortBy = useAppSelector(selectSortBy);
-  const groupBy = useAppSelector(selectGroupBy) || "channels";
+  const groupBy = useAppSelector(selectGroupBy) || 'channels';
   const filters = useAppSelector(selectFilters);
 
   // Logic for toggling the sidebar
@@ -113,28 +113,28 @@ function ForwardsPage() {
   };
 
   const defaultFilter: FilterInterface = {
-    funcName: "gte",
-    category: "number" as FilterCategoryType,
+    funcName: 'gte',
+    category: 'number' as FilterCategoryType,
     parameter: 0,
-    key: "capacity",
+    key: 'capacity',
   };
 
   const sidebar = (
-    <Sidebar title={"Table Options"} closeSidebarHandler={closeSidebarHandler()}>
+    <Sidebar title={'Table Options'} closeSidebarHandler={closeSidebarHandler()}>
       <SectionContainer
-        title={"Columns"}
+        title={'Columns'}
         icon={ColumnsIcon}
         expanded={activeSidebarSections.columns}
-        handleToggle={sidebarSectionHandler("columns")}
+        handleToggle={sidebarSectionHandler('columns')}
       >
         <ColumnsSection columns={columns} activeColumns={activeColumns} handleUpdateColumn={updateColumnsHandler} />
       </SectionContainer>
 
       <SectionContainer
-        title={"Filter"}
+        title={'Filter'}
         icon={FilterIcon}
         expanded={activeSidebarSections.filter}
-        handleToggle={sidebarSectionHandler("filter")}
+        handleToggle={sidebarSectionHandler('filter')}
       >
         <FilterSection
           columnsMeta={columns}
@@ -145,19 +145,19 @@ function ForwardsPage() {
       </SectionContainer>
 
       <SectionContainer
-        title={"Sort"}
+        title={'Sort'}
         icon={SortIcon}
         expanded={activeSidebarSections.sort}
-        handleToggle={sidebarSectionHandler("sort")}
+        handleToggle={sidebarSectionHandler('sort')}
       >
         <SortSection columns={columns} orderBy={sortBy} updateSortByHandler={handleSortUpdate} />
       </SectionContainer>
 
       <SectionContainer
-        title={"Group"}
+        title={'Group'}
         icon={GroupIcon}
         expanded={activeSidebarSections.group}
-        handleToggle={sidebarSectionHandler("group")}
+        handleToggle={sidebarSectionHandler('group')}
       >
         <GroupBySection groupBy={groupBy} groupByHandler={handleGroupByUpdate} />
       </SectionContainer>
@@ -166,14 +166,14 @@ function ForwardsPage() {
 
   const breadcrumbs = [
     <span key="b1">&quot;Analyse&quot;</span>,
-    <Link key="b2" to={"/analyse/forwards"}>
+    <Link key="b2" to={'/analyse/forwards'}>
       Forwards
     </Link>,
   ];
 
   return (
     <TablePageTemplate
-      title={"Forwards"}
+      title={'Forwards'}
       titleContent={<TimeIntervalSelect />}
       breadcrumbs={breadcrumbs}
       sidebarExpanded={sidebarExpanded}

@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./cell.module.scss";
-import classNames from "classnames";
-import { format } from "date-fns";
-import { Clock20Regular as TimeIcon, CalendarLtr20Regular as DateIcon } from "@fluentui/react-icons";
+import React from 'react';
+import styles from './cell.module.scss';
+import classNames from 'classnames';
+import { format } from 'date-fns';
+import { Clock20Regular as TimeIcon, CalendarLtr20Regular as DateIcon } from '@fluentui/react-icons';
 
 interface DateCellProps {
   value: string | Date;
@@ -11,16 +11,16 @@ interface DateCellProps {
 
 function DateCell(props: DateCellProps) {
   let date = props.value;
-  if (typeof props.value === "string") {
+  if (typeof props.value === 'string') {
     date = new Date(props.value);
   }
-  let displayDate = "";
-  let displayTime = "";
+  let displayDate = '';
+  let displayTime = '';
   if (date != null && date.valueOf() !== 0) {
-    displayDate = format(date as Date, "yyyy-MM-dd");
-    displayTime = format(date as Date, "HH:mm:ss");
+    displayDate = format(date as Date, 'yyyy-MM-dd');
+    displayTime = format(date as Date, 'HH:mm:ss');
   } else {
-    displayDate = "";
+    displayDate = '';
   }
 
   return (

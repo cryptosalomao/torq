@@ -1,125 +1,125 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../store/store";
-import { AndClause, FilterClause } from "../sidebar/sections/filter/filter";
-import { SortByOptionType } from "../sidebar/sections/sort/SortSectionOld";
-import { torqApi } from "apiSlice";
-import { ColumnMetaData } from "../table/Table";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../store/store';
+import { AndClause, FilterClause } from '../sidebar/sections/filter/filter';
+import { SortByOptionType } from '../sidebar/sections/sort/SortSectionOld';
+import { torqApi } from 'apiSlice';
+import { ColumnMetaData } from '../table/Table';
 
 export const availableColumns: ColumnMetaData[] = [
   {
-    heading: "Name",
-    type: "AliasCell",
-    key: "alias",
+    heading: 'Name',
+    type: 'AliasCell',
+    key: 'alias',
     locked: true,
-    valueType: "string",
+    valueType: 'string',
   },
   {
-    heading: "Revenue",
-    type: "BarCell",
-    key: "revenue_out",
-    valueType: "number",
+    heading: 'Revenue',
+    type: 'BarCell',
+    key: 'revenue_out',
+    valueType: 'number',
   },
   {
-    heading: "Total Forwards",
-    type: "BarCell",
-    key: "count_total",
-    valueType: "number",
+    heading: 'Total Forwards',
+    type: 'BarCell',
+    key: 'count_total',
+    valueType: 'number',
   },
   {
-    heading: "Outbound Amount",
-    type: "BarCell",
-    key: "amount_out",
-    valueType: "number",
+    heading: 'Outbound Amount',
+    type: 'BarCell',
+    key: 'amount_out',
+    valueType: 'number',
   },
   {
-    heading: "Inbound Amount",
-    type: "BarCell",
-    key: "amount_in",
-    valueType: "number",
+    heading: 'Inbound Amount',
+    type: 'BarCell',
+    key: 'amount_in',
+    valueType: 'number',
   },
   {
-    heading: "Total Amount",
-    type: "BarCell",
-    key: "amount_total",
-    valueType: "number",
+    heading: 'Total Amount',
+    type: 'BarCell',
+    key: 'amount_total',
+    valueType: 'number',
   },
   {
-    heading: "Turnover Outbound",
-    type: "BarCell",
-    key: "turnover_out",
-    valueType: "number",
+    heading: 'Turnover Outbound',
+    type: 'BarCell',
+    key: 'turnover_out',
+    valueType: 'number',
   },
   {
-    heading: "Turnover Inbound",
-    type: "BarCell",
-    key: "turnover_in",
-    valueType: "number",
+    heading: 'Turnover Inbound',
+    type: 'BarCell',
+    key: 'turnover_in',
+    valueType: 'number',
   },
   {
-    heading: "Total Turnover",
-    type: "BarCell",
-    key: "turnover_total",
-    valueType: "number",
+    heading: 'Total Turnover',
+    type: 'BarCell',
+    key: 'turnover_total',
+    valueType: 'number',
   },
   {
-    heading: "Outbound Forwards",
-    type: "BarCell",
-    key: "count_out",
-    valueType: "number",
+    heading: 'Outbound Forwards',
+    type: 'BarCell',
+    key: 'count_out',
+    valueType: 'number',
   },
   {
-    heading: "Inbound Forwards",
-    type: "BarCell",
-    key: "count_in",
-    valueType: "number",
+    heading: 'Inbound Forwards',
+    type: 'BarCell',
+    key: 'count_in',
+    valueType: 'number',
   },
   {
-    heading: "Revenue inbound",
-    type: "BarCell",
-    key: "revenue_in",
-    valueType: "number",
+    heading: 'Revenue inbound',
+    type: 'BarCell',
+    key: 'revenue_in',
+    valueType: 'number',
   },
   {
-    heading: "Revenue total",
-    type: "BarCell",
-    key: "revenue_total",
-    valueType: "number",
+    heading: 'Revenue total',
+    type: 'BarCell',
+    key: 'revenue_total',
+    valueType: 'number',
   },
   {
-    heading: "Capacity",
-    type: "BarCell",
-    key: "capacity",
-    valueType: "number",
+    heading: 'Capacity',
+    type: 'BarCell',
+    key: 'capacity',
+    valueType: 'number',
   },
   {
-    heading: "Public key",
-    type: "TextCell",
-    key: "pub_key",
-    valueType: "string",
+    heading: 'Public key',
+    type: 'TextCell',
+    key: 'pub_key',
+    valueType: 'string',
   },
   {
-    heading: "Channel point",
-    type: "TextCell",
-    key: "lndChannelPoint",
-    valueType: "string",
+    heading: 'Channel point',
+    type: 'TextCell',
+    key: 'lndChannelPoint',
+    valueType: 'string',
   },
   {
-    heading: "Channel short ID",
-    type: "TextCell",
-    key: "shortChannelId",
-    valueType: "string",
+    heading: 'Channel short ID',
+    type: 'TextCell',
+    key: 'shortChannelId',
+    valueType: 'string',
   },
   {
-    heading: "LND Channel short ID",
-    type: "TextCell",
-    key: "chan_id",
-    valueType: "string",
+    heading: 'LND Channel short ID',
+    type: 'TextCell',
+    key: 'chan_id',
+    valueType: 'string',
   },
   {
-    heading: "Open",
-    type: "BooleanCell",
-    key: "open",
-    valueType: "boolean",
+    heading: 'Open',
+    type: 'BooleanCell',
+    key: 'open',
+    valueType: 'boolean',
   },
 ];
 
@@ -138,36 +138,36 @@ export interface TableState {
   modChannels: [];
   selectedViewIndex: number;
   views: ViewInterface[];
-  status: "idle" | "loading" | "failed";
+  status: 'idle' | 'loading' | 'failed';
 }
 
 const defaultFilter = new AndClause();
 defaultFilter.addChildClause(
   new FilterClause({
-    funcName: "gt",
-    category: "number" as "number" | "string",
-    key: "amount_total",
+    funcName: 'gt',
+    category: 'number' as 'number' | 'string',
+    key: 'amount_total',
     parameter: 0,
   })
 );
 
 export const DefaultView: ViewInterface = {
-  title: "Untitled View",
+  title: 'Untitled View',
   saved: true,
   columns: availableColumns.filter((c) =>
     [
-      "alias",
-      "revenue_out",
-      "count_total",
-      "amount_out",
-      "amount_in",
-      "amount_total",
-      "turnover_total",
-      "capacity",
+      'alias',
+      'revenue_out',
+      'count_total',
+      'amount_out',
+      'amount_in',
+      'amount_total',
+      'turnover_total',
+      'capacity',
     ].includes(c.key)
   ),
   filters: defaultFilter.toJSON(),
-  sortBy: [{ value: "revenue_out", label: "Revenue", direction: "desc" }],
+  sortBy: [{ value: 'revenue_out', label: 'Revenue', direction: 'desc' }],
   groupBy: undefined,
 };
 
@@ -178,10 +178,10 @@ const initialState: TableState = {
   views: [
     {
       ...DefaultView,
-      title: "Default View",
+      title: 'Default View',
     },
   ],
-  status: "idle",
+  status: 'idle',
 };
 
 export interface viewOrderInterface {
@@ -190,7 +190,7 @@ export interface viewOrderInterface {
 }
 
 export const forwardsSlice = createSlice({
-  name: "table",
+  name: 'table',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -231,7 +231,7 @@ export const forwardsSlice = createSlice({
     builder.addMatcher(
       (action) => {
         return (
-          ["table/updateFilters", "table/updateSortBy", "table/updateColumns", "table/updateGroupBy"].findIndex(
+          ['table/updateFilters', 'table/updateSortBy', 'table/updateColumns', 'table/updateGroupBy'].findIndex(
             (item) => action.type === item
           ) !== -1
         );

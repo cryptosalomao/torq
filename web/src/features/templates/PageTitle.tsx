@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./templates.module.scss";
-import Breadcrumbs from "features/breadcrumbs/Breadcrumbs";
-import classNames from "classnames";
+import React from 'react';
+import styles from './templates.module.scss';
+import Breadcrumbs from 'features/breadcrumbs/Breadcrumbs';
+import classNames from 'classnames';
 
 type PageTitleProps = {
   title: string;

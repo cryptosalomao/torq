@@ -1,6 +1,6 @@
-import { VirtualNetwork20Regular as ChannelsIcon, Iot20Regular as PeersIcon } from "@fluentui/react-icons";
-import styles from "./group-section.module.scss";
-import classNames from "classnames";
+import { VirtualNetwork20Regular as ChannelsIcon, Iot20Regular as PeersIcon } from '@fluentui/react-icons';
+import styles from './group-section.module.scss';
+import classNames from 'classnames';
 
 type GroupPopoverProps = {
   groupBy: string;
@@ -12,10 +12,10 @@ const GroupBySection = (props: GroupPopoverProps) => {
     <div className={styles.groupRowWrapper}>
       <button
         className={classNames(styles.groupRow, {
-          [styles.groupRowSelected]: props.groupBy == "channels",
+          [styles.groupRowSelected]: props.groupBy == 'channels',
         })}
         onClick={() => {
-          props.groupByHandler("channels");
+          props.groupByHandler('channels');
         }}
       >
         <div className="icon">
@@ -25,10 +25,10 @@ const GroupBySection = (props: GroupPopoverProps) => {
       </button>
       <button
         className={classNames(styles.groupRow, {
-          [styles.groupRowSelected]: props.groupBy == "peers",
+          [styles.groupRowSelected]: props.groupBy == 'peers',
         })}
         onClick={() => {
-          props.groupByHandler("peers");
+          props.groupByHandler('peers');
         }}
       >
         <div className="icon">

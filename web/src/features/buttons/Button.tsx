@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import styles from "./button.module.scss";
+import classNames from 'classnames';
+import styles from './button.module.scss';
 
 export enum buttonColor {
   primary,
@@ -63,7 +63,7 @@ export default function Button(props: {
   };
   return (
     <button
-      type={props.submit ? "submit" : "button"}
+      type={props.submit ? 'submit' : 'button'}
       className={classNames(
         styles.button,
         props.className,

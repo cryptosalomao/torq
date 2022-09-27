@@ -1,14 +1,14 @@
-import styles from "./cell.module.scss";
-import React from "react";
-import { format } from "d3";
-import classNames from "classnames";
+import styles from './cell.module.scss';
+import React from 'react';
+import { format } from 'd3';
+import classNames from 'classnames';
 
 interface numericCell {
   current: number;
   className?: string;
 }
-const formatterDetailed = format(",.2f");
-const formatter = format(",.0f");
+const formatterDetailed = format(',.2f');
+const formatter = format(',.0f');
 
 function NumericCell({ current, className }: numericCell) {
   return (

@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "./table-page-template.module.scss";
+import React from 'react';
+import styles from './table-page-template.module.scss';
 
-import classNames from "classnames";
-import { FluentIconsProps } from "@fluentui/react-icons";
-import PageTitle from "features/templates/PageTitle";
-import Button, { buttonColor } from "../../buttons/Button";
+import classNames from 'classnames';
+import { FluentIconsProps } from '@fluentui/react-icons';
+import PageTitle from 'features/templates/PageTitle';
+import Button, { buttonColor } from '../../buttons/Button';
 
 type TablePageTemplateProps = {
   title: string;
@@ -54,7 +54,7 @@ export function TableControlsButton(props: TableControlsButtonProps) {
   return (
     <div className={classNames(styles.tableControlsButtonWrapper, { [styles.active]: props.active })}>
       <Button
-        text={""}
+        text={''}
         className={styles.tableControlsButtonIcon}
         onClick={props.onClickHandler}
         buttonColor={buttonColor.subtle}

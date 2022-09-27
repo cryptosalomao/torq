@@ -1,16 +1,16 @@
-import styles from "./views.module.scss";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import styles from './views.module.scss';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
   Dismiss20Regular as RemoveIcon,
   Edit16Regular as EditIcon,
   Save20Regular as SaveIcon,
   AddSquare20Regular as AddIcon,
   Reorder20Regular as DragHandle,
-} from "@fluentui/react-icons";
-import { useState } from "react";
-import classNames from "classnames";
-import TabButton from "features/buttons/TabButton";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+} from '@fluentui/react-icons';
+import { useState } from 'react';
+import classNames from 'classnames';
+import TabButton from 'features/buttons/TabButton';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   selectViews,
   updateViews,
@@ -20,15 +20,15 @@ import {
   viewOrderInterface,
   DefaultView,
   updateViewsOrder,
-} from "features/forwards/forwardsSlice";
-import Popover from "features/popover/Popover";
-import Button, { buttonColor, buttonSize } from "features/buttons/Button";
+} from 'features/forwards/forwardsSlice';
+import Popover from 'features/popover/Popover';
+import Button, { buttonColor, buttonSize } from 'features/buttons/Button';
 import {
   useCreateTableViewMutation,
   useUpdateTableViewMutation,
   useDeleteTableViewMutation,
   useUpdateTableViewsOrderMutation,
-} from "apiSlice";
+} from 'apiSlice';
 
 type viewRow = {
   title: string;
@@ -66,9 +66,9 @@ function ViewRow({ title, index, handleUpdateView, handleRemoveView, handleSelec
           </div>
 
           {editView ? (
-            <form onSubmit={handleInputSubmit} className={classNames(styles.viewEdit, "torq-input-field")}>
+            <form onSubmit={handleInputSubmit} className={classNames(styles.viewEdit, 'torq-input-field')}>
               <input type="text" autoFocus={true} onChange={handleInputChange} value={localTitle} />
-              <button type={"submit"}>
+              <button type={'submit'}>
                 <SaveIcon />
               </button>
             </form>
@@ -115,7 +115,7 @@ function ViewsPopover() {
   };
 
   const removeView = (index: number) => {
-    const confirmed = window.confirm("Are you sure you want to delete this view?");
+    const confirmed = window.confirm('Are you sure you want to delete this view?');
     if (!confirmed) {
       return;
     }
@@ -130,7 +130,7 @@ function ViewsPopover() {
     dispatch(updateSelectedView({ index: index }));
   };
 
-  const droppableContainerId = "views-list-droppable";
+  const droppableContainerId = 'views-list-droppable';
 
   const onDragEnd = (result: any) => {
     const { destination, source } = result;
@@ -202,7 +202,7 @@ function ViewsPopover() {
             <Button
               buttonColor={buttonColor.ghost}
               buttonSize={buttonSize.small}
-              text={"Add View"}
+              text={'Add View'}
               icon={<AddIcon />}
               onClick={addView}
             />

@@ -1,40 +1,40 @@
-import classNames from "classnames";
-import { Delete16Regular as RemoveIcon } from "@fluentui/react-icons";
-import Select from "./FilterDropDown";
+import classNames from 'classnames';
+import { Delete16Regular as RemoveIcon } from '@fluentui/react-icons';
+import Select from './FilterDropDown';
 
-import { FilterClause, FilterParameterType } from "./filter";
-import styles from "./filter-section.module.scss";
-import { FilterFunctions } from "./filter";
-import NumberFormat from "react-number-format";
-import { useState } from "react";
-import { format } from "d3";
-import { FilterCategoryType } from "./filter";
+import { FilterClause, FilterParameterType } from './filter';
+import styles from './filter-section.module.scss';
+import { FilterFunctions } from './filter';
+import NumberFormat from 'react-number-format';
+import { useState } from 'react';
+import { format } from 'd3';
+import { FilterCategoryType } from './filter';
 
-const formatter = format(",.0f");
+const formatter = format(',.0f');
 
 function formatParameter(value: number) {
   return value % 1 != 0 ? value : formatter(value);
 }
 
 const ffLabels = new Map<string, string>([
-  ["eq", "is equal to"],
-  ["neq", "is not equal to"],
-  ["gt", "is greater than"],
-  ["gte", "is greater than or equal to"],
-  ["lt", "is less than"],
-  ["lte", "is less than or equal to"],
-  ["like", "contains"],
-  ["notLike", "does not contain"],
-  ["any", "does not contain"],
-  ["notAny", "does not contain"],
+  ['eq', 'is equal to'],
+  ['neq', 'is not equal to'],
+  ['gt', 'is greater than'],
+  ['gte', 'is greater than or equal to'],
+  ['lt', 'is less than'],
+  ['lte', 'is less than or equal to'],
+  ['like', 'contains'],
+  ['notLike', 'does not contain'],
+  ['any', 'does not contain'],
+  ['notAny', 'does not contain'],
 ]);
 
 function getFilterFunctions(filterCategory: FilterCategoryType) {
   const filterFuncs = FilterFunctions.get(filterCategory)?.entries();
   if (!filterFuncs) {
-    throw new Error("Filter category not found in list of filters");
+    throw new Error('Filter category not found in list of filters');
   }
-  return Array.from(filterFuncs, ([key, _]) => ({ value: key, label: ffLabels.get(key) ?? "Label not found" }));
+  return Array.from(filterFuncs, ([key, _]) => ({ value: key, label: ffLabels.get(key) ?? 'Label not found' }));
 }
 
 interface filterRowInterface {
@@ -74,31 +74,31 @@ function FilterRow({
 
   const handleKeyChange = (item: any) => {
     rowValues.key = item.value;
-    const newCategory = filterOptions.find((item: any) => item.value === rowValues.key)?.valueType || "number";
+    const newCategory = filterOptions.find((item: any) => item.value === rowValues.key)?.valueType || 'number';
     switch (newCategory) {
-      case "number":
+      case 'number':
         rowValues.parameter = 0;
-        rowValues.funcName = "gte";
+        rowValues.funcName = 'gte';
         break;
-      case "boolean":
+      case 'boolean':
         if (newCategory !== rowValues.category) {
           rowValues.parameter = true;
         }
-        rowValues.funcName = "eq";
+        rowValues.funcName = 'eq';
         break;
-      case "date": {
-        const nd = new Date().toISOString().slice(0, 10) + "T00:00:00";
+      case 'date': {
+        const nd = new Date().toISOString().slice(0, 10) + 'T00:00:00';
         rowValues.parameter = nd;
-        rowValues.funcName = "gte";
+        rowValues.funcName = 'gte';
         break;
       }
-      case "array":
-        rowValues.parameter = "";
-        rowValues.funcName = "eq";
+      case 'array':
+        rowValues.parameter = '';
+        rowValues.funcName = 'eq';
         break;
       default:
-        rowValues.parameter = "";
-        rowValues.funcName = "like";
+        rowValues.parameter = '';
+        rowValues.funcName = 'like';
     }
     rowValues.category = newCategory;
     onUpdateFilter();
@@ -111,17 +111,17 @@ function FilterRow({
 
   const handleParamChange = (e: any) => {
     switch (rowValues.category) {
-      case "number":
+      case 'number':
         rowValues.parameter = e.floatValue || 0;
         break;
-      case "boolean":
+      case 'boolean':
         rowValues.parameter = e.value;
         break;
-      case "array":
+      case 'array':
         rowValues.parameter = String(e.value);
         break;
       default:
-        rowValues.parameter = e.target.value ? e.target.value : "";
+        rowValues.parameter = e.target.value ? e.target.value : '';
     }
     onUpdateFilter();
   };
@@ -131,7 +131,7 @@ function FilterRow({
 
   const getInputField = (handleParamChange: any) => {
     switch (rowValues.category) {
-      case "number":
+      case 'number':
         return (
           <NumberFormat
             className={classNames(styles.filterInputField, styles.small)}
@@ -140,23 +140,23 @@ function FilterRow({
             onValueChange={handleParamChange}
           />
         );
-      case "boolean":
+      case 'boolean':
         return (
           <Select
             selectProps={{
               options: [
-                { label: "True", value: true },
-                { label: "False", value: false },
+                { label: 'True', value: true },
+                { label: 'False', value: false },
               ],
-              value: { label: !rowValues.parameter ? "False" : "True", value: rowValues.parameter },
+              value: { label: !rowValues.parameter ? 'False' : 'True', value: rowValues.parameter },
               onChange: handleParamChange,
             }}
             child={child}
           />
         );
-      case "array": {
+      case 'array': {
         const label = options?.find((item) => {
-          return item.value === rowValues.parameter ? item : "";
+          return item.value === rowValues.parameter ? item : '';
         })?.label;
         return (
           <Select
@@ -169,11 +169,11 @@ function FilterRow({
           />
         );
       }
-      case "date":
+      case 'date':
         return (
           <input
             type="datetime-local"
-            className={"torq-input-field"}
+            className={'torq-input-field'}
             value={rowValues.parameter as string}
             onChange={handleParamChange}
           />
@@ -182,7 +182,7 @@ function FilterRow({
         return (
           <input
             type="text"
-            className={"torq-input-field"}
+            className={'torq-input-field'}
             value={rowValues.parameter as keyof FilterParameterType}
             onChange={handleParamChange}
           />
@@ -192,15 +192,15 @@ function FilterRow({
 
   const getParameter = () => {
     switch (rowValues.category) {
-      case "number":
+      case 'number':
         return formatParameter(rowValues.parameter as number);
-      case "duration":
+      case 'duration':
         return formatParameter(rowValues.parameter as number);
-      case "boolean":
-        return !rowValues.parameter ? "False" : "True";
-      case "array":
+      case 'boolean':
+        return !rowValues.parameter ? 'False' : 'True';
+      case 'array':
         return options?.find((item) => {
-          return item.value === rowValues.parameter ? item : "";
+          return item.value === rowValues.parameter ? item : '';
         })?.label;
       default:
         return rowValues.parameter;
@@ -238,7 +238,11 @@ function FilterRow({
 
         <div className="filter-function-container">
           <Select
-            selectProps={{ options: functionOptions, value: selectData.func, onChange: handleFunctionChange }}
+            selectProps={{
+              options: functionOptions,
+              value: selectData.func,
+              onChange: handleFunctionChange,
+            }}
             child={child}
           />
         </div>

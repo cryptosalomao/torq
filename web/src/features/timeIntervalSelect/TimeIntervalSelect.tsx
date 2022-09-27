@@ -1,17 +1,17 @@
-import "./interval_select.scss";
-import React, { useState } from "react";
-import { format, startOfDay, addDays, subDays, differenceInDays } from "date-fns";
-import { DateRangePicker } from "react-date-range";
-import { ChevronLeft24Regular as LeftIcon, ChevronRight24Regular as RightIcon } from "@fluentui/react-icons";
+import './interval_select.scss';
+import React, { useState } from 'react';
+import { format, startOfDay, addDays, subDays, differenceInDays } from 'date-fns';
+import { DateRangePicker } from 'react-date-range';
+import { ChevronLeft24Regular as LeftIcon, ChevronRight24Regular as RightIcon } from '@fluentui/react-icons';
 
-import { defaultStaticRangesFn } from "./customRanges";
+import { defaultStaticRangesFn } from './customRanges';
 
-import Popover from "../popover/Popover";
-import classNames from "classnames";
-import Button, { buttonColor } from "../buttons/Button";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { selectTimeInterval, updateInterval } from "./timeIntervalSlice";
-import { useGetSettingsQuery } from "apiSlice";
+import Popover from '../popover/Popover';
+import classNames from 'classnames';
+import Button, { buttonColor } from '../buttons/Button';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { selectTimeInterval, updateInterval } from './timeIntervalSlice';
+import { useGetSettingsQuery } from 'apiSlice';
 
 interface selection {
   startDate: Date;
@@ -32,7 +32,7 @@ function TimeIntervalSelect(props: { className?: string }) {
   const selection1: selection = {
     startDate: new Date(currentPeriod.from),
     endDate: new Date(currentPeriod.to),
-    key: "selection1",
+    key: 'selection1',
   };
 
   const dispatch = useAppDispatch();
@@ -51,17 +51,17 @@ function TimeIntervalSelect(props: { className?: string }) {
     </div>
   );
 
-  const dateRangeClass = classNames("date-range-container", {
-    "mobile-date-range": isMobile,
+  const dateRangeClass = classNames('date-range-container', {
+    'mobile-date-range': isMobile,
   });
 
   const buttonText = (): string => {
     if (currentPeriod.from === currentPeriod.to) {
-      return `${format(new Date(currentPeriod.from), "MMM d, yyyy")}`;
+      return `${format(new Date(currentPeriod.from), 'MMM d, yyyy')}`;
     }
-    return `${format(new Date(currentPeriod.from), "MMM d, yyyy")} - ${format(
+    return `${format(new Date(currentPeriod.from), 'MMM d, yyyy')} - ${format(
       new Date(currentPeriod.to),
-      "MMM d, yyyy"
+      'MMM d, yyyy'
     )}`;
   };
 
@@ -86,7 +86,7 @@ function TimeIntervalSelect(props: { className?: string }) {
   };
 
   const popOverButton = (
-    <div className={"date-range-button"}>
+    <div className={'date-range-button'}>
       <div className="time-travel-arrow" onClick={moveBackwardInTime}>
         <LeftIcon />
       </div>
@@ -99,7 +99,7 @@ function TimeIntervalSelect(props: { className?: string }) {
 
   return (
     <div className={classNames(dateRangeClass, props.className)}>
-      <Popover button={popOverButton} className={"no-padding right"}>
+      <Popover button={popOverButton} className={'no-padding right'}>
         <div className="date-range-popover-content">
           <DateRangePicker
             renderStaticRangeLabel={renderCustomRangeLabel}
@@ -108,7 +108,7 @@ function TimeIntervalSelect(props: { className?: string }) {
             staticRanges={[
               ...defaultStaticRanges,
               {
-                label: "Custom",
+                label: 'Custom',
                 hasCustomRendering: true,
                 range: () => selection1,
                 isSelected() {
@@ -127,7 +127,7 @@ function TimeIntervalSelect(props: { className?: string }) {
               },
             ]}
             fixedHeight={false}
-            rangeColors={["#ECFAF8", "#F9FAFB"]}
+            rangeColors={['#ECFAF8', '#F9FAFB']}
             maxDate={addDays(new Date(), 1)}
             minDate={addDays(new Date().setFullYear(2015, 1, 1), 0)}
             scroll={{ enabled: true, calendarHeight: 400 }}

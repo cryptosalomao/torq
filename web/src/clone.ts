@@ -6,7 +6,7 @@ const clone = <T>(source: T): T => {
 
   if (source instanceof Array) return source.map((item: any) => clone<any>(item)) as any;
 
-  if (typeof source === "object" && source !== undefined) {
+  if (typeof source === 'object' && source !== undefined) {
     const clonnedObj = { ...(source as { [key: string]: any }) } as { [key: string]: any };
     Object.keys(clonnedObj).forEach((prop) => {
       clonnedObj[prop] = clone<any>(clonnedObj[prop]);

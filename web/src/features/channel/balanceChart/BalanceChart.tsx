@@ -1,15 +1,15 @@
 // https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-import { useD3 } from "../../charts/useD3";
-import * as d3 from "d3";
-import { useEffect } from "react";
-import { NumberValue, Selection } from "d3";
-import ChartCanvas from "../../charts/chartCanvas";
-import "../../charts/chart.scss";
-import { AreaPlot } from "../../charts/charts";
-import { selectProfitChartKey } from "../channelSlice";
-import { useAppSelector } from "../../../store/hooks";
-import clone from "../../../clone";
-import { useGetSettingsQuery } from "../../../apiSlice";
+import { useD3 } from '../../charts/useD3';
+import * as d3 from 'd3';
+import { useEffect } from 'react';
+import { NumberValue, Selection } from 'd3';
+import ChartCanvas from '../../charts/chartCanvas';
+import '../../charts/chart.scss';
+import { AreaPlot } from '../../charts/charts';
+import { selectProfitChartKey } from '../channelSlice';
+import { useAppSelector } from '../../../store/hooks';
+import clone from '../../../clone';
+import { useGetSettingsQuery } from '../../../apiSlice';
 
 type BalanceChart = {
   data: any[];
@@ -60,28 +60,28 @@ function BalanceChart({ data, totalCapacity, from, to }: BalanceChart) {
       chart = new ChartCanvas(container, paddedData, {
         from: new Date(from),
         to: new Date(to),
-        timezone: settings?.data?.preferredTimezone || "UTC",
-        yScaleKey: "outbound_capacity",
-        rightYScaleKey: "outbound_capacity",
-        rightYAxisKeys: ["outbound_capacity"],
+        timezone: settings?.data?.preferredTimezone || 'UTC',
+        yScaleKey: 'outbound_capacity',
+        rightYScaleKey: 'outbound_capacity',
+        rightYAxisKeys: ['outbound_capacity'],
         yAxisMaxOverride: totalCapacity,
         rightYAxisMaxOverride: totalCapacity,
-        xAxisLabelFormatter: d3.timeFormat("%d %b - %H:%M") as (domainValue: NumberValue) => string,
+        xAxisLabelFormatter: d3.timeFormat('%d %b - %H:%M') as (domainValue: NumberValue) => string,
       });
 
       chart.plot(AreaPlot, {
-        id: "outbound_capacity",
-        key: "outbound_capacity",
-        legendLabel: "Outbound capacity",
+        id: 'outbound_capacity',
+        key: 'outbound_capacity',
+        legendLabel: 'Outbound capacity',
         curveFunction: d3.curveStepAfter,
-        areaGradient: ["rgba(133, 196, 255, 0.5)", "rgba(87, 211, 205, 0.6)"],
+        areaGradient: ['rgba(133, 196, 255, 0.5)', 'rgba(87, 211, 205, 0.6)'],
         // areaColor: "#FAAE93",
       });
       chart.draw();
 
       setInterval(navCheck(container), 200);
     },
-    [data, data ? data[0].date : "", data ? data[data.length - 1].date : "", profitKey]
+    [data, data ? data[0].date : '', data ? data[data.length - 1].date : '', profitKey]
   );
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function BalanceChart({ data, totalCapacity, from, to }: BalanceChart) {
     };
   }, [data]);
 
-  return <div ref={ref} className={"chart-ref"} />;
+  return <div ref={ref} className={'chart-ref'} />;
 }
 
 export default BalanceChart;

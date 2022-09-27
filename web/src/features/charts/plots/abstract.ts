@@ -1,4 +1,4 @@
-import ChartCanvas from "../chartCanvas";
+import ChartCanvas from '../chartCanvas';
 
 export type basePlotConfig = {
   id: string; // The id used to fetch the Plot instance from the Chart instance

@@ -1,13 +1,13 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import navReducer from "../features/navigation/navSlice";
-import channelReducer from "../features/channel/channelSlice";
-import tableReducer from "../features/forwards/forwardsSlice";
-import timeIntervalReducer from "../features/timeIntervalSelect/timeIntervalSlice";
-import { torqApi } from "apiSlice";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import paymentsReducer from "features/transact/Payments/paymentsSlice";
-import invoicesReducer from "features/transact/Invoices/invoicesSlice";
-import onChainReducer from "features/transact/OnChain/onChainSlice";
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import navReducer from '../features/navigation/navSlice';
+import channelReducer from '../features/channel/channelSlice';
+import tableReducer from '../features/forwards/forwardsSlice';
+import timeIntervalReducer from '../features/timeIntervalSelect/timeIntervalSlice';
+import { torqApi } from 'apiSlice';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import paymentsReducer from 'features/transact/Payments/paymentsSlice';
+import invoicesReducer from 'features/transact/Invoices/invoicesSlice';
+import onChainReducer from 'features/transact/OnChain/onChainSlice';
 
 export const store = configureStore({
   reducer: {

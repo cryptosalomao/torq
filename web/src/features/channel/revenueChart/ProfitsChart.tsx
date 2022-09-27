@@ -1,13 +1,13 @@
 // https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-import { useD3 } from "../../charts/useD3";
-import { useEffect } from "react";
-import { Selection } from "d3";
-import ChartCanvas from "../../charts/chartCanvas";
-import "../../charts/chart.scss";
-import { BarPlot, LinePlot } from "../../charts/charts";
-import { selectProfitChartKey } from "../channelSlice";
-import { useAppSelector } from "../../../store/hooks";
-import { useGetSettingsQuery } from "../../../apiSlice";
+import { useD3 } from '../../charts/useD3';
+import { useEffect } from 'react';
+import { Selection } from 'd3';
+import ChartCanvas from '../../charts/chartCanvas';
+import '../../charts/chart.scss';
+import { BarPlot, LinePlot } from '../../charts/charts';
+import { selectProfitChartKey } from '../channelSlice';
+import { useAppSelector } from '../../../store/hooks';
+import { useGetSettingsQuery } from '../../../apiSlice';
 
 type ProfitsChart = {
   data: any[];
@@ -41,17 +41,17 @@ function ProfitsChart({ data, dashboard, to, from }: ProfitsChart) {
         chart = new ChartCanvas(container, data, {
           from: new Date(from),
           to: new Date(to),
-          timezone: settings?.data?.preferredTimezone || "UTC",
-          yScaleKey: profitKey.value + "_out",
-          rightYScaleKey: profitKey.value + "_out",
-          rightYAxisKeys: [profitKey.value + "_out"],
+          timezone: settings?.data?.preferredTimezone || 'UTC',
+          yScaleKey: profitKey.value + '_out',
+          rightYScaleKey: profitKey.value + '_out',
+          rightYAxisKeys: [profitKey.value + '_out'],
           xAxisPadding: 12,
         });
         chart.plot(BarPlot, {
-          id: profitKey.value + "_out",
-          key: profitKey.value + "_out",
-          legendLabel: profitKey.label + " out",
-          barColor: "rgba(133, 196, 255, 0.5)",
+          id: profitKey.value + '_out',
+          key: profitKey.value + '_out',
+          legendLabel: profitKey.label + ' out',
+          barColor: 'rgba(133, 196, 255, 0.5)',
           // areaGradient: ["rgba(133, 196, 255, 0.5)", "rgba(87, 211, 205, 0.5)"],
         });
         chart.draw();
@@ -59,37 +59,37 @@ function ProfitsChart({ data, dashboard, to, from }: ProfitsChart) {
         chart = new ChartCanvas(container, data, {
           from: new Date(from),
           to: new Date(to),
-          timezone: settings?.data?.preferredTimezone || "UTC",
-          yScaleKey: profitKey.value + "_total",
-          rightYScaleKey: profitKey.value + "_total",
-          rightYAxisKeys: [profitKey.value + "_out", profitKey.value + "_in"],
+          timezone: settings?.data?.preferredTimezone || 'UTC',
+          yScaleKey: profitKey.value + '_total',
+          rightYScaleKey: profitKey.value + '_total',
+          rightYAxisKeys: [profitKey.value + '_out', profitKey.value + '_in'],
           xAxisPadding: 12,
         });
         chart.plot(BarPlot, {
-          id: profitKey.value + "_total",
-          key: profitKey.value + "_total",
-          legendLabel: profitKey.label + " total",
+          id: profitKey.value + '_total',
+          key: profitKey.value + '_total',
+          legendLabel: profitKey.label + ' total',
           // areaGradient: ["rgba(133, 196, 255, 0.5)", "rgba(87, 211, 205, 0.5)"],
-          barColor: "rgba(133, 196, 255, 0.5)",
+          barColor: 'rgba(133, 196, 255, 0.5)',
         });
         chart.plot(LinePlot, {
-          id: profitKey.value + "_out",
-          key: profitKey.value + "_out",
-          legendLabel: profitKey.label + " out",
-          lineColor: "#BA93FA",
+          id: profitKey.value + '_out',
+          key: profitKey.value + '_out',
+          legendLabel: profitKey.label + ' out',
+          lineColor: '#BA93FA',
         });
         chart.plot(LinePlot, {
-          id: profitKey.value + "_in",
-          key: profitKey.value + "_in",
-          legendLabel: profitKey.label + " in",
-          lineColor: "#FAAE93",
+          id: profitKey.value + '_in',
+          key: profitKey.value + '_in',
+          legendLabel: profitKey.label + ' in',
+          lineColor: '#FAAE93',
         });
         chart.draw();
       }
 
       setInterval(navCheck(container), 200);
     },
-    [data, data ? data[0].date : "", data ? data[data.length - 1].date : "", profitKey, settings]
+    [data, data ? data[0].date : '', data ? data[data.length - 1].date : '', profitKey, settings]
   );
 
   useEffect(() => {
@@ -100,7 +100,7 @@ function ProfitsChart({ data, dashboard, to, from }: ProfitsChart) {
     };
   }, [data]);
 
-  return <div ref={ref} className={"chart-ref"} />;
+  return <div ref={ref} className={'chart-ref'} />;
 }
 
 export default ProfitsChart;

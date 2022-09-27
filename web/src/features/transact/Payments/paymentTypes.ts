@@ -48,4 +48,4 @@ export type NewPaymentResponse = {
   attempt: attempt;
 };
 
-export type NewPaymentError = { id: string; type: "Error"; error: string };
+export type NewPaymentError = { id: string; type: 'Error'; error: string };

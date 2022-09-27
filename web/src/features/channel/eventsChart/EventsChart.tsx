@@ -1,12 +1,12 @@
 // https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-import { useD3 } from "../../charts/useD3";
-import { useEffect } from "react";
-import { Selection } from "d3";
-import { ChartCanvas, EventsPlot, LinePlot, BarPlot } from "../../charts/charts";
-import "../../charts/chart.scss";
-import { useAppSelector } from "../../../store/hooks";
-import { selectEventChartKey } from "../channelSlice";
-import { useGetSettingsQuery } from "../../../apiSlice";
+import { useD3 } from '../../charts/useD3';
+import { useEffect } from 'react';
+import { Selection } from 'd3';
+import { ChartCanvas, EventsPlot, LinePlot, BarPlot } from '../../charts/charts';
+import '../../charts/chart.scss';
+import { useAppSelector } from '../../../store/hooks';
+import { selectEventChartKey } from '../channelSlice';
+import { useGetSettingsQuery } from '../../../apiSlice';
 
 type EventsChart = {
   data: any[];
@@ -40,41 +40,41 @@ function EventsChart({ data, events, selectedEventTypes, from, to }: EventsChart
       chart = new ChartCanvas(container, data, {
         from: new Date(from),
         to: new Date(to),
-        timezone: settings?.data?.preferredTimezone || "UTC",
-        yScaleKey: eventKey.value + "_total",
-        rightYScaleKey: eventKey.value + "_total",
-        rightYAxisKeys: [eventKey.value + "_out", eventKey.value + "_in", eventKey.value + "_total"],
+        timezone: settings?.data?.preferredTimezone || 'UTC',
+        yScaleKey: eventKey.value + '_total',
+        rightYScaleKey: eventKey.value + '_total',
+        rightYAxisKeys: [eventKey.value + '_out', eventKey.value + '_in', eventKey.value + '_total'],
         xAxisPadding: 12,
       });
       chart.plot(BarPlot, {
-        id: eventKey.value + "_total",
-        key: eventKey.value + "_total",
-        legendLabel: eventKey.label + " Total",
-        barColor: "rgba(133, 196, 255, 0.5)",
+        id: eventKey.value + '_total',
+        key: eventKey.value + '_total',
+        legendLabel: eventKey.label + ' Total',
+        barColor: 'rgba(133, 196, 255, 0.5)',
         // areaGradient: ["rgba(133, 196, 255, 0.5)", "rgba(87, 211, 205, 0.5)"],
       });
       chart.plot(LinePlot, {
-        id: eventKey.value + "_out",
-        key: eventKey.value + "_out",
-        legendLabel: eventKey.label + " Out",
-        lineColor: "#BA93FA",
+        id: eventKey.value + '_out',
+        key: eventKey.value + '_out',
+        legendLabel: eventKey.label + ' Out',
+        lineColor: '#BA93FA',
         // rightAxis: true,
       });
       chart.plot(LinePlot, {
-        id: eventKey.value + "_in",
-        key: eventKey.value + "_in",
-        legendLabel: eventKey.label + " In",
-        lineColor: "#FAAE93",
+        id: eventKey.value + '_in',
+        key: eventKey.value + '_in',
+        legendLabel: eventKey.label + ' In',
+        lineColor: '#FAAE93',
       });
       const filteredEvents =
         events?.filter((d) => {
           return selectedEventTypes.get(d.type); // selectedEventTypes
         }) || [];
-      chart.plot(EventsPlot, { id: "events", key: "events", events: filteredEvents });
+      chart.plot(EventsPlot, { id: 'events', key: 'events', events: filteredEvents });
       chart.draw();
       setInterval(navCheck(container), 200);
     },
-    [data, eventKey, data ? data[0].date : "", data ? data[data.length - 1].date : "", selectedEventTypes, settings]
+    [data, eventKey, data ? data[0].date : '', data ? data[data.length - 1].date : '', selectedEventTypes, settings]
   );
 
   useEffect(() => {
@@ -83,9 +83,9 @@ function EventsChart({ data, events, selectedEventTypes, from, to }: EventsChart
         chart.removeResizeListener();
       }
     };
-  }, [data, data ? data[0].date : ""]);
+  }, [data, data ? data[0].date : '']);
 
-  return <div ref={ref} className={"testing"} />;
+  return <div ref={ref} className={'testing'} />;
 }
 
 export default EventsChart;

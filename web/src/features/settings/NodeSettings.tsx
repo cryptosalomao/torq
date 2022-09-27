@@ -1,7 +1,7 @@
-import Box from "./Box";
-import styles from "./NodeSettings.module.scss";
-import Select, { SelectOption } from "../forms/Select";
-import React, { useState } from "react";
+import Box from './Box';
+import styles from './NodeSettings.module.scss';
+import Select, { SelectOption } from '../forms/Select';
+import React, { useState } from 'react';
 import {
   Save20Regular as SaveIcon,
   Play16Regular as ConnectedIcon,
@@ -13,25 +13,25 @@ import {
   Delete20Regular as DeleteIcon,
   Pause20Regular as PauseIcon,
   Play20Regular as PlayIcon,
-} from "@fluentui/react-icons";
-import Spinny from "features/spinny/Spinny";
-import { toastCategory } from "../toast/Toasts";
-import ToastContext from "../toast/context";
-import File from "../forms/File";
-import TextInput from "features/forms/TextInput";
+} from '@fluentui/react-icons';
+import Spinny from 'features/spinny/Spinny';
+import { toastCategory } from '../toast/Toasts';
+import ToastContext from '../toast/context';
+import File from '../forms/File';
+import TextInput from 'features/forms/TextInput';
 import {
   useGetLocalNodeQuery,
   useUpdateLocalNodeMutation,
   useAddLocalNodeMutation,
   useUpdateLocalNodeSetDisabledMutation,
   useUpdateLocalNodeSetDeletedMutation,
-} from "apiSlice";
-import { localNode } from "apiTypes";
-import classNames from "classnames";
-import Collapse from "features/collapse/Collapse";
-import Popover from "features/popover/Popover";
-import Button, { buttonColor, buttonPosition } from "features/buttons/Button";
-import Modal from "features/modal/Modal";
+} from 'apiSlice';
+import { localNode } from 'apiTypes';
+import classNames from 'classnames';
+import Collapse from 'features/collapse/Collapse';
+import Popover from 'features/popover/Popover';
+import Button, { buttonColor, buttonPosition } from 'features/buttons/Button';
+import Modal from 'features/modal/Modal';
 
 interface nodeProps {
   localNodeId: number;
@@ -59,7 +59,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
   const [localState, setLocalState] = useState({} as localNode);
   const [collapsedState, setCollapsedState] = useState(collapsed ?? false);
   const [showModalState, setShowModalState] = useState(false);
-  const [deleteConfirmationTextInputState, setDeleteConfirmationTextInputState] = useState("");
+  const [deleteConfirmationTextInputState, setDeleteConfirmationTextInputState] = useState('');
   const [deleteEnabled, setDeleteEnabled] = useState(false);
   const [saveEnabledState, setSaveEnabledState] = useState(true);
   const [enableEnableButtonState, setEnableEnableButtonState] = useState(true);
@@ -71,7 +71,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
   }));
 
   const clear = () => {
-    setLocalState({ grpcAddress: "", implementation: "" } as localNode);
+    setLocalState({ grpcAddress: '', implementation: '' } as localNode);
   };
 
   React.useEffect(() => {
@@ -82,7 +82,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
 
   const handleConfirmationModalClose = () => {
     setShowModalState(false);
-    setDeleteConfirmationTextInputState("");
+    setDeleteConfirmationTextInputState('');
     setDeleteEnabled(false);
     setLocalState({} as localNode);
   };
@@ -102,13 +102,13 @@ const NodeSettings = React.forwardRef(function NodeSettings(
   const submitNodeSettings = async () => {
     setSaveEnabledState(false);
     const form = new FormData();
-    form.append("implementation", "LND");
-    form.append("grpcAddress", localState.grpcAddress ?? "");
+    form.append('implementation', 'LND');
+    form.append('grpcAddress', localState.grpcAddress ?? '');
     if (localState.tlsFile) {
-      form.append("tlsFile", localState.tlsFile, localState.tlsFileName);
+      form.append('tlsFile', localState.tlsFile, localState.tlsFileName);
     }
     if (localState.macaroonFile) {
-      form.append("macaroonFile", localState.macaroonFile, localState.macaroonFileName);
+      form.append('macaroonFile', localState.macaroonFile, localState.macaroonFileName);
     }
     // we are adding new node
     if (!localState.localNodeId) {
@@ -116,14 +116,14 @@ const NodeSettings = React.forwardRef(function NodeSettings(
         .unwrap()
         .then((_) => {
           setSaveEnabledState(true);
-          toastRef?.current?.addToast("Local node added", toastCategory.success);
+          toastRef?.current?.addToast('Local node added', toastCategory.success);
           if (onAddSuccess) {
             onAddSuccess();
           }
         })
         .catch((error) => {
           setSaveEnabledState(true);
-          toastRef?.current?.addToast(error.data["errors"]["server"][0].split(":")[0], toastCategory.error);
+          toastRef?.current?.addToast(error.data['errors']['server'][0].split(':')[0], toastCategory.error);
         });
 
       return;
@@ -132,11 +132,11 @@ const NodeSettings = React.forwardRef(function NodeSettings(
       .unwrap()
       .then((_) => {
         setSaveEnabledState(true);
-        toastRef?.current?.addToast("Local node info saved", toastCategory.success);
+        toastRef?.current?.addToast('Local node info saved', toastCategory.success);
       })
       .catch((error) => {
         setSaveEnabledState(true);
-        toastRef?.current?.addToast(error.data["errors"]["server"][0].split(":")[0], toastCategory.error);
+        toastRef?.current?.addToast(error.data['errors']['server'][0].split(':')[0], toastCategory.error);
       });
   };
 
@@ -164,14 +164,14 @@ const NodeSettings = React.forwardRef(function NodeSettings(
 
   const handleModalDeleteClick = () => {
     setShowModalState(false);
-    setDeleteConfirmationTextInputState("");
+    setDeleteConfirmationTextInputState('');
     setDeleteEnabled(false);
     deleteLocalNode({ localNodeId: localState.localNodeId });
   };
 
   const handleDeleteConfirmationTextInputChange = (value: string) => {
     setDeleteConfirmationTextInputState(value as string);
-    setDeleteEnabled(value.toLowerCase() === "delete");
+    setDeleteEnabled(value.toLowerCase() === 'delete');
   };
 
   const handleDisableClick = () => {
@@ -186,7 +186,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
     }
   };
 
-  const implementationOptions = [{ value: "LND", label: "LND" } as SelectOption];
+  const implementationOptions = [{ value: 'LND', label: 'LND' } as SelectOption];
 
   const menuButton = <MoreIcon className={styles.moreIcon} />;
   return (
@@ -216,18 +216,18 @@ const NodeSettings = React.forwardRef(function NodeSettings(
                 <div className={styles.borderSection}>
                   <div className={styles.detailHeader}>
                     <h4 className={styles.detailsTitle}>Node Details</h4>
-                    <Popover button={menuButton} className={classNames("right", styles.moreButton)} ref={popoverRef}>
+                    <Popover button={menuButton} className={classNames('right', styles.moreButton)} ref={popoverRef}>
                       <div className={styles.nodeMenu}>
                         <Button
                           buttonColor={buttonColor.secondary}
-                          text={localState.disabled ? "Enable node" : "Disable node"}
+                          text={localState.disabled ? 'Enable node' : 'Disable node'}
                           icon={localState.disabled ? <PlayIcon /> : <PauseIcon />}
                           onClick={handleDisableClick}
                           disabled={!enableEnableButtonState}
                         />
                         <Button
                           buttonColor={buttonColor.warning}
-                          text={"Delete node"}
+                          text={'Delete node'}
                           icon={<DeleteIcon />}
                           onClick={handleDeleteClick}
                         />
@@ -237,7 +237,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
                 </div>
               </>
             )}
-            <div className={""}>
+            <div className={''}>
               <form onSubmit={handleSubmit}>
                 <Select
                   label="Implementation"
@@ -267,7 +267,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
                 </span>
                 <Button
                   buttonColor={buttonColor.green}
-                  text={addMode ? "Add Node" : saveEnabledState ? "Save node details" : "Saving..."}
+                  text={addMode ? 'Add Node' : saveEnabledState ? 'Save node details' : 'Saving...'}
                   icon={saveEnabledState ? <SaveIcon /> : <Spinny />}
                   onClick={submitNodeSettings}
                   buttonPosition={buttonPosition.fullWidth}
@@ -278,7 +278,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
           </>
         </Collapse>
         <Modal
-          title={"Are you sure?"}
+          title={'Are you sure?'}
           icon={<DeleteIconHeader />}
           onClose={handleConfirmationModalClose}
           show={showModalState}
@@ -300,7 +300,7 @@ const NodeSettings = React.forwardRef(function NodeSettings(
               <Button
                 buttonColor={buttonColor.warning}
                 buttonPosition={buttonPosition.fullWidth}
-                text={"Delete node"}
+                text={'Delete node'}
                 icon={<DeleteIcon />}
                 onClick={handleModalDeleteClick}
                 disabled={!deleteEnabled}

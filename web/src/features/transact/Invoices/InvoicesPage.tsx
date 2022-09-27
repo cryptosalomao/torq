@@ -1,37 +1,37 @@
-import Table, { ColumnMetaData } from "features/table/Table";
-import { useGetInvoicesQuery } from "apiSlice";
-import { Link } from "react-router-dom";
+import Table, { ColumnMetaData } from 'features/table/Table';
+import { useGetInvoicesQuery } from 'apiSlice';
+import { Link } from 'react-router-dom';
 import {
   Filter20Regular as FilterIcon,
   ArrowSortDownLines20Regular as SortIcon,
   ColumnTriple20Regular as ColumnsIcon,
   Options20Regular as OptionsIcon,
-} from "@fluentui/react-icons";
-import Sidebar from "features/sidebar/Sidebar";
+} from '@fluentui/react-icons';
+import Sidebar from 'features/sidebar/Sidebar';
 import TablePageTemplate, {
   TableControlSection,
   TableControlsButton,
   TableControlsButtonGroup,
-} from "features/templates/tablePageTemplate/TablePageTemplate";
-import { useState } from "react";
-import TransactTabs from "../TransactTabs";
-import Pagination from "features/table/pagination/Pagination";
-import useLocalStorage from "features/helpers/useLocalStorage";
-import SortSection, { OrderBy } from "features/sidebar/sections/sort/SortSection";
-import FilterSection from "../../sidebar/sections/filter/FilterSection";
-import { Clause, deserialiseQuery, FilterInterface } from "../../sidebar/sections/filter/filter";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+} from 'features/templates/tablePageTemplate/TablePageTemplate';
+import { useState } from 'react';
+import TransactTabs from '../TransactTabs';
+import Pagination from 'features/table/pagination/Pagination';
+import useLocalStorage from 'features/helpers/useLocalStorage';
+import SortSection, { OrderBy } from 'features/sidebar/sections/sort/SortSection';
+import FilterSection from '../../sidebar/sections/filter/FilterSection';
+import { Clause, deserialiseQuery, FilterInterface } from '../../sidebar/sections/filter/filter';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import {
   selectActiveColumns,
   selectAllColumns,
   selectInvoicesFilters,
   updateColumns,
   updateInvoicesFilters,
-} from "../Invoices/invoicesSlice";
-import { FilterCategoryType } from "../../sidebar/sections/filter/filter";
-import ColumnsSection from "../../sidebar/sections/columns/ColumnsSection";
-import clone from "../../../clone";
-import { SectionContainer } from "../../section/SectionContainer";
+} from '../Invoices/invoicesSlice';
+import { FilterCategoryType } from '../../sidebar/sections/filter/filter';
+import ColumnsSection from '../../sidebar/sections/columns/ColumnsSection';
+import clone from '../../../clone';
+import { SectionContainer } from '../../section/SectionContainer';
 
 type sections = {
   filter: boolean;
@@ -40,18 +40,18 @@ type sections = {
 };
 
 const statusTypes: any = {
-  OPEN: "Open",
-  SETTLED: "Settled",
-  EXPIRED: "Expired",
+  OPEN: 'Open',
+  SETTLED: 'Settled',
+  EXPIRED: 'Expired',
 };
 
 function InvoicesPage() {
-  const [limit, setLimit] = useLocalStorage("invoicesLimit", 100);
+  const [limit, setLimit] = useLocalStorage('invoicesLimit', 100);
   const [offset, setOffset] = useState(0);
-  const [orderBy, setOrderBy] = useLocalStorage("invoicesOrderBy", [
+  const [orderBy, setOrderBy] = useLocalStorage('invoicesOrderBy', [
     {
-      key: "creation_date",
-      direction: "desc",
+      key: 'creation_date',
+      direction: 'desc',
     },
   ] as Array<OrderBy>);
 
@@ -117,15 +117,15 @@ function InvoicesPage() {
   );
 
   const defaultFilter: FilterInterface = {
-    funcName: "gte",
-    category: "number" as FilterCategoryType,
+    funcName: 'gte',
+    category: 'number' as FilterCategoryType,
     parameter: 0,
-    key: "value",
+    key: 'value',
   };
 
   const filterColumns = clone(allColumns).map((c: any) => {
     switch (c.key) {
-      case "invoice_state":
+      case 'invoice_state':
         c.selectOptions = Object.keys(statusTypes).map((key: any) => {
           return {
             value: key,
@@ -143,23 +143,23 @@ function InvoicesPage() {
 
   const sortableColumns = allColumns.filter((column: ColumnMetaData) =>
     [
-      "creation_date",
-      "settle_date",
-      "invoice_state",
-      "amt_paid",
-      "memo",
-      "value",
-      "is_rebalance",
-      "is_keysend",
-      "destination_pub_key",
-      "is_amp",
-      "fallback_addr",
-      "payment_addr",
-      "payment_request",
-      "private",
-      "expiry",
-      "cltv_expiry",
-      "updated_on",
+      'creation_date',
+      'settle_date',
+      'invoice_state',
+      'amt_paid',
+      'memo',
+      'value',
+      'is_rebalance',
+      'is_keysend',
+      'destination_pub_key',
+      'is_amp',
+      'fallback_addr',
+      'payment_addr',
+      'payment_request',
+      'private',
+      'expiry',
+      'cltv_expiry',
+      'updated_on',
     ].includes(column.key)
   );
 
@@ -172,20 +172,20 @@ function InvoicesPage() {
   };
 
   const sidebar = (
-    <Sidebar title={"Options"} closeSidebarHandler={closeSidebarHandler()}>
+    <Sidebar title={'Options'} closeSidebarHandler={closeSidebarHandler()}>
       <SectionContainer
-        title={"Columns"}
+        title={'Columns'}
         icon={ColumnsIcon}
         expanded={activeSidebarSections.columns}
-        handleToggle={sidebarSectionHandler("columns")}
+        handleToggle={sidebarSectionHandler('columns')}
       >
         <ColumnsSection columns={allColumns} activeColumns={activeColumns} handleUpdateColumn={updateColumnsHandler} />
       </SectionContainer>
       <SectionContainer
-        title={"Filter"}
+        title={'Filter'}
         icon={FilterIcon}
         expanded={activeSidebarSections.filter}
-        handleToggle={sidebarSectionHandler("filter")}
+        handleToggle={sidebarSectionHandler('filter')}
       >
         <FilterSection
           columnsMeta={filterColumns}
@@ -195,10 +195,10 @@ function InvoicesPage() {
         />
       </SectionContainer>
       <SectionContainer
-        title={"Sort"}
+        title={'Sort'}
         icon={SortIcon}
         expanded={activeSidebarSections.sort}
-        handleToggle={sidebarSectionHandler("sort")}
+        handleToggle={sidebarSectionHandler('sort')}
       >
         <SortSection columns={sortableColumns} orderBy={orderBy} updateHandler={handleSortUpdate} />
       </SectionContainer>
@@ -207,7 +207,7 @@ function InvoicesPage() {
 
   const breadcrumbs = [
     <span key="b1">Transactions</span>,
-    <Link key="b2" to={"/transactions/invoices"}>
+    <Link key="b2" to={'/transactions/invoices'}>
       Invoices
     </Link>,
   ];
@@ -222,7 +222,7 @@ function InvoicesPage() {
   );
   return (
     <TablePageTemplate
-      title={"Invoices"}
+      title={'Invoices'}
       breadcrumbs={breadcrumbs}
       sidebarExpanded={sidebarExpanded}
       sidebar={sidebar}
